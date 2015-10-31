@@ -98,18 +98,18 @@ $result = mysqli_query($mysqli, $sql);
   </div>
   <div class="col-md-6">
     <table>
-		<tr><td>Name: </td><td><?php echo $row["title"] ?></td><tr>
-                <br /><br/>
-        <tr><td>Description: </td><td><?php echo $row["description"] ?></td><tr>
-                <br /><br/>
-        <tr><td>Start Date: </td><td><?php echo $row["startDate"] ?></td><tr>
-                <br /><br />
-        <tr><td>Duration of Project: </td><td><?php echo $row["duration"] ?></td><tr>
-                <br /> <br />
-        <tr><td>Categories: </td><td><?php echo $row["categories"] ?></td><tr>
-                <br /><br />
-        <tr><td>Funds Collected: </td><td><?php echo $row["fundsCollected"] ?></td><tr>
-                <br />  <br />
+		<tr><td valign="top" width="100px" height="50px">Name: </td><td valign="top"><?php echo $row["title"] ?></td><tr>
+       
+        <tr><td valign="top" width="100px" height="50px">Description: </td><td valign="top"><?php echo $row["description"] ?></td><tr>
+          
+        <tr><td valign="top" width="100px" height="50px">Start Date: </td><td valign="top"><?php echo $row["startDate"] ?></td><tr>
+        
+        <tr><td valign="top" width="100px" height="50px">Duration of Project: </td><td valign="top"><?php echo $row["duration"] ?></td><tr>
+      
+        <tr><td valign="top" width="100px" height="50px">Categories: </td><td valign="top"><?php echo $row["categories"] ?></td><tr>
+ 
+        <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
+      
    </table>
  </div>
  <div class="clearfix"></div>
