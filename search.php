@@ -129,7 +129,7 @@ if(isset($_POST["keyword"])){
 		if(isset($_POST["keyword"])&&$rowcount3>0){
 			foreach ($result3 as $a ){
 	?>
-				<tr><td><a href=""><?php echo $a["firstName"] ?> <?php echo $a["lastName"] ?></a></td></tr>
+				<tr><td><a href="viewProfile?userEmail=<?php echo $a["userEmail"] ?>"><?php echo $a["firstName"] ?> <?php echo $a["lastName"] ?></a></td></tr>
 	<?php		
 			}
 		} else {
