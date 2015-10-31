@@ -81,6 +81,7 @@
     </div>
 <?php
 
+
 include("db.php"); 
 
 $sql = "SELECT title, categories FROM project";
