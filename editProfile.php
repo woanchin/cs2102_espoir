@@ -100,8 +100,7 @@
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>My Profile</h2> 
-    <a href="editProfile.php">Edit</a>
+    <h2>My Profile</h2>
     <p>
      			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
                 <br /><br/>
