@@ -2,9 +2,6 @@
 session_start();
 
 include("db.php");
-date_default_timezone_set('Asia/Singapore');
-
-$date = new DateTime();
 
 	//Store Data input into variables
 	$emailtxt = $_POST["emailtxt"];
@@ -12,7 +9,7 @@ $date = new DateTime();
     $content = $_POST["content"];
 	
     // Query String
-    $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`,  `dateTime`) VALUES ('$projectID','$emailtxt','$content', '$date')";	
+    $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`) VALUES ('$projectID','$emailtxt','$content')";	
     
     
     $sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
