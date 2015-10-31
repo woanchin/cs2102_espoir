@@ -1,10 +1,10 @@
 <?php
-//session_start();
 //Database Connection String
+
+session_start();
 include("db.php");
 $emailtxt = $_SESSION["emailtxt"];
-
-$userEmail = "siqi940@gmail.com";
+$userEmail = $emailtxt;
 $title = $_POST["projecttitle"];
 $description = $_POST["description"];
 $startDate = $_POST["startdate"];
@@ -15,7 +15,6 @@ $fundsCollected = 0;
 
 // prepare the image for insertion
 $imgData =addslashes (file_get_contents($_FILES['test']['tmp_name']));
-$bio = $_POST["bio"];
 
 $filename = "img_post" . rand(1, 9) . date("YmdHis") . rand(25, 125) . rand(256, 850);
 $allowed  = array(
@@ -35,14 +34,14 @@ if ($result[0] == 0) {
     $date  = (String) date("Y-M-d-H:i:s");
 
     // Query String
-    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, duration, `categories`, `currency`, fundsCollected, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', $duration, '$categories', '$currency', $fundsCollected,  '$filename.jpg')";
+    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, `duration`, `categories`, `currency`, fundsCollected, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', '$duration', '$categories', '$currency', '$fundsCollected',  '$filename.jpg')";
     
-    $sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
+    $success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
     // Execute Query					
-    if($sucess == 1){
+    if($success == 1){
         echo '<script language="javascript">';
-        echo 'alert("Account Created");';
-        echo 'window.location.href="../CS2102/loginreg.php";';
+        echo 'alert("Project Created");';
+        echo 'window.location.href="../CS2102/displayProject.php";';
         echo '</script>';
     }
 
