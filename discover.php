@@ -36,7 +36,7 @@
               <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
                     <li ><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                    <li ><a href="createProject.html">Create Project</a></li>
+                    <li ><a href="createProject.php">Create Project</a></li>
                     <li > <a href="loginreg.html">Register/Login</a></li>
 					<li class="active"><a href="index.html">Discover <span class="sr-only">(current)</span></a></li>
                     
