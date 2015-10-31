@@ -741,6 +741,7 @@ button.send {
 .navbar button {
   min-width: inherit;
 }
+
 @media (min-width:1025px){
   .promo p {
     margin-left: 150px;
@@ -885,4 +886,5 @@ a.navbar-brand {
 .portfolio-caption h5 {
     margin-left: 50px;
 }
+
 }
