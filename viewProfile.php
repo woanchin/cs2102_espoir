@@ -4,7 +4,6 @@ session_start();
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,35 +33,37 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   <?php 
     include("db.php");  
 
+    //Store Data input into variables
 	$emailtxt = $_SESSION["emailtxt"];
+	
+    //select results matching to what the user has typed	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-	if ($result=mysqli_query($mysqli,$sql)){
-	         	$rowcount=mysqli_num_rows($result);
-    	}
 
-	if($rowcount==1){	
-	        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    //check if the sql has been execute
+	if ($result=mysqli_query($mysqli,$sql))
+    {
+        // Return the number of rows in result set
+        $rowcount=mysqli_num_rows($result);
+    }
+
+    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
+	if($rowcount==1)
+	{	
+
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 	}
-	else {
+	
+	else 
+	{
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
 		echo 'alert("Wrong username/password");';
 		echo 'window.location.href="../CS2102/loginreg.php";';
 		echo '</script>';
+		
 	}
 
-if(isset($_POST["keyword"])){
-	$keyword = $_POST["keyword"];
-	$sql2 = "SELECT * FROM project WHERE title LIKE '%$keyword%'";
-	$result2=mysqli_query($mysqli,$sql2);
-	$rowcount2 = mysqli_num_rows($result2);
-	$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
-
-	$sql3 = "SELECT * FROM user WHERE firstName LIKE '%$keyword%' OR lastName LIKE '%$keyword%'";
-	$result3=mysqli_query($mysqli,$sql3);
-	$rowcount3 = mysqli_num_rows($result3);
-	$row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-}
   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -81,7 +82,7 @@ if(isset($_POST["keyword"])){
                     <li class="active"><a href="index.html">Profile</a>
  <span class="sr-only">(current)</span></a></li>
                     <li><a href="create.html">My Projects</a></li>
-                    <li> <a href="loginreg.html">My Settings</a></li>
+                    <li><a href="logout.php" id="logout">Logout</a></li>
 					        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
@@ -93,8 +94,8 @@ if(isset($_POST["keyword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">hi <?php echo $row["firstName"] ?>! here are your search results ... </h4>
-  					<form method="POST" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  </p></form>
+  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
+  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
   				</div>
   			</div>
   		</div>
@@ -102,45 +103,27 @@ if(isset($_POST["keyword"])){
         <div class="inner-page services">
  <div class="container">
   <div class="">
-   
+   <div class="col-md-6 no-padding-left">
+	<img src="image/<?php echo $row["picName"]; ?>">
+    <!--<img src="image/">-->
+  </div>
   <div class="col-md-6">
-    <h2>Projects</h2>
-    <table>
-	<?php 
-		if(isset($_POST["keyword"])&&$rowcount2>0){
-			foreach ($result2 as $a ){
-	?>
-				<tr><td><a href="displayProject.php?id=<?php echo $a["projectID"] ?>"><?php echo $a["title"] ?></a></td></tr>
-	<?php		
-			}
-		} else {
-	?>
-			No project found!
-	<?php
-		}
-
-	?>
-    </table>
-    <br />
-    <br />
-    <h2>Users</h2>
-    <table>
-	<?php 
-		if(isset($_POST["keyword"])&&$rowcount3>0){
-			foreach ($result3 as $a ){
-	?>
-				<tr><td><a href="viewProfile?userEmail=<?php echo $a["userEmail"] ?>"><?php echo $a["firstName"] ?> <?php echo $a["lastName"] ?></a></td></tr>
-	<?php		
-			}
-		} else {
-	?>
-			No user found!
-	<?php
-		}
-
-	?>
-     </table>
-
+    <h2>My Profile</h2>
+    <p>
+     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
+                <br /><br/>
+                Email: <?php echo $row["userEmail"] ?>
+                <br /><br/>
+                Nationality: <?php echo $row["nationality"] ?>
+                <br /><br />
+                Birthday: <?php echo $row["birthday"] ?>
+                <br /> <br />
+                Gender: <?php echo $row["gender"] ?>
+                <br /><br />
+                Bio: <?php echo $row["bio"] ?>
+                <br />  <br />
+                <a href="editProfile.php">Edit</a>
+   </p>
  </div>
  <div class="clearfix"></div>
 </div>
