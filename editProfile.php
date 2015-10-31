@@ -81,7 +81,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   							<ul class="nav navbar-nav">
                     <li class="active"><a href="index.html">My Profile <span class="sr-only">(current)</span></a></li>
                     <li><a href="create.html">My Projects</a></li>
-                    <li> <a href="loginreg.html">My Settings</a></li>
+                    <li><a href="logout.php" id="logout">Logout</a></li>
 					        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
