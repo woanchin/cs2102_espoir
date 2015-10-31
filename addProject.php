@@ -2,6 +2,7 @@
 //session_start();
 //Database Connection String
 include("db.php");
+$emailtxt = $_SESSION["emailtxt"];
 
 $userEmail = "siqi940@gmail.com";
 $title = $_POST["projecttitle"];
@@ -11,63 +12,91 @@ $duration = $_POST["days"];
 $categories = $_POST["category"];
 $currency = $_POST["currency"];
 $fundsCollected = 0;
-$picSrcData = "";
 
-/* not able to read the uploaded image successfully
-$uploadOk = 1;
+// prepare the image for insertion
+$imgData =addslashes (file_get_contents($_FILES['test']['tmp_name']));
+$bio = $_POST["bio"];
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["picSrc"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
+$filename = "img_post" . rand(1, 9) . date("YmdHis") . rand(25, 125) . rand(256, 850);
+$allowed  = array(
+    "image/jpeg",
+    "image/pjpeg",
+    "image/jpg",
+    "image/png",
+    "image/JPEG",
+    "image/bmp",
+    "image/PNG"
+);
+
+$result= UploadFile("test", $allowed, 10000000);
+if ($result[0] == 0) {
+    // Put Photo uploaded into sever folder
+    file_put_contents("image/" . $filename . ".jpg", $result[2]);
+    $date  = (String) date("Y-M-d-H:i:s");
+
+    // Query String
+    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, duration, `categories`, `currency`, fundsCollected, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', $duration, '$categories', '$currency', $fundsCollected,  '$filename.jpg')";
+    
+    $sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
+    // Execute Query					
+    if($sucess == 1){
+        echo '<script language="javascript">';
+        echo 'alert("Account Created");';
+        echo 'window.location.href="../CS2102/loginreg.php";';
+        echo '</script>';
     }
-}
-
-// Check file size
-if ($_FILES["picSrc"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
-
-if ($_FILES["picSrc"]["size"] == 0) {
-    echo "Sorry, your file is empty.";
-    $uploadOk = 0;
-}
-
-// Allow certain file formats
-$picSrcName = $_FILES["picSrc"]["name"];
-$imageFileType = end(explode(".", $picSrcName));
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    $uploadOk = 0;
-}
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
-} 
-else { // if everything is ok, try to upload file
-  $picSrcData = mysql_read_escape_string(file_get_contents($_FILES["picSrc"]["tmp_name"]));
-  echo "got file content...";
-}
 
 
-$sql = "INSERT INTO project (userEmail, title, description, fileSrc, startDate, duration, categories, currency, fundsCollected) VALUES ('$userEmail', '$title', '$description', '$picSrcData', '$startDate', $duration, '$categories', '$currency', $fundsCollected)";
-*/
-
-$sql = "INSERT INTO project (userEmail, title, description, startDate, duration, categories, currency, fundsCollected) VALUES ('$userEmail', '$title', '$description', '$startDate', $duration, '$categories', '$currency', $fundsCollected)";
-
-if ($mysqli->query($sql) === TRUE) {
-    //Redirect link				
-    header("location:addSuccess.html");
 } else {
-    echo "Error: " . $sql . "<br>" . $mysqli->error;
+    if ($result[0] == "-1")
+        echo "wrong";
+    if ($result[0] == "-2")
+        echo "wrong file type";
+    if ($result[0] == "-3")
+        echo "MAximum length exceeded";
+    if ($result[0] > 0)
+        echo "Error due to $result";
+    echo $result[0];
+    echo $result;
+    echo "<br/>File Upload Error!";
+    
 }
 
-$mysqli->close();
-    ?>
+
+function UploadFile($name, $filetype, $maxlen)
+{
+    if (!isset($_FILES[$name]['name']))
+        return array(
+            -1,
+            NULL,
+            NULL
+        );
+    if (!isset($_FILES[$name]['type'], $filetype))
+        return array(
+            -2,
+            NULL,
+            NULL
+        );
+    if ($_FILES[$name]['size'] > $maxlen)
+        return array(
+            -3,
+            NULL,
+            NULL
+        );
+    if ($_FILES[$name]['error'] > 0)
+        return array(
+            $_FILES[$name]['error'],
+            NULL,
+            NULL
+        );
+    
+    $temp = file_get_contents($_FILES[$name]['tmp_name']);
+    return array(
+        0,
+        $_FILES[$name]['type'],
+        $temp
+    );
+}
+
+
+?>
