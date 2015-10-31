@@ -110,7 +110,7 @@ if(isset($_POST["keyword"])){
 		if(isset($_POST["keyword"])&&$rowcount2>0){
 			foreach ($result2 as $a ){
 	?>
-				<tr><td><a href=""><?php echo $a["title"] ?></a></td></tr>
+				<tr><td><a href="displayProject.php?projectID="><?php echo $a["title"] ?></a></td></tr>
 	<?php		
 			}
 		} else {

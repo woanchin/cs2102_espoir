@@ -4,6 +4,8 @@ session_start();
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +133,7 @@ $row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                   </select></td></tr>
 	<tr><td>Amount: </td>
 	<td>&nbsp; &nbsp;</td>
-	<td><input type="number" name="amount" step="any" />&nbsp;<input type="submit" value="Donate" /></td></tr></form></table>
+	<td><input type="number" name="amount" step="any" value="0.00" />&nbsp;<input type="submit" value="Donate" /></td></tr></form></table>
  <div class="clearfix"></div>
             <div class="clearfix"></div>
           </div>
