@@ -1,7 +1,7 @@
 <?php
 //File Description:  PHP Process for Database connection string
 
-session_start();
+//session_start();
 	 $username = "root";
      $password = "";
      $hostname = "localhost";
