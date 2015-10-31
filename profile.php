@@ -95,7 +95,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   			<div class="container">
   				<div class="col-lg-12">
   					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<form method="get" action="search.php"><p class="pull-right pagination"><input type="Search" name="q"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
+  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
   				</div>
   			</div>
   		</div>

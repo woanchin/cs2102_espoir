@@ -6,5 +6,7 @@ $projectID = $_POST["projectID"];
 $currency = $_POST["currency"];
 $amount = $_POST["amount"];
 
+$sql = "INSERT INTO donate (userEmail, projectID, 
+
 
 ?>
