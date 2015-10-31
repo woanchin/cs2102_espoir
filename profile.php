@@ -101,8 +101,7 @@
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>My Profile</h2> 
-    <a href="editProfile.php">Edit</a>
+    <h2>My Profile</h2>
     <p>
      			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
                 <br /><br/>
@@ -116,6 +115,7 @@
                 <br /><br />
                 Bio: <?php echo $row["bio"] ?>
                 <br />  <br />
+                <a href="editProfile.php">Edit</a>
    </p>
  </div>
  <div class="clearfix"></div>
