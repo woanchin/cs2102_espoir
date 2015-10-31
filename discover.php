@@ -84,18 +84,18 @@
 
 include("db.php"); 
 
-$sql = "SELECT title, categories FROM project";
-$result = $mysqli->query($sql);
+$sql = "SELECT title, projectID, categories FROM project";
+$result = mysqli_query($mysqli, $sql);
 
-if ($result -> num_rows>0) {
+if (mysqli_num_rows($result)>0) {
 	$i = 1;
-	while($row = $result->fetch_assoc()) {
+	while($row = mysqli_fetch_assoc($result)) {
 		echo "<div class="."col-sm-4".">
         <div class="."portfolio-img-wrap".">
           <img src="."img/portfolio$i.jpg".">
           <div class="."caption-container".">
            <div class="."portfolio-caption".">
-               <h5>".$row["title"]."</h5>
+               <h5><a href="."displayProject.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
                <p>- &nbsp; ".$row["categories"]."</p>
            </div>
        </div>
