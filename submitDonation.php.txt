@@ -1,0 +1,10 @@
+<?php
+include("db.php");
+
+$userEmail = $_SESSION["emailtxt"];
+$projectID = $_POST["projectID"];
+$currency = $_POST["currency"];
+$amount = $_POST["amount"];
+
+
+?>

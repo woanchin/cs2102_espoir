@@ -5,6 +5,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +35,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     include("db.php");  
 
     //Store Data input into variables
-	$emailtxt = $_SESSION["emailtxt"];
+	$emailtxt = "siqi940@gmail.com"; // hardcode
+	
 	
     //select results matching to what the user has typed	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
@@ -63,6 +65,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		echo '</script>';
 		
 	}
+
+$projectID = "200001"; // hardcode
+$sql2 = "SELECT * FROM project WHERE projectID = '$projectID'";
+$result2=mysqli_query($mysqli,$sql2);
+$rowcount2 = mysqli_num_rows($result2);
+$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
   ?>
 
@@ -94,39 +102,37 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<form method="get" action="search.php"><p class="pull-right pagination"><input type="Search" name="q"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
+  					<h4 class="pull-left">Donation..</h4>
+  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="search" name="keyword" /><input type="submit" value="Search" /> &nbsp;&nbsp;&nbsp;&nbsp;  Donate</p></form>
   				</div>
   			</div>
   		</div>
   		<!-- inner-head end -->
         <div class="inner-page services">
  <div class="container">
-  <div class="">
-   <div class="col-md-6 no-padding-left">
-	<img src="image/<?php echo $row["picName"]; ?>">
-    <!--<img src="image/">-->
-  </div>
-  <div class="col-md-6">
-    <h2>My Profile</h2>
-    <p>
-     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                <br /><br/>
-                Email: <?php echo $row["userEmail"] ?>
-                <br /><br/>
-                Nationality: <?php echo $row["nationality"] ?>
-                <br /><br />
-                Birthday: <?php echo $row["birthday"] ?>
-                <br /> <br />
-                Gender: <?php echo $row["gender"] ?>
-                <br /><br />
-                Bio: <?php echo $row["bio"] ?>
-                <br />  <br />
-                <a href="editProfile.php">Edit</a>
-   </p>
- </div>
+   <h2>Project:  <?php echo $row2["title"] ?></h2><br />
+   <table><form method="post" action="submitDonation.php"><tr>
+	<td>Currency: </td>
+	<td><input type="hidden" value="<?php echo $projectID ?>" name="projectID" />&nbsp; &nbsp;</td>
+		<td><select name="currency">
+                                      <option value="">Currency...</option>
+                                      <option value="AUD">AUD</option>
+                                      <option value="CAD">CAD</option>
+                                      <option value="CHF">CHF</option>
+                                      <option value="EUR">EUR</option>
+                                      <option value="GBP">GBP</option>
+                                      <option value="INR">INR</option>
+                                      <option value="JPY">JPY</option>
+                                      <option value="KRW">KRW</option>
+                                      <option value="NZD">NZD</option>
+                                      <option value="RMB">RMB</option>
+                                      <option value="SGD">SGD</option>
+                                      <option value="USD">USD</option>
+                                  </select></td></tr>
+	<tr><td>Amount: </td>
+	<td>&nbsp; &nbsp;</td>
+	<td><input type="number" name="amount" step="any" />&nbsp;<input type="submit" value="Donate" /></td></tr></form></table>
  <div class="clearfix"></div>
-</div>
             <div class="clearfix"></div>
           </div>
         </div>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
+	header("location:loginreg.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,13 +51,18 @@
 		echo '</script>';
 	}
 
+if($_POST!=null){
 $keyword = $_POST["keyword"];
 $sql2 = "SELECT * FROM project WHERE title LIKE '%$keyword%'";
 $result2=mysqli_query($mysqli,$sql2);
 $rowcount2 = mysqli_num_rows($result2);
-echo $rowcount2;
 $row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
+$sql3 = "SELECT * FROM user WHERE firstName LIKE '%$keyword%' OR lastName LIKE '%$keyword%'";
+$result3=mysqli_query($mysqli,$sql3);
+$rowcount3 = mysqli_num_rows($result3);
+$row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+} 
   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -81,7 +94,7 @@ $row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
   			<div class="container">
   				<div class="col-lg-12">
   					<h4 class="pull-left">hi <?php echo $row["firstName"] ?>! here are your search results ... </h4>
-  					<form method="get" action="search.php"><p class="pull-right pagination"><input type="Search" name="q"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
+  					<form method="get" action="search.php"><p class="pull-right pagination"><input type="Search" name="q"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  </p></form>
   				</div>
   			</div>
   		</div>
@@ -94,14 +107,39 @@ $row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
     <h2>Projects</h2>
     <table>
 	<?php 
-		foreach ($result2 as $a ){
+		if($_POST!=null&&$rowcount2>0){
+			foreach ($result2 as $a ){
 	?>
-			<tr><td><?php echo $a["title"] ?></td><td></td></tr>
+				<tr><td><a href=""><?php echo $a["title"] ?></a></td></tr>
 	<?php		
+			}
+		} else {
+	?>
+			No project found!
+	<?php
 		}
 
 	?>
     </table>
+    <br />
+    <br />
+    <h2>Users</h2>
+    <table>
+	<?php 
+		if($_POST!=null&&$rowcount3>0){
+			foreach ($result3 as $a ){
+	?>
+				<tr><td><a href=""><?php echo $a["firstName"] ?> <?php echo $a["lastName"] ?></a></td></tr>
+	<?php		
+			}
+		} else {
+	?>
+			No user found!
+	<?php
+		}
+
+	?>
+     </table>
 
  </div>
  <div class="clearfix"></div>
