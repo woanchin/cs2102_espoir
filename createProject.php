@@ -108,8 +108,8 @@
                                   <input name="projecttitle" type="text" />
                               </div>
                               <div>
-                                <label for="fileScr">Upload a Picture: </label>
-                                <input name="fileSrc" type="file" accept="image/*" required />
+                                <label for="picSrc">Upload a Picture: </label>
+                                <input id="picSrc" name="test" type="file" accept="image/*" required />
                               </div>
                               <br />
                               <div>

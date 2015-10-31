@@ -1,8 +1,8 @@
 <?php
-//Database Connection String
 
 session_start();
 include("db.php");
+
 $emailtxt = $_SESSION["emailtxt"];
 $userEmail = $emailtxt;
 $title = $_POST["projecttitle"];
@@ -15,7 +15,6 @@ $fundsCollected = 0;
 
 // prepare the image for insertion
 $imgData =addslashes (file_get_contents($_FILES['test']['tmp_name']));
-
 $filename = "img_post" . rand(1, 9) . date("YmdHis") . rand(25, 125) . rand(256, 850);
 $allowed  = array(
     "image/jpeg",
@@ -64,38 +63,18 @@ if ($result[0] == 0) {
 
 function UploadFile($name, $filetype, $maxlen)
 {
-    if (!isset($_FILES[$name]['name']))
-        return array(
-            -1,
-            NULL,
-            NULL
-        );
-    if (!isset($_FILES[$name]['type'], $filetype))
-        return array(
-            -2,
-            NULL,
-            NULL
-        );
-    if ($_FILES[$name]['size'] > $maxlen)
-        return array(
-            -3,
-            NULL,
-            NULL
-        );
-    if ($_FILES[$name]['error'] > 0)
-        return array(
-            $_FILES[$name]['error'],
-            NULL,
-            NULL
-        );
-    
-    $temp = file_get_contents($_FILES[$name]['tmp_name']);
-    return array(
-        0,
-        $_FILES[$name]['type'],
-        $temp
-    );
-}
+	if (!isset($_FILES[$name]['name']))
+		return array(-1,NULL,NULL);
+		if (!isset($_FILES[$name]['type'], $filetype))
+			return array(-2,NULL,NULL);
+		if ($_FILES[$name]['size'] > $maxlen)
+			return array(-3,NULL,NULL);
+		if ($_FILES[$name]['error'] > 0)
+			return array($_FILES[$name]['error'],NULL,NULL);
+		
+		$temp = file_get_contents($_FILES[$name]['tmp_name']);
+		return array(0,$_FILES[$name]['type'],$temp);
+	}
 
 
 ?>
