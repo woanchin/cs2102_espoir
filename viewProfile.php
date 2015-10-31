@@ -5,32 +5,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
 }
 ?>
-
-<?php 
-    include("db.php");  
-
-    //Store Data input into variables
-	$emailtxt = $_SESSION["emailtxt"];
-	
-    //select results matching to what the user has typed	
-	$sqlUser = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-
-    //check if the sql has been execute
-	if ($resultUser=mysqli_query($mysqli,$sqlUser))
-    {
-        // Return the number of rows in result set
-        $rowcountUser=mysqli_num_rows($resultUser);
-    }
-
-    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcountUser==1)
-	{	
-
-        $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
-
-	}
-
-  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,13 +29,17 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
       <![endif]-->
 
   </head>
-<?php
 
-$id = $_GET["id"];
-$sql = "SELECT * FROM project WHERE projectID = '$id'";
-$result = mysqli_query($mysqli, $sql);
+  <?php 
+    include("db.php");  
 
-//check if the sql has been execute
+    //Store Data input into variables
+	$emailtxt = $_SESSION["emailtxt"];
+	
+    //select results matching to what the user has typed	
+	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+
+    //check if the sql has been execute
 	if ($result=mysqli_query($mysqli,$sql))
     {
         // Return the number of rows in result set
@@ -74,11 +52,20 @@ $result = mysqli_query($mysqli, $sql);
 
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-	} else {
-		echo "Fail to retrieve";
+	}
+	
+	else 
+	{
+		//ERROR Message and Redirect Link
+		echo '<script language="javascript">';
+		echo 'alert("Wrong username/password");';
+		echo 'window.location.href="../CS2102/loginreg.php";';
+		echo '</script>';
+		
 	}
 
-?>
+  ?>
+
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
   	<div class="wrapper">
   		<div class="container">
@@ -92,11 +79,11 @@ $result = mysqli_query($mysqli, $sql);
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li ><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                    <li ><a href="createProject.php">Create Project</a></li>
-                    <li ><a href="loginreg.php">Register/Login</a></li>
-					<li ><a href="discover.php">Discover</a><li>
-                  </ul>
+                    <li class="active"><a href="index.html">Profile</a>
+ <span class="sr-only">(current)</span></a></li>
+                    <li><a href="create.html">My Projects</a></li>
+                    <li><a href="logout.php" id="logout">Logout</a></li>
+					        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
   					</div>
@@ -107,8 +94,9 @@ $result = mysqli_query($mysqli, $sql);
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left"><?php echo $row["title"] ?></h4>
-   				</div>
+  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
+  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
+  				</div>
   			</div>
   		</div>
   		<!-- inner-head end -->
@@ -120,27 +108,22 @@ $result = mysqli_query($mysqli, $sql);
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <table>
-		<tr><td valign="top" width="100px" height="50px">Name: </td><td valign="top"><?php echo $row["title"] ?></td><tr>
-       
-        <tr><td valign="top" width="100px" height="50px">Description: </td><td valign="top"><?php echo $row["description"] ?></td><tr>
-          
-        <tr><td valign="top" width="100px" height="50px">Start Date: </td><td valign="top"><?php echo $row["startDate"] ?></td><tr>
-        
-        <tr><td valign="top" width="100px" height="50px">Duration of Project: </td><td valign="top"><?php echo $row["duration"] ?></td><tr>
-      
-        <tr><td valign="top" width="100px" height="50px">Categories: </td><td valign="top"><?php echo $row["categories"] ?></td><tr>
- 
-        <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
-      
-   </table>
-   
-   <?php
-	if($rowUser["userEmail"] == $row["userEmail"]) 
-	{	
-		echo "<a href="."editProject.php?=".$row["projectID"].">Edit</a>";
-	}
-   ?>
+    <h2>My Profile</h2>
+    <p>
+     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
+                <br /><br/>
+                Email: <?php echo $row["userEmail"] ?>
+                <br /><br/>
+                Nationality: <?php echo $row["nationality"] ?>
+                <br /><br />
+                Birthday: <?php echo $row["birthday"] ?>
+                <br /> <br />
+                Gender: <?php echo $row["gender"] ?>
+                <br /><br />
+                Bio: <?php echo $row["bio"] ?>
+                <br />  <br />
+                <a href="editProfile.php">Edit</a>
+   </p>
  </div>
  <div class="clearfix"></div>
 </div>
