@@ -72,7 +72,8 @@
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">My Profile <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="index.html">Profile</a>
+ <span class="sr-only">(current)</span></a></li>
                     <li><a href="create.html">My Projects</a></li>
                     <li> <a href="loginreg.html">My Settings</a></li>
 					        </ul>
@@ -87,7 +88,7 @@
   			<div class="container">
   				<div class="col-lg-12">
   					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<p class="pull-right pagination"><a href="index.html">profile</a></p>
+  					<p class="pull-right pagination">Profile</p>
   				</div>
   			</div>
   		</div>
