@@ -74,106 +74,39 @@
 </div>
 <!-- slider end -->
 <div class="container">
-    <div class="our-works">
-        <div class="header-intro">
-            <h2>Discover Project</h2>
-            <p>Things do not happen things are made to happen</p>
-        </div>
-        <div class="col-sm-4">
-        <div class="portfolio-img-wrap">
-          <img src="img/portfolio1.jpg">
-          <div class="caption-container">
-           <div class="portfolio-caption">
-               <h5>Project Name</h5>
-               <p>- &nbsp; Category</p>
+	<div class="our-works">
+    <div class="header-intro">
+        <h2>Discover Project</h2>
+        <p>Things do not happen things are made to happen</p>
+    </div>
+<?php
+
+include("db.php"); 
+
+$sql = "SELECT title, categories FROM project";
+$result = $mysqli->query($sql);
+
+if ($result -> num_rows>0) {
+	$i = 1;
+	while($row = $result->fetch_assoc()) {
+		echo "<div class="."col-sm-4".">
+        <div class="."portfolio-img-wrap".">
+          <img src="."img/portfolio$i.jpg".">
+          <div class="."caption-container".">
+           <div class="."portfolio-caption".">
+               <h5>".$row["title"]."</h5>
+               <p>- &nbsp; ".$row["categories"]."</p>
            </div>
        </div>
        </div>
-   </div>
-   <div class="col-sm-4">
-   <div class="portfolio-img-wrap">
-      <img src="img/portfolio2.jpg">
-      <div class="caption-container">
-       <div class="portfolio-caption">
-           <h5>Project Name</h5>
-           <p>- &nbsp; Category</p>
-       </div>
-   </div>
-   </div>
-</div>
+		</div>";
+		$i++;
+	}
+} else {
+	
+}
+?>
 
-<div class="col-sm-4">
-<div class="portfolio-img-wrap">
-  <img src="img/portfolio3.jpg">
-  <div class="caption-container">
-   <div class="portfolio-caption">
-       <h5>Project Name</h5>
-       <p>- &nbsp; Category</p>
-   </div>
-</div>
-</div>
-</div>
-
-<div class="col-sm-4">
-<div class="portfolio-img-wrap">
-  <img src="img/portfolio4.jpg">
-  <div class="caption-container">
-   <div class="portfolio-caption">
-       <h5>Project Name</h5>
-       <p>- &nbsp; Category</p>
-   </div>
-</div>
-</div>
-</div>
-
-<div class="col-sm-4">
-<div class="portfolio-img-wrap">
-  <img src="img/portfolio5.jpg">
-  
-  <div class="caption-container">
-   <div class="portfolio-caption">
-       <h5>Project Name</h5>
-       <p>- &nbsp; Category</p>
-   </div>
-</div>
-</div>
-</div>
-
-<div class="col-sm-4">
-<div class="portfolio-img-wrap">
-  <img src="img/portfolio6.jpg">
-  <div class="caption-container">
-   <div class="portfolio-caption">
-       <h5>Project Name</h5>
-       <p>- &nbsp; Category</p>
-   </div>
-</div>
-</div>
-</div>
-
-<div class="col-sm-4">
-<div class="portfolio-img-wrap">
-  <img src="img/portfolio7.jpg">
-  <div class="caption-container">
-   <div class="portfolio-caption">
-       <h5>Project Name</h5>
-       <p>- &nbsp; Category</p>
-   </div>
-</div>
-</div>
-</div>
-
-<div class="col-sm-4">
-<div class="portfolio-img-wrap">
-  <img src="img/portfolio8.jpg">
-  <div class="caption-container">
-   <div class="portfolio-caption">
-       <h5>Project Name</h5>
-       <p>- &nbsp; Category</p>
-   </div>
-</div>
-</div>
-</div>
 <div class="clearfix"></div>
 
 </div>
@@ -181,6 +114,7 @@
 <!-- works end -->
 <div class="copyright">
     <div class="container">
+
       <p>All Rights Reserved 2015 &copy; Espoir.com</p>
    </div>
 </div>

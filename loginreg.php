@@ -38,7 +38,8 @@
                     <li><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
                     <li><a href="create.html">Create Project</a></li>
                     <li  class="active"> <a href="loginreg.html">Register/Login</a></li>
-					        </ul>
+					<li><a href="discover.php">Discover</a></li>        
+							</ul>
   						</div>
   						<!-- /.navbar-collapse --> 
   					</div>
