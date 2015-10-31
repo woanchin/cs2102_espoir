@@ -4,8 +4,8 @@ session_start();
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,35 +34,44 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   <?php 
     include("db.php");  
 
-	$emailtxt = $_SESSION["emailtxt"];
+    //Store Data input into variables
+	$emailtxt = "siqi940@gmail.com"; // hardcode
+	
+	
+    //select results matching to what the user has typed	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-	if ($result=mysqli_query($mysqli,$sql)){
-	         	$rowcount=mysqli_num_rows($result);
-    	}
 
-	if($rowcount==1){	
-	        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    //check if the sql has been execute
+	if ($result=mysqli_query($mysqli,$sql))
+    {
+        // Return the number of rows in result set
+        $rowcount=mysqli_num_rows($result);
+    }
+
+    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
+	if($rowcount==1)
+	{	
+
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 	}
-	else {
+	
+	else 
+	{
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
 		echo 'alert("Wrong username/password");';
 		echo 'window.location.href="../CS2102/loginreg.php";';
 		echo '</script>';
+		
 	}
 
-if(isset($_POST["keyword"])){
-	$keyword = $_POST["keyword"];
-	$sql2 = "SELECT * FROM project WHERE title LIKE '%$keyword%'";
-	$result2=mysqli_query($mysqli,$sql2);
-	$rowcount2 = mysqli_num_rows($result2);
-	$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
+$projectID = "200001"; // hardcode
+$sql2 = "SELECT * FROM project WHERE projectID = '$projectID'";
+$result2=mysqli_query($mysqli,$sql2);
+$rowcount2 = mysqli_num_rows($result2);
+$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-	$sql3 = "SELECT * FROM user WHERE firstName LIKE '%$keyword%' OR lastName LIKE '%$keyword%'";
-	$result3=mysqli_query($mysqli,$sql3);
-	$rowcount3 = mysqli_num_rows($result3);
-	$row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-}
   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -93,57 +102,37 @@ if(isset($_POST["keyword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">hi <?php echo $row["firstName"] ?>! here are your search results ... </h4>
-  					<form method="POST" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  </p></form>
+  					<h4 class="pull-left">Donation..</h4>
+  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="search" name="keyword" /><input type="submit" value="Search" /> &nbsp;&nbsp;&nbsp;&nbsp;  Donate</p></form>
   				</div>
   			</div>
   		</div>
   		<!-- inner-head end -->
         <div class="inner-page services">
  <div class="container">
-  <div class="">
-   
-  <div class="col-md-6">
-    <h2>Projects</h2>
-    <table>
-	<?php 
-		if(isset($_POST["keyword"])&&$rowcount2>0){
-			foreach ($result2 as $a ){
-	?>
-				<tr><td><a href=""><?php echo $a["title"] ?></a></td></tr>
-	<?php		
-			}
-		} else {
-	?>
-			No project found!
-	<?php
-		}
-
-	?>
-    </table>
-    <br />
-    <br />
-    <h2>Users</h2>
-    <table>
-	<?php 
-		if(isset($_POST["keyword"])&&$rowcount3>0){
-			foreach ($result3 as $a ){
-	?>
-				<tr><td><a href=""><?php echo $a["firstName"] ?> <?php echo $a["lastName"] ?></a></td></tr>
-	<?php		
-			}
-		} else {
-	?>
-			No user found!
-	<?php
-		}
-
-	?>
-     </table>
-
- </div>
+   <h2>Project:  <?php echo $row2["title"] ?></h2><br />
+   <table><form method="post" action="submitDonation.php"><tr>
+	<td>Currency: </td>
+	<td><input type="hidden" value="<?php echo $projectID ?>" name="projectID" />&nbsp; &nbsp;</td>
+		<td><select name="currency">
+                                      <option value="">Currency...</option>
+                                      <option value="AUD">AUD</option>
+                                      <option value="CAD">CAD</option>
+                                      <option value="CHF">CHF</option>
+                                      <option value="EUR">EUR</option>
+                                      <option value="GBP">GBP</option>
+                                      <option value="INR">INR</option>
+                                      <option value="JPY">JPY</option>
+                                      <option value="KRW">KRW</option>
+                                      <option value="NZD">NZD</option>
+                                      <option value="RMB">RMB</option>
+                                      <option value="SGD">SGD</option>
+                                      <option value="USD">USD</option>
+                                  </select></td></tr>
+	<tr><td>Amount: </td>
+	<td>&nbsp; &nbsp;</td>
+	<td><input type="number" name="amount" step="any" />&nbsp;<input type="submit" value="Donate" /></td></tr></form></table>
  <div class="clearfix"></div>
-</div>
             <div class="clearfix"></div>
           </div>
         </div>

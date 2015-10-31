@@ -82,7 +82,7 @@
   			<div class="container">
                 <div class="col-md-6 no-padding-left">
   						<h2>Start a Project</h2>
-                          <form name="createProjForm" action="/Crowdfunding/addProject.php" method="post" enctype="multipart/form-data">
+                          <form name="createProjForm" action="addProject.php" method="post" enctype="multipart/form-data">
                               <div>
                                   <label for="category">Select a Category : </label>
                                   <select name="category">
