@@ -35,9 +35,9 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
     //Store Data input into variables
 	$emailtxt = $_SESSION["emailtxt"];
-	
+	$id = $_GET["id"];
     //select results matching to what the user has typed	
-	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+	$sql = "SELECT * FROM project WHERE projectID = '$id'";
 
     //check if the sql has been execute
 	if ($result=mysqli_query($mysqli,$sql))
@@ -52,18 +52,10 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
+	} else {
+		echo "Failure to retrieve";
 	}
 	
-	else 
-	{
-		//ERROR Message and Redirect Link
-		echo '<script language="javascript">';
-		echo 'alert("Wrong username/password");';
-		echo 'window.location.href="../CS2102/loginreg.php";';
-		echo '</script>';
-		
-	}
-
   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -93,8 +85,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<p class="pull-right pagination"><a href="index.html">profile</a></p>
+  					<h4 class="pull-left"><?php echo $row["title"] ?></h4>
   				</div>
   			</div>
   		</div>
@@ -107,33 +98,28 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>Edit Profile</h2>
+    <h2>Edit Project</h2>
     <p>
-      						<form action="editProfileMan.php" method="post">
+      						<form action="editProjectMan.php" method="post">
                               <p>
-                                  <label for="Lname"> Last Name:</label>
-                                  <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px" value="<?php echo $row["lastName"] ?>">
-                              </p>
-                              <br />
-                              <p>
-                              		<label for="Fname"> First Name:</label>
-                                 	<input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>">
+                                  <label for="name"> Project Name:</label>
+                                  <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>">
                               </p>
                               <p>
-                              		<label for="userEmail"> Email:</label>
-                                 	<input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly>
-                              </p>
-                              
-                              <p>
-                              		<label> About Me : </label> 
-                                	<textarea name="bio" cols="20" rows="2"><?php echo $row["bio"] ?></textarea>
+                              		<label for="description"> Description:</label>
+                                 	<textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea>
                               </p>
                               <p>
-                             	   <label for="password">Password : </label>
-                                   <input id="userPassword" name ="userPassword" type="password" value="<?php echo $row["password"] ?>" />
+                              		<label> Duration: </label> 
+                                	<input name="duration" type="text" id="duration" style="width:200px!important;height:25px" value="<?php echo $row["duration"] ?>">
+                              </p>
+							  <p>
+                              		<label> Categories: </label> 
+                                	<input name="categories" type="text" id="categories" style="width:200px!important;height:25px" value="<?php echo $row["categories"] ?>">
                               </p>
                               <p>
-                                  <input type="submit" name="edit" id="edit" value="Edit">
+                                  <input type="text" name="id" id="id" value="<?php echo $id ?>">
+								  <input type="submit" name="edit" id="edit" value="Edit">
                               </p>
                           </form>
                 <br />  <br />

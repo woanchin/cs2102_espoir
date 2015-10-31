@@ -2,22 +2,22 @@
 
 include("db.php");
 
-	$Lname = $_POST["Lname"];
-	$Fname= $_POST["Fname"];
-	$userEmail= $_POST["userEmail"];
-	$bio = $_POST["bio"];
-	$userPassword = $_POST["userPassword"];
+	$name = $_POST["name"];
+	$description= $_POST["description"];
+	$duration= $_POST["duration"];
+	$categories = $_POST["categories"];
+	$id = $_POST["id"];
 	
 					// Query String
-					$query = "UPDATE `user` SET `password`='$userPassword',`firstName`='$Fname',`lastName`='$Lname',`bio`='$bio' WHERE `userEmail`='$userEmail'";
+					$query = "UPDATE `project` SET `title`='$name',`description`='$description',`duration`='$duration',`categories`='$categories' WHERE `projectID`='$id'";
 					
 					
-					$sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
+					$success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
 					// Execute Query					
-					if($sucess == 1){
+					if($success == 1){
 						echo '<script language="javascript">';
-						echo 'alert("Profile Updated");';
-						echo 'window.location.href="../CS2102/Profile.php";';
+						echo 'alert("Project Updated");';
+						echo 'window.location.href="../CS2102/displayProject.php?id='.$id.'";';
 						echo '</script>';
 					}
 
