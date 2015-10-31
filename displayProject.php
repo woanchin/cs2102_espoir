@@ -138,7 +138,9 @@ $result = mysqli_query($mysqli, $sql);
    <?php
 	if($rowUser["userEmail"] == $row["userEmail"]) 
 	{	
-		echo "<a href="."editProject.php?=".$row["projectID"].">Edit</a>";
+		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
+	} else {
+		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
 	}
    ?>
  </div>
