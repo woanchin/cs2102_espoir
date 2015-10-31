@@ -64,6 +64,14 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		
 	}
 
+if(isset($_GET["userEmail"])){
+	$searchUser = $_GET["userEmail"];
+	$sql2 = "SELECT * FROM user WHERE userEmail = '$searchUser'";
+	$result2=mysqli_query($mysqli,$sql2);
+	$rowcount2=mysqli_num_rows($result2);
+	$row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+}
+
   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -108,21 +116,20 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>My Profile</h2>
+    <h2><?php echo $row2["firstName"] ?>'s Profile</h2>
     <p>
-     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
+     			Name: <?php echo $row2["lastName"]." ".$row2["firstName"] ?>
                 <br /><br/>
-                Email: <?php echo $row["userEmail"] ?>
+                Email: <?php echo $row2["userEmail"] ?>
                 <br /><br/>
-                Nationality: <?php echo $row["nationality"] ?>
+                Nationality: <?php echo $row2["nationality"] ?>
                 <br /><br />
-                Birthday: <?php echo $row["birthday"] ?>
+                Birthday: <?php echo $row2["birthday"] ?>
                 <br /> <br />
-                Gender: <?php echo $row["gender"] ?>
+                Gender: <?php echo $row2["gender"] ?>
                 <br /><br />
-                Bio: <?php echo $row["bio"] ?>
+                Bio: <?php echo $row2["bio"] ?>
                 <br />  <br />
-                <a href="editProfile.php">Edit</a>
    </p>
  </div>
  <div class="clearfix"></div>

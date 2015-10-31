@@ -27,8 +27,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
 
+      <![endif]-->
   </head>
 
   <?php 
@@ -129,7 +129,7 @@ if(isset($_POST["keyword"])){
 		if(isset($_POST["keyword"])&&$rowcount3>0){
 			foreach ($result3 as $a ){
 	?>
-				<tr><td><a href="viewProfile?userEmail=<?php echo $a["userEmail"] ?>"><?php echo $a["firstName"] ?> <?php echo $a["lastName"] ?></a></td></tr>
+				<tr><td><a href="viewProfile.php?userEmail=<?php echo $a["userEmail"] ?>"><?php echo $a["lastName"]." ".$a["firstName"] ?></a></td></tr>
 	<?php		
 			}
 		} else {
