@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if (isset($_SESSION["emailtxt"]) && isset($_SESSION["loginPassword"])){
@@ -45,8 +45,8 @@ if (isset($_SESSION["emailtxt"]) && isset($_SESSION["loginPassword"])){
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
                     <li><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="create.html">Create Project</a></li>
-                    <li  class="active"> <a href="loginreg.html">Register/Login</a></li>
+                    <li><a href="createProject.php">Create Project</a></li>
+                    <li  class="active"><a href="loginreg.php">Register/Login</a></li>
 					<li><a href="discover.php">Discover</a></li>        
 							</ul>
   						</div>
