@@ -35,11 +35,12 @@
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                    <li ><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
                     <li ><a href="createProject.html">Create Project</a></li>
                     <li > <a href="loginreg.html">Register/Login</a></li>
-					<li><a href="discover.html">Discover</a><li>
-                  </ul>
+					<li class="active"><a href="index.html">Discover <span class="sr-only">(current)</span></a></li>
+                    
+				  </ul>
             </div>
             <!-- /.navbar-collapse --> 
         </div>
@@ -50,7 +51,7 @@
 <div class="slider">
   <div class="rslides_container">
     <ul class="rslides">
-      <li> <img src="img/slider_medium.jpg" data-min-width-1400="img/slider.jpg" alt="">
+      <li> <img src="img/filler-medium.jpg" data-min-width-1400="img/filler.jpg" alt="">
         <div class="container">
           <div class="caption">
             <h1>everything</h1>
@@ -59,7 +60,7 @@
         </div>
     </div>
 </li>
-<li> <img src="img/slider1_medium.jpg" data-min-width-1400="img/slider1.jpg" alt="">
+<li> <img src="img/kiki-medium.jpg" data-min-width-1400="img/kiki.jpg" alt="">
     <div class="container">
       <div class="caption">
         <h1>The power of</h1>
