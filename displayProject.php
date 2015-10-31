@@ -5,6 +5,32 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
 }
 ?>
+
+<?php 
+    include("db.php");  
+
+    //Store Data input into variables
+	$emailtxt = $_SESSION["emailtxt"];
+	
+    //select results matching to what the user has typed	
+	$sqlUser = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+
+    //check if the sql has been execute
+	if ($resultUser=mysqli_query($mysqli,$sqlUser))
+    {
+        // Return the number of rows in result set
+        $rowcountUser=mysqli_num_rows($resultUser);
+    }
+
+    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
+	if($rowcountUser==1)
+	{	
+
+        $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
+
+	}
+
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +56,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
   </head>
 <?php
-
-
-include("db.php"); 
 
 $id = $_GET["id"];
 $sql = "SELECT * FROM project WHERE projectID = '$id'";
@@ -111,6 +134,13 @@ $result = mysqli_query($mysqli, $sql);
         <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
       
    </table>
+   
+   <?php
+	if($rowUser["userEmail"] == $row["userEmail"]) 
+	{	
+		echo "<a href="."editProject.php?=".$row["projectID"].">Edit</a>";
+	}
+   ?>
  </div>
  <div class="clearfix"></div>
 </div>
