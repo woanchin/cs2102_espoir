@@ -97,22 +97,20 @@ $result = mysqli_query($mysqli, $sql);
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>My Profile</h2>
-    <p>
-     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
+    <table>
+		<tr><td>Name: </td><td><?php echo $row["title"] ?></td><tr>
                 <br /><br/>
-                Email: <?php echo $row["userEmail"] ?>
+        <tr><td>Description: </td><td><?php echo $row["description"] ?></td><tr>
                 <br /><br/>
-                Nationality: <?php echo $row["nationality"] ?>
+        <tr><td>Start Date: </td><td><?php echo $row["startDate"] ?></td><tr>
                 <br /><br />
-                Birthday: <?php echo $row["birthday"] ?>
+        <tr><td>Duration of Project: </td><td><?php echo $row["duration"] ?></td><tr>
                 <br /> <br />
-                Gender: <?php echo $row["gender"] ?>
+        <tr><td>Categories: </td><td><?php echo $row["categories"] ?></td><tr>
                 <br /><br />
-                Bio: <?php echo $row["bio"] ?>
+        <tr><td>Funds Collected: </td><td><?php echo $row["fundsCollected"] ?></td><tr>
                 <br />  <br />
-                <a href="editProfile.php">Edit</a>
-   </p>
+   </table>
  </div>
  <div class="clearfix"></div>
 </div>
