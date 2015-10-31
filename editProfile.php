@@ -100,19 +100,35 @@
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>My Profile</h2>
+    <h2>Edit Profile</h2>
     <p>
-     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                <br /><br/>
-                Email: <?php echo $row["userEmail"] ?>
-                <br /><br/>
-                Nationality: <?php echo $row["nationality"] ?>
-                <br /><br />
-                Birthday: <?php echo $row["birthday"] ?>
-                <br /> <br />
-                Gender: <?php echo $row["gender"] ?>
-                <br /><br />
-                Bio: <?php echo $row["bio"] ?>
+      						<form action="editProfileMan.php" method="post">
+                              <p>
+                                  <label for="Lname"> Last Name:</label>
+                                  <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px" value="<?php echo $row["lastName"] ?>">
+                              </p>
+                              <br />
+                              <p>
+                              		<label for="Fname"> First Name:</label>
+                                 	<input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>">
+                              </p>
+                              <p>
+                              		<label for="userEmail"> Email:</label>
+                                 	<input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly>
+                              </p>
+                              
+                              <p>
+                              		<label> About Me : </label> 
+                                	<textarea name="bio" cols="20" rows="2"><?php echo $row["bio"] ?></textarea>
+                              </p>
+                              <p>
+                             	   <label for="password">Password : </label>
+                                   <input id="userPassword" name ="userPassword" type="password" value="<?php echo $row["password"] ?>" />
+                              </p>
+                              <p>
+                                  <input type="submit" name="edit" id="edit" value="Edit">
+                              </p>
+                          </form>
                 <br />  <br />
    </p>
  </div>

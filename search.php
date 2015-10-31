@@ -26,36 +26,29 @@
   <?php 
     include("db.php");  
 
-    //Store Data input into variables
 	$emailtxt = $_SESSION["emailtxt"];
-	
-    //select results matching to what the user has typed	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+	if ($result=mysqli_query($mysqli,$sql)){
+	         	$rowcount=mysqli_num_rows($result);
+    	}
 
-    //check if the sql has been execute
-	if ($result=mysqli_query($mysqli,$sql))
-    {
-        // Return the number of rows in result set
-        $rowcount=mysqli_num_rows($result);
-    }
-
-    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
+	if($rowcount==1){	
+	        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 	}
-	
-	else 
-	{
+	else {
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
 		echo 'alert("Wrong username/password");';
 		echo 'window.location.href="../CS2102/loginreg.php";';
 		echo '</script>';
-		
 	}
+
+$keyword = $_POST["keyword"];
+$sql2 = "SELECT * FROM project WHERE title LIKE '%$keyword%'";
+$result2=mysqli_query($mysqli,$sql2);
+$rowcount2 = mysqli_num_rows($result2);
+echo $rowcount2;
+$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
   ?>
 
@@ -87,8 +80,8 @@
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="search" name="keyword" /><input type="submit" value="Search" /> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
+  					<h4 class="pull-left">hi <?php echo $row["firstName"] ?>! here are your search results ... </h4>
+  					<form method="get" action="search.php"><p class="pull-right pagination"><input type="Search" name="q"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
   				</div>
   			</div>
   		</div>
@@ -96,27 +89,20 @@
         <div class="inner-page services">
  <div class="container">
   <div class="">
-   <div class="col-md-6 no-padding-left">
-	<img src="image/<?php echo $row["picName"]; ?>">
-    <!--<img src="image/">-->
-  </div>
+   
   <div class="col-md-6">
-    <h2>My Profile</h2>
-    <p>
-     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                <br /><br/>
-                Email: <?php echo $row["userEmail"] ?>
-                <br /><br/>
-                Nationality: <?php echo $row["nationality"] ?>
-                <br /><br />
-                Birthday: <?php echo $row["birthday"] ?>
-                <br /> <br />
-                Gender: <?php echo $row["gender"] ?>
-                <br /><br />
-                Bio: <?php echo $row["bio"] ?>
-                <br />  <br />
-                <a href="editProfile.php">Edit</a>
-   </p>
+    <h2>Projects</h2>
+    <table>
+	<?php 
+		foreach ($result2 as $a ){
+	?>
+			<tr><td><?php echo $a["title"] ?></td><td></td></tr>
+	<?php		
+		}
+
+	?>
+    </table>
+
  </div>
  <div class="clearfix"></div>
 </div>
