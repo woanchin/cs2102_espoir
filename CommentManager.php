@@ -5,7 +5,7 @@ include("db.php");
 
 	//Store Data input into variables
 	$emailtxt = $_POST["emailtxt"];
-	$projectID = $_POST["projectId"];
+	$projectID = $_POST["projectID"];
     $content = $_POST["content"];
 	
     // Query String
@@ -15,10 +15,10 @@ include("db.php");
     $sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
     // Execute Query					
     if($sucess == 1){
-        echo '<script language="javascript">';
-        echo 'alert("Account Created");';
-        echo 'window.location.href="../CS2102/comment.php";';
-        echo '</script>';
+        echo "<script language='javascript'>;
+         alert('Comment added');
+         window.location.href='../CS2102/comment.php?projectID=$projectID';
+         </script>";
     }
 
 ?>

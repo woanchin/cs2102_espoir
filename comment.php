@@ -30,6 +30,16 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
 
+    <style type="text/css">
+        .auto-style1 {
+            height: 45px;
+        }
+        .auto-style2 {
+            width: 70%;
+            height: 45px;
+        }
+    </style>
+
 </head>
 
 <?php 
@@ -40,7 +50,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     $emailtxt = $_SESSION["emailtxt"];
 	
     //select results matching to what the user has typed	
-	$commentSql = "SELECT * FROM comment WHERE projectID = '$projectID'";
+	$commentSql = mysqli_query($mysqli,"SELECT * FROM comment WHERE projectID = '$projectID'");
     $sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 
     //check if the sql has been execute
@@ -103,7 +113,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                 <form method="post" action="search.php">
                     <p class="pull-right pagination">
                         <input type="search" name="keyword" /><input type="submit" value="Search" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;  Profile
+                        &nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                 </form>
             </div>
@@ -112,29 +122,31 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-            <div class="">
-                <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row["picName"]; ?>">
-                    <!--<img src="image/">-->
-                </div>
-                <div class="col-md-6">
+                <div class="inner-page contact-us">
+                    <div class="header-intro">
                     <h2>Comments</h2>
-                    <table style="width: 100%;">
+                        </div>
+                    <table style="width: 80%; margin:0 auto; height: 85px;">
                         <thead>
                             <tr>
-                                <td>Time</td>
-                                <td>Comment</td>
-                                <td>Commented By</td>
+                                <td class="auto-style1">Time</td>
+                                <td class="auto-style2">Comment</td>
+                                <td class="auto-style1">Commented By</td>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php while($row = mysql_fetch_array($commentSql,MYSQLI_ASSOC)) { ?>
+                        <tbody style="padding: 10px; margin: 10px">
+                            <?php 
+                                if($commentSql == FALSE){
+                                    die(mysql_error());
+                                }
+                                while($row = mysqli_fetch_array($commentSql,MYSQLI_ASSOC)) { 
+                                    ?>
                             <tr>
                                 <td><?php echo $row['dateTime']?></td>
-                                <td><?php echo $row['content']?></td>
+                                <td style="padding: 10px; margin: 10px"><?php echo $row['content']?></td>
                                 <?php 
                                       $email = $row['userEmail'];
-                                    $user = mysql_query("SELECT * FROM user WHERE userEmail = '$email'");
+                                    $user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
                                     $userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
                                 ?>
                                 <td><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
@@ -143,24 +155,24 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                             <?php } ?>
                         </tbody>
                     </table>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="col-md-6">
-                    <form action="CommentManager.php" method="post">
+                    <br />
+                    <div class="clearfix"></div><br />
+                    <form action="CommentManager.php" method="post" style="width: 80%; margin:0 auto">
                         <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                        <input name="projectId" type="hidden" value="<?php echo $_GET["projectID"]?>"/>
-                        <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea>
+                        <input name="projectID" type="hidden" value="<?php echo $_GET["projectID"]?>"/>
+                        <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
                         <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
                     </form>
-                </div>s
+                    <br />
+                    <div class="clearfix"></div>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
-        </div>
     </div>
     <div class="clearfix"></div>
 
-     <!---->
+    <!---->
     <div class="footer">
         <div class="container">
             <div class="col-sm-2">
