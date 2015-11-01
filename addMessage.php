@@ -46,12 +46,13 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     include("db.php");  
 
     //Store Data input into variables
-	$projectID = $_GET["projectID"];
     $emailtxt = $_SESSION["emailtxt"];
+    $messageEmail = $_GET["emailtxt"];
 	
     //select results matching to what the user has typed	
-	$commentSql = mysqli_query($mysqli,"SELECT * FROM comment WHERE projectID = '$projectID'");
     $sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+    $message = mysqli_query($mysqli, "SELECT * FROM message WHERE (senderEmail = '$emailtxt' AND receiverEmail = '$messageEmail') OR (receiverEmail = '$emailtxt' AND senderEmail = '$messageEmail') ORDER BY projectID, dateTime ASC ");
+    $topic = mysqli_query($mysqli, "SELECT projectID FROM message WHERE (senderEmail = '$emailtxt' AND receiverEmail = '$messageEmail') OR (receiverEmail = '$emailtxt' AND senderEmail = '$messageEmail') GROUP BY projectID");
 
     //check if the sql has been execute
 	if ($result=mysqli_query($mysqli,$sql))
@@ -124,28 +125,35 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         <div class="container">
                 <div class="inner-page contact-us">
                     <div class="header-intro">
-                    <h2>Comments</h2>
+                    <h2>Send Message</h2>
                         </div>
                     <table style="width: 80%; margin:0 auto; height: 85px;">
                         <thead>
                             <tr>
+                                <td class="auto-style1">Topic</td>
                                 <td class="auto-style1">Time</td>
-                                <td class="auto-style2">Comment</td>
-                                <td class="auto-style1">Commented By</td>
+                                <td class="auto-style2">Message</td>
+                                <td class="auto-style1">Message By</td>
                             </tr>
                         </thead>
                         <tbody style="padding: 10px; margin: 10px">
                             <?php 
-                                if($commentSql == FALSE){
+                            if($message == FALSE){
                                     die(mysqli_error());
                                 }
-                                while($row = mysqli_fetch_array($commentSql,MYSQLI_ASSOC)) { 
+                            while($row = mysqli_fetch_array($message,MYSQLI_ASSOC)) { 
                             ?>
                             <tr>
+                                <?php 
+                                $project = $row['projectID'];
+                                $pjt = mysqli_query($mysqli,"SELECT * FROM project WHERE projectID = '$project'");
+                                $projectDetail = mysqli_fetch_array($pjt,MYSQLI_ASSOC);
+                                ?>
+                                <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $projectDetail['title']?></td>
                                 <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $row['dateTime']?></td>
                                 <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $row['content']?></td>
                                 <?php 
-                                      $email = $row['userEmail'];
+                                    $email = $row['senderEmail'];
                                     $user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
                                     $userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
                                 ?>
@@ -157,11 +165,26 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     </table>
                     <br />
                     <div class="clearfix"></div><br />
-                    <form action="CommentManager.php" method="post" style="width: 80%; margin:0 auto">
-                        <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                        <input name="projectID" type="hidden" value="<?php echo $_GET["projectID"]?>"/>
+                    <form action="messageManager.php" method="post" style="width: 80%; margin:0 auto">
+                        <input name="senderEmail" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
+                        <input name="receiverEmail" type="hidden" value="<?php echo $_GET["emailtxt"]?>"/>
+                        Topic: <select name="topic">
+                            <?php 
+                            if($topic == FALSE){
+                                    die(mysqli_error());
+                                }
+                            while($row = mysqli_fetch_array($topic,MYSQLI_ASSOC)) { 
+                                $project = $row['projectID'];
+                                $pjt = mysqli_query($mysqli,"SELECT * FROM project WHERE projectID = '$project'");
+                                $projectDetail = mysqli_fetch_array($pjt,MYSQLI_ASSOC);
+                                ?>
+                                <option value="<?php echo $row['projectID']?>"> <?php echo $projectDetail['title']?></option>
+                            <?php } ?>
+                        </select> 
+                        <br />
+                        <br />
                         <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
-                        <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
+                        <input type="submit" name="submitBtn" id="submitBtn" value="Send!">
                     </form>
                     <br />
                     <div class="clearfix"></div>
