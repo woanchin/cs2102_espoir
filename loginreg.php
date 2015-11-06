@@ -44,11 +44,8 @@ if (isset($_SESSION["emailtxt"]) && isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="createProject.php">Create Project</a></li>
-                    <li  class="active"><a href="loginreg.php">Register/Login</a></li>
-					<li><a href="discover.php">Discover</a></li>
-                    <li>       
+                    <li><a href="discover.php">Discover</a></li>
+                    <li  class="active"><a href="loginreg.php">Register/Login</a> <span class="sr-only">(current)</span></li>
 							</ul>
   						</div>
   						<!-- /.navbar-collapse --> 

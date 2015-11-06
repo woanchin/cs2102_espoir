@@ -79,9 +79,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">Profile</a>
+                            <li><a href="discoverlogin.php">Discover</a></li>
+                    <li class="active"><a href="profile.php">Profile
  <span class="sr-only">(current)</span></a></li>
-                    <li><a href="create.html">My Projects</a></li>
+                    <li> <a href="createProject.php">Create Project </a></li>
+                    <li> <a href="transactions.php"> Donate History </a></li>
                     <li><a href="logout.php" id="logout">Logout</a></li>
 					        </ul>
   						</div>
