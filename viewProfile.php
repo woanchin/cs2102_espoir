@@ -72,6 +72,13 @@ if(isset($_GET["userEmail"])){
 }
 
   ?>
+<?php
+  
+  	$sql5 = "SELECT COUNT(following) FROM subscription WHERE following ='$searchUser'";
+	 $count5=mysqli_query($mysqli,$sql5) or die(mysqli_error());
+	 $result5 = mysqli_fetch_assoc($count5); 
+	 $total5 = $result5['COUNT(following)'];
+  ?>
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
 <div class="wrapper">
@@ -133,6 +140,8 @@ if(isset($_GET["userEmail"])){
           <br />
           Bio: <?php echo $row2["bio"] ?> <br />
           <br />
+          Followers: <?php echo $total5?> <br/>
+          <br/>
           <?php 
 					$sql3 = "SELECT * FROM subscription WHERE userEmail ='$emailtxt' AND following ='".$row2["userEmail"]."'";
 					$result3=mysqli_query($mysqli,$sql3);

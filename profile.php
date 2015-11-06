@@ -65,6 +65,13 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	}
 
   ?>
+  <?php
+  
+  	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
+	 $count=mysqli_query($mysqli,$sql2) or die(mysqli_error());
+	 $result = mysqli_fetch_assoc($count); 
+	 $total = $result['COUNT(following)'];
+  ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
   	<div class="wrapper">
@@ -124,6 +131,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                 <br /><br />
                 Bio: <?php echo $row["bio"] ?>
                 <br />  <br />
+                Followers: <?php echo $total?>
+                <br/><br/>
                 <a href="editProfile.php">Edit</a>
    </p>
  </div>
