@@ -133,7 +133,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                                    <input id="userPassword" name ="userPassword" type="password" value="<?php echo $row["password"] ?>" />
                               </p>
                               <p>
-                                  <input type="submit" name="edit" id="edit" value="Edit" class="caption">
+                                  <input type="submit" name="edit" id="edit" value="Edit">
                               </p>
                           </form>
                 <br />  <br />
