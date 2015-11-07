@@ -74,7 +74,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   					<!-- Brand and toggle get grouped for better mobile display -->
   					<div class="navbar-header">
   						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-  						<a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
+  						<a class="navbar-brand">E<span>Spoir</span></a> </div>
 
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
@@ -133,7 +133,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                                    <input id="userPassword" name ="userPassword" type="password" value="<?php echo $row["password"] ?>" />
                               </p>
                               <p>
-                                  <input type="submit" name="edit" id="edit" value="Edit" class="caption">
+                                  <input type="submit" name="edit" id="edit" value="Edit">
                               </p>
                           </form>
                 <br />  <br />

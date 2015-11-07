@@ -36,11 +36,12 @@ if ($result[0] == 0) {
     $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, `duration`, `categories`, `currency`, fundsCollected, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', '$duration', '$categories', '$currency', '$fundsCollected',  '$filename.jpg')";
     
     $success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
+    $id =mysqli_insert_id($mysqli);
     // Execute Query					
     if($success == 1){
         echo '<script language="javascript">';
         echo 'alert("Project Created");';
-        echo 'window.location.href="../CS2102/displayProject.php";';
+        echo 'window.location.href="../CS2102/displayProject.php?id='.$id.'";';
         echo '</script>';
     }
 
