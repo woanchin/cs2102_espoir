@@ -152,7 +152,7 @@ $result = mysqli_query($mysqli, $sql);
 		echo "<br>";
 		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
 	} else {
-		echo "br";
+		echo "<br>";
 		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
 	}
    ?>
