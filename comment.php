@@ -47,7 +47,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
     //Store Data input into variables
 	$projectID = $_POST["projectID"];
-    $emailtxt = $_SESSION["emailtxt"];
+	$emailtxt = $_SESSION["emailtxt"];
 	
     //select results matching to what the user has typed	
 	$commentSql = mysqli_query($mysqli,"SELECT * FROM comment WHERE projectID = '$projectID'");
@@ -159,7 +159,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <div class="clearfix"></div><br />
                     <form action="CommentManager.php" method="post" style="width: 80%; margin:0 auto">
                         <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                        <input name="projectID" type="hidden" value="<?php echo $_GET["projectID"]?>"/>
+                        <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
                         <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
                         <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
                     </form>

@@ -9,7 +9,8 @@ include("db.php");
     $content = $_POST["content"];
 	
     // Query String
-    $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`) VALUES ('$projectID','$emailtxt','$content')";	
+	echo $projectID;
+    $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`) VALUES ($projectID,'$emailtxt','$content')";	
     
     
     $sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
