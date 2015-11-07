@@ -40,6 +40,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         }
     </style>
 
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <?php 
@@ -141,30 +143,53 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                                 }
                                 while($row = mysqli_fetch_array($commentSql,MYSQLI_ASSOC)) { 
                             ?>
-                            <tr>
-                                <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $row['dateTime']?></td>
-                                <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $row['content']?></td>
-                                <?php 
-                                      $email = $row['userEmail'];
-                                    $user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
-                                    $userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
-                                ?>
-                                <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
-                            </tr>
+								<tr>
+									<td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
+										<?php echo $row['dateTime']?>
+									</td>
+									<td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
+											
+											<?php 
+												
+												echo $row['content'];
+											
+												
+												if ($row['userEmail'] == $emailtxt) {
+													?> <form action="CommentManager.php" 
+														method="post" 
+														style="width: 95%">
+															<input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
+															<input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
+															<textarea name="content" cols="30" rows="3" placeholder="Your message here"></textarea><br />
+															<input type="submit" name="submitBtn" id="submitBtn" value="Edit!">
+													</form>
+											<?php	}
+											?>
+									</td>
+									<?php 
+										$email = $row['userEmail'];
+										$user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
+										$userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
+									?>
+									<td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
+								
+								</tr>
 
                             <?php } ?>
                         </tbody>
                     </table>
                     <br />
                     <div class="clearfix"></div><br />
-                    <form action="CommentManager.php" method="post" style="width: 80%; margin:0 auto">
+                    <form action="CommentManager.php" 
+					method="post" 
+					style="width: 80%; margin:0 auto">
                         <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
                         <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
                         <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
                         <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
                     </form>
                     <br />
-                    <div class="clearfix"></div>
+                    <div class="clearfix"></div> 
                 </div>
                 <div class="clearfix"></div>
             </div>
