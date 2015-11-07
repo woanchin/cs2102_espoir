@@ -57,7 +57,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   </head>
 <?php
 
-$id = $_GET["id"];
+if (isset($_GET["id"])){
+	$id = $_GET["id"];
+} else {
+	$id = mysqli_insert_id();
+}
+
 $sql = "SELECT * FROM project WHERE projectID = '$id'";
 $result = mysqli_query($mysqli, $sql);
 
