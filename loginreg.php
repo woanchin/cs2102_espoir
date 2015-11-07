@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION["emailtxt"]) && isset($_SESSION["loginPassword"])){
-	header("location:Profile.php");
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
