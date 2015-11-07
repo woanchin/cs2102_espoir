@@ -68,7 +68,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   <?php
   
   	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
-	 $count=mysqli_query($mysqli,$sql2) or die(mysqli_error());
+	 $count=mysqli_query($mysqli,$sql2) or die('Error: ' . mysqli_error($mysqli));
 	 $result = mysqli_fetch_assoc($count); 
 	 $total = $result['COUNT(following)'];
   ?>
@@ -76,7 +76,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   <?php
   
   	$sql3 = "SELECT COUNT(userEmail) FROM subscription WHERE userEmail ='$emailtxt'";
-	 $count3=mysqli_query($mysqli,$sql3) or die(mysqli_error());
+	 $count3=mysqli_query($mysqli,$sql3) or die('Error: ' . mysqli_error($mysqli));
 	 $result3 = mysqli_fetch_assoc($count3); 
 	 $total3 = $result3['COUNT(userEmail)'];
   ?>

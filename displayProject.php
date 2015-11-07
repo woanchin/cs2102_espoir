@@ -133,16 +133,29 @@ $result = mysqli_query($mysqli, $sql);
  
         <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
       
+		<tr><td><form action="comment.php" method="post">
+                        <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
+                        <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
+                        <input type="submit" name="submitBtn" id="submitBtn" value="Click here to leave a comment to this project here!">
+                    </form></td></tr>
+		
    </table>
    
    <?php
 	if($rowUser["userEmail"] == $row["userEmail"]) 
 	{	
+		echo "<br>";
 		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
 	} else {
+		echo "br";
 		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
 	}
    ?>
+   
+   <?
+   
+   ?>
+   
  </div>
  <div class="clearfix"></div>
 </div>

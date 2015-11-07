@@ -46,7 +46,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     include("db.php");  
 
     //Store Data input into variables
-	$projectID = $_GET["projectID"];
+	$projectID = $_POST["projectID"];
     $emailtxt = $_SESSION["emailtxt"];
 	
     //select results matching to what the user has typed	
