@@ -34,14 +34,15 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         .auto-style1 {
             height: 45px;
         }
+
         .auto-style2 {
             width: 70%;
             height: 45px;
         }
     </style>
 
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <?php 
@@ -80,7 +81,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		
 	}
 
-  ?>
+?>
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
@@ -96,10 +97,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Profile</a>
-                                <span class="sr-only">(current)</span></a></li>
-                            <li><a href="create.html">My Projects</a></li>
-                            <li><a href="loginreg.html">My Settings</a></li>
+                            <li><a href="discoverlogin.php">Discover</a></li>
+                            <li><a href="profile.php">Profile</a></li>
+                            <li><a href="createProject.php">Create Project </a></li>
+                            <li><a href="transactions.php">Donate History </a></li>
+                            <li><a href="logout.php" id="logout">Logout</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -124,124 +126,83 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-                <div class="inner-page contact-us">
-                    <div class="header-intro">
+            <div class="inner-page contact-us">
+                <div class="header-intro">
                     <h2>Comments</h2>
-                        </div>
-                    <table style="width: 80%; margin:0 auto; height: 85px;">
-                        <thead>
-                            <tr>
-                                <td class="auto-style1">Time</td>
-                                <td class="auto-style2">Comment</td>
-                                <td class="auto-style1">Commented By</td>
-                            </tr>
-                        </thead>
-                        <tbody style="padding: 10px; margin: 10px">
-                            <?php 
+                </div>
+                <table style="width: 80%; margin: 0 auto; height: 85px;">
+                    <thead>
+                        <tr>
+                            <td class="auto-style1">Time</td>
+                            <td class="auto-style2">Comment</td>
+                            <td class="auto-style1">Commented By</td>
+                        </tr>
+                    </thead>
+                    <tbody style="padding: 10px; margin: 10px">
+                        <?php 
                                 if($commentSql == FALSE){
                                     die(mysqli_error());
                                 }
                                 while($row = mysqli_fetch_array($commentSql,MYSQLI_ASSOC)) { 
                             ?>
-								<tr>
-									<td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
-										<?php echo $row['dateTime']?>
-									</td>
-									<td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
-											
-											<?php 
+                        <tr>
+                            <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
+                                <?php echo $row['dateTime']?>
+                            </td>
+                            <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
+
+                                <?php 
 												
 												echo $row['content'];
 											
 												
 												if ($row['userEmail'] == $emailtxt) {
-													?> <form action="CommentManager.php" 
-														method="post" 
-														style="width: 95%">
-															<input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-															<input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
-															<textarea name="content" cols="30" rows="3" placeholder="Your message here"></textarea><br />
-															<input type="submit" name="submitBtn" id="submitBtn" value="Edit!">
-													</form>
-											<?php	}
+                                ?>
+                                <form action="CommentManager.php"
+                                    method="post"
+                                    style="width: 95%">
+                                    <input name="commentID" type="hidden" value="<?php echo $row['commentID']?>"/>
+                                    <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
+                                    <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
+                                    <textarea name="content" cols="30" rows="1" placeholder="Your message here"></textarea><br />
+                                    <input type="submit" name="submitBtn" id="submitBtn" value="Edit!">
+                                </form>
+                                <?php	}
 											?>
-									</td>
-									<?php 
+                            </td>
+                            <?php 
 										$email = $row['userEmail'];
 										$user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
 										$userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
 									?>
-									<td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
-								
-								</tr>
+                            <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
 
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <br />
-                    <div class="clearfix"></div><br />
-                    <form action="CommentManager.php" 
-					method="post" 
-					style="width: 80%; margin:0 auto">
-                        <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                        <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
-                        <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
-                        <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
-                    </form>
-                    <br />
-                    <div class="clearfix"></div> 
-                </div>
+                        </tr>
+
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <br />
+                <div class="clearfix"></div>
+                <br />
+                <form action="CommentManager.php"
+                    method="post"
+                    style="width: 80%; margin: 0 auto">
+                    <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
+                    <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
+                    <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
+                    <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
+                </form>
+                <br />
                 <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
 
     <!---->
-    <div class="footer">
-        <div class="container">
-            <div class="col-sm-2">
-                <h5>Site Map</h5>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Pricing</a></li>
-                    <li><a href="">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-4 col-md-3 twitter">
-                <h5>Twitter Feed</h5>
-                <ul>
-                    <li><i class="fa  fa-twitter"></i>Hello. Welcome to our Crowdfunding website. <span>http://uibrush.com</span></li>
-                    <li><i class="fa  fa-twitter"></i>Hello. Welcome to our Crowdfunding website. <span>http://uibrush.com</span></li>
-                </ul>
-            </div>
-            <div class="col-md-4 testimonial">
-                <h5>Testimonial</h5>
-                <ul>
-                    <li><i class="fa  fa-quote-left"></i>Lorem ipsum dolor sit amet,  adipiscing elit, sed 
-  							diam  nibh euismod tincidunt ut laoreet dolore magna erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  </li>
-
-                </ul>
-                <div class="t-image">
-                    <img src="img/testimonial.png">
-                    <h6>- Joyce He </h6>
-                    <br>
-                    <p>Team Lead</p>
-                </div>
-            </div>
-            <div class="col-md-3 contact-footer">
-                <div class="footer-form">
-                    <h5>Contact Us</h5>
-                    <input type="text" placeholder="Name">
-                    <input type="text" placeholder="E-Mail">
-                    <textarea placeholder="Message" rows="3"></textarea>
-                    <button class="submit-bt">Send</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="copyright">
         <div class="container">
             <p>All Rights Reserved 2015 &copy; Espoir.com</p>
@@ -259,9 +220,9 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         }).on('hidden.bs.collapse', function () {
             $(this).parent().find(".up-icon").removeClass("up-icon").addClass("down-icon");
         });
-  			</script>
+    </script>
     <script>
 
-  			</script>
+    </script>
 </body>
 </html>

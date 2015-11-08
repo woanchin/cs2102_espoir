@@ -28,6 +28,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
 
+    <style type="text/css">
+        .auto-style1 {
+            width: 446px;
+        }
+    </style>
+
 </head>
 
 <?php 
@@ -64,7 +70,13 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		
 	}
 
-?>
+  ?>
+<?php
+  
+$sql2 = "SELECT `senderEmail` FROM `message` WHERE `senderEmail` = '$emailtxt' OR `receiverEmail` = '$emailtxt' UNION SELECT `receiverEmail` FROM `message` WHERE `senderEmail` = '$emailtxt' OR `receiverEmail` = '$emailtxt'";
+	 $message=mysqli_query($mysqli,$sql2) or die('Error: ' . mysqli_error($mysqli));
+	 $rowcount=mysqli_num_rows($message);
+  ?>
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
@@ -81,7 +93,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="discoverlogin.php">Discover</a></li>
-                            <li class="active"><a href="profile.php">Profile <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
                             <li><a href="createProject.php">Create Project </a></li>
                             <li><a href="transactions.php">Donate History </a></li>
                             <li><a href="logout.php" id="logout">Logout</a></li>
@@ -97,7 +109,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         <div class="container">
             <div class="col-lg-12">
                 <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-                <p class="pull-right pagination"><a href="index.html">Edit Profile</a></p>
+                <form method="post" action="search.php">
+                    <p class="pull-right pagination">
+                        <input type="Search" name="keyword"><input type="submit" value="Search">
+                        &nbsp;&nbsp;&nbsp;&nbsp;  Message
+                    </p>
+                </form>
             </div>
         </div>
     </div>
@@ -106,42 +123,44 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         <div class="container">
             <div class="">
                 <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row["picName"]; ?>">
-                    <!--<img src="image/">-->
+                    <img src="img/work8.jpg">
                 </div>
                 <div class="col-md-6">
-                    <h2>Edit Profile</h2>
-                    <p>
-                        <form action="editProfileMan.php" method="post">
-                            <p>
-                                <label for="Lname">Last Name:</label>
-                                <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px" value="<?php echo $row["lastName"] ?>">
-                            </p>
-                            <br />
-                            <p>
-                                <label for="Fname">First Name:</label>
-                                <input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>">
-                            </p>
-                            <p>
-                                <label for="userEmail">Email:</label>
-                                <input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly>
-                            </p>
-
-                            <p>
-                                <label>About Me : </label>
-                                <textarea name="bio" cols="20" rows="2"><?php echo $row["bio"] ?></textarea>
-                            </p>
-                            <p>
-                                <label for="password">Password : </label>
-                                <input id="userPassword" name ="userPassword" type="password" value="<?php echo $row["password"] ?>" />
-                            </p>
-                            <p>
-                                <input type="submit" name="edit" id="edit" value="Edit">
-                            </p>
-                        </form>
-                        <br />
-                        <br />
-                    </p>
+                    <div class="header-intro">
+                        <h2>Inbox</h2>
+                    </div>
+                    <?php 
+                    if($rowcount == 0){
+                        ?>
+                    <h3>There is no message for you!</h3>
+                    <?php
+                    }
+                        ?>
+                    <table style="width: 98%; margin: 0 auto; height: 85px;">
+                        <thead></thead>
+                        <tbody>
+                            <?php 
+                            if($message == FALSE){
+                                die(mysqli_error());
+                            }
+                            while($row = mysqli_fetch_array($message,MYSQLI_ASSOC)) { 
+                                if($emailtxt != $row['senderEmail'] ){
+                        ?>
+                            <tr>
+                                <?php
+                                    $email = $row['senderEmail'];
+                                    $user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
+                                    $userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
+                                ?>
+                                <td class="auto-style1"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
+                                <td><a href="addMessage.php?emailtxt=<?php echo $row['senderEmail']?>">View Message</a></td>
+                            </tr>
+                            <?php 
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="clearfix"></div>
             </div>

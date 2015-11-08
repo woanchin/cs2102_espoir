@@ -17,9 +17,9 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+          <![endif]-->
 
 </head>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -29,18 +29,17 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a class="navbar-brand">E<span>Spoir</span></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        <a class="navbar-brand" href="#">E<span>Spoir</span></a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="discoverlogin.php">Discover <span class="sr-only">(current)</span></a></li>
-                            <li><a href="profile.php">Profile</a></li>
-                            <li><a href="createProject.php">Create Project </a></li>
-                            <li><a href="transactions.php">Donate History </a></li>
-                            <li><a href="logout.php" id="logout">Logout</a></li>
+                            <li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                            <li><a href="loginreg.php">Register/Login</a></li>
+                            <li><a href="discover.php">Discover</a>
+                            <li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -53,7 +52,7 @@
         <div class="rslides_container">
             <ul class="rslides">
                 <li>
-                    <img src="img/filler-medium.jpg" data-min-width-1400="img/filler.jpg" alt="">
+                    <img src="img/slider_medium.jpg" data-min-width-1400="img/slider.jpg" alt="">
                     <div class="container">
                         <div class="caption">
                             <h1>everything</h1>
@@ -63,7 +62,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="img/kiki-medium.jpg" data-min-width-1400="img/kiki.jpg" alt="">
+                    <img src="img/slider1_medium.jpg" data-min-width-1400="img/slider1.jpg" alt="">
                     <div class="container">
                         <div class="caption">
                             <h1>The power of</h1>
@@ -82,35 +81,36 @@
                 <h2>Discover Project</h2>
                 <p>Things do not happen things are made to happen</p>
             </div>
+
             <?php
+            include("db.php");
 
+            $sql = "SELECT title, projectID, categories FROM project";
+            $result = mysqli_query($mysqli, $sql);
 
-include("db.php"); 
-
-$sql = "SELECT title, projectID, categories FROM project";
-$result = mysqli_query($mysqli, $sql);
-
-if (mysqli_num_rows($result)>0) {
-	$i = 1;
-	while($row = mysqli_fetch_assoc($result) && $i<=8) {
-		echo "<div class="."col-sm-4".">
-        <div class="."portfolio-img-wrap".">
-          <img src="."img/portfolio$i.jpg".">
-          <div class="."caption-container".">
-           <div class="."portfolio-caption".">
-               <h5><a href="."displayProject.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
-               <p>- &nbsp; ".$row["categories"]."</p>
-           </div>
-       </div>
-       </div>
-		</div>";
-		$i++;
-	}
-} else {
+            if (mysqli_num_rows($result)>0) {
+            $i = 1;
+            	while($row = mysqli_fetch_assoc($result) && $i<=3) {
+		        echo "<div class="."col-sm-4".">
+                <div class="."portfolio-img-wrap".">
+                  <img src="."img/portfolio$i.jpg".">
+                  <div class="."caption-container".">
+                   <div class="."portfolio-caption".">
+                       <h5><a href="."displayProject.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
+                       <p>- &nbsp; ".$row["categories"]."</p>
+                   </div>
+               </div>
+               </div>
+		        </div>";
+		        $i++;
+	        }
+        } else {
 	
-}
-?>
+        }
+            ?>
+
             <div class="clearfix"></div>
+
         </div>
     </div>
     <!-- works end -->
