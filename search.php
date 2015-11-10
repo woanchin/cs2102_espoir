@@ -34,6 +34,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   <?php 
     include("db.php");  
 
+if(isset($_SESSION["emailtxt"])){
+
 	$emailtxt = $_SESSION["emailtxt"];
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 	if ($result=mysqli_query($mysqli,$sql)){
@@ -42,6 +44,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
 	if($rowcount==1){	
 	        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	        $searcher = $row["firstName"];
 	}
 	else {
 		//ERROR Message and Redirect Link
@@ -50,6 +53,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		echo 'window.location.href="../CS2102/loginreg.php";';
 		echo '</script>';
 	}
+
+}
 
 if(isset($_POST["keyword"])){
 	$keyword = $_POST["keyword"];
@@ -78,10 +83,12 @@ if(isset($_POST["keyword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">Profile</a>
- <span class="sr-only">(current)</span></a></li>
-                    <li><a href="create.html">My Projects</a></li>
-                    <li> <a href="loginreg.html">My Settings</a></li>
+<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>           
+	<li class="active"><a href="discoverlogin.php">Discover <span class="sr-only">(current)</span></a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li> <a href="createProject.php">Create Project </a></li>
+            <li> <a href="transactions.php"> Donate History </a></li>
+            <li><a href="logout.php" id="logout">Logout</a></li>
 					        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
@@ -93,8 +100,19 @@ if(isset($_POST["keyword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
+				<?php 
+					if(isset($_SESSION["emailtxt"])){ 
+				?>
   					<h4 class="pull-left">hi <?php echo $row["firstName"] ?>! here are your search results ... </h4>
-  					<form method="POST" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  </p></form>
+				<?php
+					} else {
+				?>
+					<h4 class="pull-left">dear guest! here are your search results ... </h4>
+				<?php
+					}
+				?>
+
+
   				</div>
   			</div>
   		</div>

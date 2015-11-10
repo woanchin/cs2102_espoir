@@ -30,12 +30,13 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" href="#">E<span>Spoir</span></a> </div>
-        
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="discoverlogin.php">Discover <span class="sr-only">(current)</span></a></li>
+          <a class="navbar-brand" href="#">E<span>Spoir</span></a> 
+	</div>
+        <!-- Collect the nav links, forms, and other content for toggling -->       
+	<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">	        
+<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>   
+	<li class="active"><a href="discoverlogin.php">Discover <span class="sr-only">(current)</span></a></li>
             <li><a href="profile.php">Profile</a></li>
             <li> <a href="createProject.php">Create Project </a></li>
             <li> <a href="transactions.php"> Donate History </a></li>

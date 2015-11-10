@@ -35,8 +35,9 @@
           <a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
         
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1" >
+         <ul class="nav navbar-nav">
+<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>   
             <li><a href="discoverlogin.php">Discover </a></li>
             <li><a href="profile.php">Profile</a></li>
             <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
@@ -53,25 +54,13 @@
 <div class="inner-head">
   <div class="container">
     <div class="col-lg-12">
-      <h4 class="pull-left">services</h4>
-      <p class="pull-right pagination"><a href="index.html">home</a><span>></span><a href="">services</a></p>
+      <h4 class="pull-left">a new crowdfunding project..</h4>
+      <p class="pull-right pagination">new project</p>
     </div>
   </div>
 </div>
 <!-- inner-head end -->
-<div class="inner-page services">
   <div class="container">
-    <div class="">
-      <div class="col-md-6 no-padding-left"> <img src="img/about_us.jpg"> </div>
-      <div class="col-md-6">
-        <h2>Our Service</h2>
-        <p> Espoir helps artists, musicians, filmmakers, designers, and other creators find the resources and support they need to bring their creative ideas to life. <br />
-          <br />
-          We provide a platform that gives you space to work with people who support you. </p>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-    <p>&nbsp;</p>
     <div class="inner-page about-us">
       <div class="container">
         <div class="col-md-6 no-padding-left">
@@ -146,9 +135,7 @@
         <div class="col-md-6"> <img src="img/what_we_do.jpg"> </div>
         <div class="clearfix"></div>
       </div>
-    </div>
   </div>
-</div>
 <p>&nbsp;</p>
 <div class="copyright">
   <div class="container">

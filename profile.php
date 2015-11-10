@@ -94,6 +94,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
+	<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
                             <li><a href="discoverlogin.php">Discover</a></li>
                     <li class="active"><a href="profile.php">Profile
  <span class="sr-only">(current)</span></a></li>
@@ -109,10 +110,9 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   			</div>
   		</div>
   		<div class="inner-head">
-  			<div class="container">
-  				<div class="col-lg-12">
+  			<div class="container"><div class="col-lg-12">
   					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<form method="post" action="search.php"><p class="pull-right pagination"><input type="Search" name="keyword"><input type="submit" value="Search"> &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p></form>
+  					<p class="pull-right pagination"> Profile</p>
   				</div>
   			</div>
   		</div>

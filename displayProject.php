@@ -97,11 +97,12 @@ $result = mysqli_query($mysqli, $sql);
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li ><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                    <li ><a href="createProject.php">Create Project</a></li>
-                    <li ><a href="loginreg.php">Register/Login</a></li>
-					<li ><a href="discover.php">Discover</a><li>
-                  </ul>
+            <li><a href="discoverlogin.php">Discover </a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
+            <li> <a href="transactions.php"> Donate History </a></li>
+            <li><a href="logout.php" id="logout">Logout</a></li>
+          </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
   					</div>
