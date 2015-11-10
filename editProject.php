@@ -71,8 +71,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">My Profile <span class="sr-only">(current)</span></a></li>
-                    <li><a href="create.html">My Projects</a></li>
+<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
+                            <li><a href="discoverlogin.php">Discover</a></li>
+                    <li ><a href="profile.php">Profile</a></li>
+                    <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
+                    <li> <a href="transactions.php"> Donate History </a></li>
                     <li><a href="logout.php" id="logout">Logout</a></li>
 					        </ul>
   						</div>
@@ -92,104 +95,30 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   		<!-- inner-head end -->
         <div class="inner-page services">
  <div class="container">
-  <div class="">
    <div class="col-md-6 no-padding-left">
-	<img src="image/<?php echo $row["picName"]; ?>">
+	<img src="image/<?php echo $row["picName"]; ?>"><br /><br /><br />
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
     <h2>Edit Project</h2>
-    <p>
-      						<form action="editProjectMan.php" method="post">
-                              <p>
-                                  <label for="name"> Project Name:</label>
-                                  <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>">
-                              </p>
-                              <p>
-                              		<label for="description"> Description:</label>
-                                 	<textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea>
-                              </p>
-                              <p>
-                              		<label> Duration: </label> 
-                                	<input name="duration" type="text" id="duration" style="width:200px!important;height:25px" value="<?php echo $row["duration"] ?>">
-                              </p>
-							  <p>
-                              		<label> Categories: </label> 
-                                	<input name="categories" type="text" id="categories" style="width:200px!important;height:25px" value="<?php echo $row["categories"] ?>">
-                              </p>
-                              <p>
-                                  <input type="text" name="id" id="id" value="<?php echo $id ?>">
-								  <input type="submit" name="edit" id="edit" value="Edit">
-                              </p>
+	<form action="editProjectMan.php" method="post">
+                              Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
+                              Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
+                              Duration: <input name="duration" type="text" id="duration" style="width:200px!important;height:25px" value="<?php echo $row["duration"] ?>"> <br />
+                              <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+	         <input type="submit" name="edit" id="edit" value="Edit">
                           </form>
-                <br />  <br />
-   </p>
  </div>
  <div class="clearfix"></div>
 </div>
             <div class="clearfix"></div>
           </div>
         </div>
-        <div class="testimonial main">
-              </div>
-
-            </div>
-          </div>
-                 <div class="clearfix"></div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-
-  		<div class="footer">
-  			<div class="container">
-  				<div class="col-sm-2">
-  					<h5>Site Map</h5>
-  					<ul>
-  						<li><a href="">Home</a></li>
-  						<li><a href="">About Us</a></li>
-  						<li><a href="">Services</a></li>
-  						<li><a href="">Pricing</a></li>
-  						<li><a href="">Contact Us</a></li>
-  					</ul>
-  				</div>
-  				<div class="col-sm-4 col-md-3 twitter">
-  					<h5>Twitter Feed</h5>
-  					<ul>
-  						<li><i class="fa  fa-twitter"></i>Hello. Welcome to our Crowdfunding website. <span>http://uibrush.com</span></li>
-  						<li><i class="fa  fa-twitter"></i>Hello. Welcome to our Crowdfunding website. <span>http://uibrush.com</span></li>
-  					</ul>
-  				</div>
-  				<div class="col-md-4 testimonial">
-  					<h5>Testimonial</h5>
-  					<ul>
-  						<li><i class="fa  fa-quote-left"></i>Lorem ipsum dolor sit amet,  adipiscing elit, sed 
-  							diam  nibh euismod tincidunt ut laoreet dolore magna erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  </li>
-
-  						</ul>
-  						<div class="t-image">
-  							<img src="img/testimonial.png">
-  							<h6>- Joyce He </h6><br>
-  							<p>Team Lead</p>
-  						</div>
-  					</div>
-  					<div class="col-md-3 contact-footer">
-  						<div class="footer-form">
-  							<h5>Contact Us</h5>
-  							<input type="text" placeholder="Name">
-  							<input type="text" placeholder="E-Mail">
-  							<textarea placeholder="Message" rows="3"></textarea>
-  							<button class="submit-bt">Send</button>
-  						</div>
-  					</div>
-  				</div>
-  			</div>
-  			<div class="copyright">
-  				<div class="container">
-  					<p>All Rights Reserved 2015 &copy; Espoir.com</p>
-  				</div>
-  			</div>
+</div>
+</div>
+<div class="copyright"><div class="container">
+<p>All Rights Reserved 2015 &copy; Espoir.com</p>
+</div></div>
   			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
   			<script src="js/jquery.min.js"></script> 
   			<!-- Include all compiled plugins (below), or include individual files as needed --> 

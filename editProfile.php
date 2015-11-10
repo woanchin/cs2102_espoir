@@ -79,8 +79,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">My Profile <span class="sr-only">(current)</span></a></li>
-                    <li><a href="create.html">My Projects</a></li>
+<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
+                            <li><a href="discoverlogin.php">Discover</a></li>
+                    <li class="active"><a href="profile.php">Profile
+ <span class="sr-only">(current)</span></a></li>
+                    <li> <a href="createProject.php">Create Project </a></li>
+                    <li> <a href="transactions.php"> Donate History </a></li>
                     <li><a href="logout.php" id="logout">Logout</a></li>
 					        </ul>
   						</div>
@@ -107,37 +111,14 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
-    <h2>Edit Profile</h2>
-    <p>
-      						<form action="editProfileMan.php" method="post">
-                              <p>
-                                  <label for="Lname"> Last Name:</label>
-                                  <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px" value="<?php echo $row["lastName"] ?>">
-                              </p>
-                              <br />
-                              <p>
-                              		<label for="Fname"> First Name:</label>
-                                 	<input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>">
-                              </p>
-                              <p>
-                              		<label for="userEmail"> Email:</label>
-                                 	<input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly>
-                              </p>
-                              
-                              <p>
-                              		<label> About Me : </label> 
-                                	<textarea name="bio" cols="20" rows="2"><?php echo $row["bio"] ?></textarea>
-                              </p>
-                              <p>
-                             	   <label for="password">Password : </label>
-                                   <input id="userPassword" name ="userPassword" type="password" value="<?php echo $row["password"] ?>" />
-                              </p>
-                              <p>
-                                  <input type="submit" name="edit" id="edit" value="Edit" class="caption">
-                              </p>
-                          </form>
-                <br />  <br />
-   </p>
+    <h2>Edit Profile</h2><br />
+	<form action="editProfileMan.php" method="post">
+	Last Name: <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px"  value="<?php echo $row["lastName"] ?>" /><br />
+                    First Name: <input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>" /><br />
+	Email: <input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly /><br /><br />
+                    About Me : <br /><textarea name="bio"><?php echo $row["bio"] ?></textarea><br />
+	<input type="submit" name="edit" id="edit" value="Edit" />
+                    </form>
  </div>
  <div class="clearfix"></div>
 </div>

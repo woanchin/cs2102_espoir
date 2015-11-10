@@ -5,11 +5,10 @@ include("db.php");
 	$name = $_POST["name"];
 	$description= $_POST["description"];
 	$duration= $_POST["duration"];
-	$categories = $_POST["categories"];
 	$id = $_POST["id"];
 	
 					// Query String
-					$query = "UPDATE `project` SET `title`='$name',`description`='$description',`duration`='$duration',`categories`='$categories' WHERE `projectID`='$id'";
+					$query = "UPDATE `project` SET `title`='$name',`description`='$description',`duration`='$duration' WHERE `projectID`='$id'";
 					
 					
 					$success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
