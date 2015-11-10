@@ -439,6 +439,8 @@ a.accordion-toggle {
 .clearfix {
   position: relative;
   z-index: -1;
+    top: 1px;
+    left: 0px;
 }
 .grey-bg {
   background: #f8f8f8;

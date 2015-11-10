@@ -78,6 +78,7 @@ if(isset($_POST["keyword"])){
   					<!-- Brand and toggle get grouped for better mobile display -->
   					<div class="navbar-header">
   						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+<<<<<<< HEAD
   						<a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
 
   						<!-- Collect the nav links, forms, and other content for toggling -->
@@ -92,6 +93,20 @@ if(isset($_POST["keyword"])){
 					        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
+=======
+  						<a class="navbar-brand">E<span>Spoir</span></a> </div>
+                      <!-- Collect the nav links, forms, and other content for toggling -->
+                      <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+                          <ul class="nav navbar-nav">
+                              <li><a href="discoverlogin.php">Discover</a></li>
+                              <li><a href="profile.php">Profile </a></li>
+                              <li><a href="createProject.php">Create Project </a></li>
+                              <li><a href="transactions.php">Donate History </a></li>
+                              <li><a href="logout.php" id="logout">Logout</a></li>
+                          </ul>
+                      </div>
+                      <!-- /.navbar-collapse -->
+>>>>>>> cc91c111b78ab8bb38e45395e364bb255af54b69
   					</div>
   					<!-- /.container-fluid --> 
   				</nav>

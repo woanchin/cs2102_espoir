@@ -6,11 +6,10 @@ include("db.php");
 	//Store Data input into variables
     $senderEmail = $_POST["senderEmail"];
 	$receiverEmail = $_POST["receiverEmail"];
-    $projectID= $_POST["topic"];
     $content = $_POST["content"];
 	
     // Query String
-    $query = "INSERT INTO `message` (`projectID`,`senderEmail`, `receiverEmail`, `content`) VALUES ('$projectID','$senderEmail','$receiverEmail', '$content')";	
+    $query = "INSERT INTO `message` (`senderEmail`, `receiverEmail`, `content`) VALUES ('$senderEmail','$receiverEmail', '$content')";	
     
     
     $sucess= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));

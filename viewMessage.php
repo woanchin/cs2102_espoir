@@ -2,11 +2,9 @@
 session_start();
 
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
-    header("location:loginreg.php");
+	header("location:loginreg.php");
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,29 +30,20 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
     <style type="text/css">
         .auto-style1 {
-            height: 45px;
-        }
-
-        .auto-style2 {
-            width: 70%;
-            height: 45px;
+            width: 446px;
         }
     </style>
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <?php 
     include("db.php");  
 
     //Store Data input into variables
-	$projectID = $_POST["projectID"];
 	$emailtxt = $_SESSION["emailtxt"];
 	
     //select results matching to what the user has typed	
-	$commentSql = mysqli_query($mysqli,"SELECT * FROM comment WHERE projectID = '$projectID'");
-    $sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 
     //check if the sql has been execute
 	if ($result=mysqli_query($mysqli,$sql))
@@ -81,7 +70,13 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		
 	}
 
-?>
+  ?>
+<?php
+  
+$sql2 = "SELECT `senderEmail` FROM `message` WHERE `senderEmail` = '$emailtxt' OR `receiverEmail` = '$emailtxt' UNION SELECT `receiverEmail` FROM `message` WHERE `senderEmail` = '$emailtxt' OR `receiverEmail` = '$emailtxt'";
+	 $message=mysqli_query($mysqli,$sql2) or die('Error: ' . mysqli_error($mysqli));
+	 $rowcount=mysqli_num_rows($message);
+  ?>
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
@@ -98,7 +93,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="discoverlogin.php">Discover</a></li>
-                            <li><a href="profile.php">Profile</a></li>
+                            <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
                             <li><a href="createProject.php">Create Project </a></li>
                             <li><a href="transactions.php">Donate History </a></li>
                             <li><a href="logout.php" id="logout">Logout</a></li>
@@ -116,8 +111,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                 <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
                 <form method="post" action="search.php">
                     <p class="pull-right pagination">
-                        <input type="search" name="keyword" /><input type="submit" value="Search" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="Search" name="keyword"><input type="submit" value="Search">
+                        &nbsp;&nbsp;&nbsp;&nbsp;  Message
                     </p>
                 </form>
             </div>
@@ -126,83 +121,55 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-            <div class="inner-page contact-us">
-                <div class="header-intro">
-                    <h2>Comments</h2>
+            <div class="">
+                <div class="col-md-6 no-padding-left">
+                    <img src="img/work8.jpg">
                 </div>
-                <table style="width: 80%; margin: 0 auto; height: 85px;">
-                    <thead>
-                        <tr>
-                            <td class="auto-style1">Time</td>
-                            <td class="auto-style2">Comment</td>
-                            <td class="auto-style1">Commented By</td>
-                        </tr>
-                    </thead>
-                    <tbody style="padding: 10px; margin: 10px">
-                        <?php 
-                                if($commentSql == FALSE){
-                                    die(mysqli_error());
-                                }
-                                while($row = mysqli_fetch_array($commentSql,MYSQLI_ASSOC)) { 
-                            ?>
-                        <tr>
-                            <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <?php echo $row['dateTime']?>
-                            </td>
-                            <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
-
-                                <?php 
-												
-												echo $row['content'];
-											
-												
-												if ($row['userEmail'] == $emailtxt) {
-                                ?>
-                                <form action="CommentManager.php"
-                                    method="post"
-                                    style="width: 95%">
-                                    <input name="commentID" type="hidden" value="<?php echo $row['commentID']?>"/>
-                                    <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                                    <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
-                                    <textarea name="content" cols="30" rows="1" placeholder="Your message here"></textarea><br />
-                                    <input type="submit" name="submitBtn" id="submitBtn" value="Edit!">
-                                </form>
-                                <?php	}
-											?>
-                            </td>
+                <div class="col-md-6">
+                    <div class="header-intro">
+                        <h2>Inbox</h2>
+                    </div>
+                    <?php 
+                    if($rowcount == 0){
+                        ?>
+                    <h3>There is no message for you!</h3>
+                    <?php
+                    }
+                        ?>
+                    <table style="width: 98%; margin: 0 auto; height: 85px;">
+                        <thead></thead>
+                        <tbody>
                             <?php 
-										$email = $row['userEmail'];
-										$user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
-										$userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
-									?>
-                            <td style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
-
-                        </tr>
-
-                        <?php } ?>
-                    </tbody>
-                </table>
-                <br />
-                <div class="clearfix"></div>
-                <br />
-                <form action="CommentManager.php"
-                    method="post"
-                    style="width: 80%; margin: 0 auto">
-                    <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                    <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
-                    <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
-                    <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
-                </form>
-                <br />
+                            if($message == FALSE){
+                                die(mysqli_error());
+                            }
+                            while($row = mysqli_fetch_array($message,MYSQLI_ASSOC)) { 
+                                if($emailtxt != $row['senderEmail'] ){
+                        ?>
+                            <tr>
+                                <?php
+                                    $email = $row['senderEmail'];
+                                    $user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
+                                    $userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
+                                ?>
+                                <td class="auto-style1"><?php echo $userDetail["lastName"]." ".$userDetail["firstName"]?></td>
+                                <td><a href="addMessage.php?emailtxt=<?php echo $row['senderEmail']?>">View Message</a></td>
+                            </tr>
+                            <?php 
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
+    <div class="testimonial main">
+    </div>
 
-    <!---->
     <div class="copyright">
         <div class="container">
             <p>All Rights Reserved 2015 &copy; Espoir.com</p>

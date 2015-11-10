@@ -11,9 +11,16 @@ include("db.php");
 	$emailtxt = $_POST["emailtxt"];
 	$projectID = $_POST["projectID"];
     $content = $_POST["content"];
+    $commentID = $_POST["commentID"];
 	
-    // Query String
-    $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`) VALUES ($projectID,'$emailtxt','$content')";	
+    // Query String for edit comment
+    if($commentID != null ){
+        $query = "UPDATE `comment` SET `content` = $content WHERE `commentID` = $commentID";
+
+    } else{ // Query String for new comment
+ 
+        $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`) VALUES ($projectID,'$emailtxt','$content')";	
+    }
     
     
     $success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
@@ -25,6 +32,6 @@ include("db.php");
 	</form>
 		
 	<script language='javascript'>;
-        alert('Comment added');
+        alert('Comment added/updated');
         document.getElementById("BackToCommentForm").submit();
 	</script>
