@@ -33,7 +33,7 @@ if ($result[0] == 0) {
     $date  = (String) date("Y-M-d-H:i:s");
 
     // Query String
-    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, `duration`, `categories`, `currency`, fundsCollected, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', '$duration', '$categories', '$currency', '$fundsCollected',  '$filename.jpg')";
+    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, `duration`, `categories`, `currency`, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', '$duration', '$categories', '$currency',  '$filename.jpg')";
     
     $success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
     $id =mysqli_insert_id($mysqli);

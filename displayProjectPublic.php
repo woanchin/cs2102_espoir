@@ -1,25 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
-	header("location:loginreg.php");
-}
-?>
-
-<?php 
-  include("db.php");  
-
-	$emailtxt = $_SESSION["emailtxt"];
-	$sqlUser = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-	if ($resultUser=mysqli_query($mysqli,$sqlUser))    {
-        // Return the number of rows in result set
-        $rowcountUser=mysqli_num_rows($resultUser);
-  }
-	if($rowcountUser==1)	{	
-        $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
-	}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +23,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
 </head>
 <?php
-
+include("db.php");  
 if (isset($_GET["id"])){
 	$id = $_GET["id"];
 } else {
@@ -100,11 +78,9 @@ $result = mysqli_query($mysqli, $sql);
   						<a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                  <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>               <li><a href="discoverlogin.php">Discover </a></li>
-                  <li><a href="profile.php">Profile</a></li>
-                  <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
-                  <li> <a href="transactions.php"> Donate History </a></li>
-                  <li><a href="logout.php" id="logout">Logout</a></li>
+                            <li class="active"><a href="index.php">Discover <span class="sr-only">(current)</span></a></li>
+                            <li><a href="loginreg.php">Register/Login</a></li>
+                            <li>
                 </ul>
   						</div> 
   					</div>
@@ -134,22 +110,7 @@ $result = mysqli_query($mysqli, $sql);
     <tr><td valign="top" width="100px" height="50px">Duration of Project: </td><td valign="top"><?php echo $row["duration"] ?></td><tr>
     <tr><td valign="top" width="100px" height="50px">Categories: </td><td valign="top"><?php echo $row["categories"] ?></td><tr>
     <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row2["amount"] ?></td><tr>
-    <tr><td colspa="2" height="50px"><form action="comment.php" method="post">
-          <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-          <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
-          <input type="submit" name="submitBtn" id="submitBtn" value="Click here to leave a comment to this project here!">
-    </form></td></tr>		
    </table>   
-  <?php
-  	if($rowUser["userEmail"] == $row["userEmail"]) 
-  	{	
-  		echo "<br>";
-  		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
-  	} else {
-  		echo "<br>";
-  		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
-  	}
-  ?>
                 </div>
                 <div class="clearfix"></div>
             </div>

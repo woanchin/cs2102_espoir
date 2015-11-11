@@ -36,9 +36,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="index.php">Discover <span class="sr-only">(current)</span></a></li>
                             <li><a href="loginreg.php">Register/Login</a></li>
-                            <li><a href="discover.php">Discover</a>
                             <li>
                         </ul>
                     </div>
@@ -90,13 +89,13 @@
 
             if (mysqli_num_rows($result)>0) {
             $i = 1;
-            	while($row = mysqli_fetch_assoc($result) && $i<=3) {
+            	while($row = mysqli_fetch_assoc($result)) {
 		        echo "<div class="."col-sm-4".">
                 <div class="."portfolio-img-wrap".">
                   <img src="."img/portfolio$i.jpg".">
                   <div class="."caption-container".">
                    <div class="."portfolio-caption".">
-                       <h5><a href="."displayProject.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
+                       <h5><a href="."displayProjectPublic.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
                        <p>- &nbsp; ".$row["categories"]."</p>
                    </div>
                </div>
