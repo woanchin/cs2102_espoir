@@ -91,6 +91,7 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
 		echo "Fail to retrieve";
 	}
 ?>
+
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
 <div class="wrapper">
   <div class="container">
@@ -130,41 +131,41 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
 <div class="inner-page services">
   <div class="container">
     <div class="">
-      <div class="col-md-6 no-padding-left"> <img src="image/<?php echo $row["picName"]; ?>"> 
-        <!--<img src="image/">--> 
+      <div class="col-md-6 no-padding-left"> 
+        <img src="image/<?php echo $row["picName"]; ?>"> 
       </div>
       <div class="col-md-6">
         <table>
           <tr>
-            <td valign="top" width="100px" height="50px">Name: </td>
+            <td valign="top" width="50px" height="50px">Name: </td>
             <td valign="top"><?php echo $row["title"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">By: </td>
+            <td valign="top" width="50px" height="50px">By: </td>
             <td valign="top"><?php echo $rown["firstName"] ?> <?php echo $rown["lastName"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">Description: </td>
+            <td valign="top" width="50px" height="50px">Description: </td>
             <td valign="top"><?php echo $row["description"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">Start Date: </td>
+            <td valign="top" width="50px" height="50px">Start Date: </td>
             <td valign="top"><?php echo $row["startDate"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">End Date: </td>
+            <td valign="top" width="50px" height="50px">End Date: </td>
             <td valign="top"><?php echo $row["endDate"] ?></td>
           <tr>
           <tr>
-          <td valign="top" width="100px" height="50px">CountDown: </td>
+            <td valign="top" width="50px" height="50px">CountDown: </td>
            <td valign="top"><?php echo $remain->d . ' days and ' . $remain->h . ' hours';?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">Categories: </td>
+            <td valign="top" width="50px" height="50px">Categories: </td>
             <td valign="top"><?php echo $row["categories"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">Funds Collected: </td>
+            <td valign="top" width="50px" height="50px">Funds Collected: </td>
             <td valign="top"><?php echo "\$".$row2["amount"] ?></td>
           <tr>
           <tr>
@@ -175,33 +176,31 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
               </form></td>
           </tr>
         </table>
-        <?php
-  	if($rowUser["userEmail"] == $row["userEmail"]) 
-  	{	
-  		echo "<br>";
-  		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
-  	} else {
-  		echo "<br>";
-  		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
-  	}
-  ?>
-<?php
-	
-		$projf = "SELECT * FROM projfollow WHERE userEmail ='$emailtxt' AND projectID ='".$row["projectID"]."'";
-		$projr=mysqli_query($mysqli,$projf);
-		$rowcountp=mysqli_num_rows($projr);
 
-  	if($rowUser["userEmail"] != $row["userEmail"]) 
-  	{	
-	if($rowcountp == 1){
-  		echo "<br>";
-  		echo '<a href="unfollowproj.php?id='.$row["projectID"].'">Unfollow Project</a>';
-  	} 
-	else{
-		echo"<br>";
-		echo '<a href="followproj.php?id='.$row["projectID"].'">Follow Project</a>';
-	}
-	}
+        <?php
+        	if($rowUser["userEmail"] == $row["userEmail"]) 
+        	{	
+        		echo "<br>";
+        		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
+        	} else {
+        		echo "<br>";
+        		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
+        	}
+        		$projf = "SELECT * FROM projfollow WHERE userEmail ='$emailtxt' AND projectID ='".$row["projectID"]."'";
+        		$projr=mysqli_query($mysqli,$projf);
+        		$rowcountp=mysqli_num_rows($projr);
+
+          	if($rowUser["userEmail"] != $row["userEmail"]) 
+          	{	
+        	if($rowcountp == 1){
+          		echo "<br>";
+          		echo '<a href="unfollowproj.php?id='.$row["projectID"].'">Unfollow Project</a>';
+          	} 
+        	else{
+        		echo"<br>";
+        		echo '<a href="followproj.php?id='.$row["projectID"].'">Follow Project</a>';
+        	}
+        	}
   ?>
       </div>
       <div class="clearfix"></div>
