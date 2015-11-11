@@ -55,7 +55,7 @@
         <div class="container">
             <div class="col-lg-12">
                 <h4 class="pull-left">Create Project</h4>
-                <p class="pull-right pagination"><a href="index.html">home</a><span>></span><a href="">Create Project</a></p>
+                <p class="pull-right pagination">Create Project</p>
             </div>
         </div>
     </div>
