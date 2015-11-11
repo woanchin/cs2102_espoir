@@ -127,56 +127,54 @@ if(isset($_GET["userEmail"])){
         <div class="container">
             <div class="">
                 <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row2["picName"]; ?>">
+                    <img src="image/<?php echo $row2["picName"]; ?>"><br /><br />
                     <!--<img src="image/">-->
                 </div>
                 <div class="col-md-6">
                     <h2><?php echo $row2["firstName"] ?>'s Profile</h2>
-                    <p>
-                        Name: <?php echo $row2["lastName"]." ".$row2["firstName"] ?>
-                        <br />
-                        <br />
-                        Email: <?php echo $row2["userEmail"] ?>
-                        <br />
-                        <br />
-                        Nationality: <?php echo $row2["nationality"] ?>
-                        <br />
-                        <br />
-                        Birthday: <?php echo $row2["birthday"] ?>
-                        <br />
-                        <br />
-                        Gender: <?php echo $row2["gender"] ?>
-                        <br />
-                        <br />
-                        Bio: <?php echo $row2["bio"] ?>
-                        <br />
-                        <br />
-                        Followers: <?php echo $total5?>
-                        <br />
-                        <br />
-                        <a href="addMessage.php?emailtxt=<?php echo $row2["userEmail"] ?>">Sent Message to <?php echo $row2["lastName"]." ".$row2["firstName"] ?></a>
-                        <br />
-                        <br />
-                        <?php 
-					$sql3 = "SELECT * FROM subscription WHERE userEmail ='$emailtxt' AND following ='".$row2["userEmail"]."'";
-					$result3=mysqli_query($mysqli,$sql3);
-					$rowcount3=mysqli_num_rows($result3);
-					
-					if($rowcount3 ==1){
-					echo '<a href="unsubscribe.php?userEmail='.$row2["userEmail"].'">Unfollow User</a>';
-					}
-					else{
-					echo '<a href="subscribe.php?userEmail='.$row2["userEmail"].'">Follow User</a>';
-					}
-				?>
+                    <br />
+                    Name: <?php echo $row2["lastName"]." ".$row2["firstName"] ?>
+                    <br />
+                    <br />
+                    Email: <?php echo $row2["userEmail"] ?>
+                    <br />
+                    <br />
+                    Nationality: <?php echo $row2["nationality"] ?>
+                    <br />
+                    <br />
+                    Birthday: <?php echo $row2["birthday"] ?>
+                    <br />
+                    <br />
+                    Gender: <?php echo $row2["gender"] ?>
+                    <br />
+                    <br />
+                    Bio: <?php echo $row2["bio"] ?>
+                    <br />
+                    <br />
+                    Followers: <?php echo $total5?>
+                    <br />
+                    <br />
+                    <a href="addMessage.php?emailtxt=<?php echo $row2["userEmail"] ?>">Sent Message to <?php echo $row2["lastName"]." ".$row2["firstName"] ?></a>
+                    <br />
+                    <br />
+                    <?php 
+    					$sql3 = "SELECT * FROM subscription WHERE userEmail ='$emailtxt' AND following ='".$row2["userEmail"]."'";
+    					$result3=mysqli_query($mysqli,$sql3);
+    					$rowcount3=mysqli_num_rows($result3);
+    					
+    					if($rowcount3 ==1){
+    					echo '<a href="unsubscribe.php?userEmail='.$row2["userEmail"].'">Unfollow User</a>';
+    					}
+    					else{
+    					echo '<a href="subscribe.php?userEmail='.$row2["userEmail"].'">Follow User</a>';
+    					}
+				    ?>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="testimonial main"></div>
-
     <div class="copyright">
         <div class="container">
             <p>All Rights Reserved 2015 &copy; Espoir.com</p>

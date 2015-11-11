@@ -139,21 +139,20 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                         if($rowcount == 0){
                             ?>
                             <h3>You did not follow any project yet! Check out some awesome project </h3>
-                            <?php }
-        ?>
+                            <?php }   ?>
+
                             <tr>
                                 <td></td>
                             </tr>
                         </table>
-                    </p>
+                    </p>   
+                    <br /> 
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="testimonial main"></div>
-
     <div class="copyright">
         <div class="container">
             <p>All Rights Reserved 2015 &copy; Espoir.com</p>

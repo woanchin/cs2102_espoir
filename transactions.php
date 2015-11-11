@@ -164,13 +164,13 @@ donation history</p>
           </tr>
         </table>
         </p>
+        <br />
       </div>
       <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
   </div>
 </div>
-<div class="testimonial main"> </div>
 </div>
 </div>
 <div class="clearfix"></div>

@@ -142,7 +142,12 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
           <tr>
           <tr>
             <td valign="top" height="50px">By: </td>
-            <td valign="top"><?php echo $rown["firstName"] ?> <?php echo $rown["lastName"] ?></td>
+            <td valign="top">
+              <a href="viewProfile.php?userEmail=<?php echo $row['userEmail'] ?>">
+                <?php echo $rown["firstName"] ?> 
+                <?php echo $rown["lastName"] ?>
+              </a>
+            </td>
           <tr>
           <tr>
             <td valign="top" height="50px">Description: </td>
