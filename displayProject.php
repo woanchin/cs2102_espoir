@@ -7,30 +7,21 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 ?>
 
 <?php 
-    include("db.php");  
+  include("db.php");  
 
-    //Store Data input into variables
 	$emailtxt = $_SESSION["emailtxt"];
-	
-    //select results matching to what the user has typed	
 	$sqlUser = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-
-    //check if the sql has been execute
-	if ($resultUser=mysqli_query($mysqli,$sqlUser))
-    {
+	if ($resultUser=mysqli_query($mysqli,$sqlUser))    {
         // Return the number of rows in result set
         $rowcountUser=mysqli_num_rows($resultUser);
-    }
-
-    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcountUser==1)
-	{	
-
+  }
+	if($rowcountUser==1)	{	
         $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
-
 	}
 
-  ?>
+  $donated = "SELECT SUM(`amount`) AS 'amount' FROM `donate` WHERE projectID = '$id'";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
