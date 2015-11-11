@@ -19,8 +19,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	}
 
-  $donated = "SELECT SUM(`amount`) AS 'amount' FROM `donate` WHERE projectID = '$id'";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +72,22 @@ $result = mysqli_query($mysqli, $sql);
 	} else {
 		echo "Fail to retrieve";
 	}
+	
+	if ($result2=mysqli_query($mysqli,$donated))
+    {
+        // Return the number of rows in result set
+        $rowcount2=mysqli_num_rows($result2);
+    }
+		if($rowcount2==1)
+	{	
+
+        $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
+	} else {
+		echo "Fail to retrieve";
+	}
+
+	
 
 ?>
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -119,7 +133,7 @@ $result = mysqli_query($mysqli, $sql);
     <tr><td valign="top" width="100px" height="50px">Start Date: </td><td valign="top"><?php echo $row["startDate"] ?></td><tr>
     <tr><td valign="top" width="100px" height="50px">Duration of Project: </td><td valign="top"><?php echo $row["duration"] ?></td><tr>
     <tr><td valign="top" width="100px" height="50px">Categories: </td><td valign="top"><?php echo $row["categories"] ?></td><tr>
-    <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
+    <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row2["amount"] ?></td><tr>
     <tr><td colspa="2" height="50px"><form action="comment.php" method="post">
           <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
           <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
