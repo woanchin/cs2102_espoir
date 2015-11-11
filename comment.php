@@ -190,7 +190,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     style="width: 80%; margin: 0 auto">
                     <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
                     <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
-                    <textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
+                    <input name="commentID" type="hidden" value=-1 "/>
+					<textarea name="content" cols="30" rows="10" placeholder="Message"></textarea><br />
                     <input type="submit" name="submitBtn" id="submitBtn" value="Comment!">
                 </form>
                 <br />
