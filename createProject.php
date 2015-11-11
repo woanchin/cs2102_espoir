@@ -41,6 +41,7 @@
                             <li><a href="discoverlogin.php">Discover </a></li>
                             <li><a href="profile.php">Profile</a></li>
                             <li class="active"><a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
+                            <li><a href="projfollist.php">Projects Followed</a></li>
                             <li><a href="transactions.php">Donate History </a></li>
                             <li><a href="logout.php" id="logout">Logout</a></li>
                         </ul>
@@ -164,6 +165,7 @@
  });
 </script> 
 <script>
+</script>
     </div>
     <p>&nbsp;</p>
     <div class="copyright">
