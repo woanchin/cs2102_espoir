@@ -67,14 +67,12 @@
                     <form name="signUpForm" id="signUpForm" action="signup.php" method="post" enctype="multipart/form-data">
                         <div>
                             <label for="email">Email : </label>
-                            <input id="userEmail" name="userEmail" type="email" required />
+                            <input id="userEmail" name="userEmail" type="text" required style="width:200px!important;height:25px" />
                         </div>
-                        <br />
                         <div>
                             <label for="firstName">First Name : </label>
                             <input type="text" name="firstName" id="firstName" style="width: 200px!important; height: 25px" required />
                         </div>
-
                         <div>
                             <label for="lastName">Last Name : </label>
                             <input type="text" name="lastName" id="lastName" style="width: 200px!important; height: 25px" required />
@@ -82,12 +80,12 @@
 
                         <div>
                             <label for="password">Password : </label>
-                            <input id="userPassword" name="userPassword" type="password" required />
+                            <input id="userPassword" name="userPassword" type="password" style="width:200px!important;height:25px" required />
                         </div>
                         <br />
                         <div>
                             <label for="nationality">Nationality : </label>
-                            <select name="nationality" required>
+                            <select name="nationality" style="width:200px!important;height:25px" required>
                                 <option value="">Country...</option>
                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
@@ -341,7 +339,7 @@
                         <br />
                         <div>
                             <label for="birthday">Birthday : </label>
-                            <input type="date" name="birthday" id="birthday" required>
+                            <input type="date" name="birthday" id="birthday" style="width:200px!important;height:25px" required>
                         </div>
                         <br />
                         <div>
@@ -372,12 +370,12 @@
                     <form action="AdminManager.php" method="post">
                         <p>
                             <label for="emailtxt">Email:</label>
-                            <input name="emailtxt" type="email" id="emailtxt" required>
+                            <input name="emailtxt" type="text" id="emailtxt" style="width:200px!important;height:25px" required>
                         </p>
                         <br />
                         <p>
                             <label for="loginPassword">Password:</label>
-                            <input type="password" name="loginPassword" id="loginPassword" required>
+                            <input type="password" name="loginPassword" id="loginPassword" style="width:200px!important;height:25px" required>
                         </p>
                         <p>
                             <input type="submit" name="login" id="login" value="Login">

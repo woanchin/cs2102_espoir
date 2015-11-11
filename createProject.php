@@ -25,88 +25,10 @@
 
 </head>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
-<div class="wrapper">
-  <div class="container">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid"> 
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
-        
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1" >
-         <ul class="nav navbar-nav">
-<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>   
-            <li><a href="discoverlogin.php">Discover </a></li>
-            <li><a href="profile.php">Profile</a></li>
-            <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
-            <li> <a href="transactions.php"> Donate History </a></li>
-            <li><a href="logout.php" id="logout">Logout</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse --> 
-      </div>
-      <!-- /.container-fluid --> 
-    </nav>
-  </div>
-</div>
-<div class="inner-head">
-  <div class="container">
-    <div class="col-lg-12">
-      <h4 class="pull-left">a new crowdfunding project..</h4>
-      <p class="pull-right pagination">new project</p>
-    </div>
-  </div>
-</div>
-<!-- inner-head end -->
-  <div class="container">
-    <div class="inner-page about-us">
-      <div class="container">
-        <div class="col-md-6 no-padding-left">
-          <h2>Start a Project</h2>
-          <form name="createProjForm" action="addProject.php" method="post" enctype="multipart/form-data">
-            <div>
-              <label for="category">Select a Category : </label>
-              <select name="category">
-                <option value="">Categories...</option>
-                <option value="Art">Art</option>
-                <option value="Charity">Charity</option>
-                <option value="Dance & Music">Dance & Music</option>
-                <option value="Design & Innovation">Design & Innovation</option>
-                <option value="Education">Education</option>
-                <option value="Fashion">Fashion</option>
-                <option value="Film">Film</option>
-                <option value="Games">Games</option>
-                <option value="Gourmet">Gourmet</option>
-                <option value="Health">Health</option>
-                <option value="Photography">Photography</option>
-                <option value="Sports">Sports</option>
-                <option value="Technology">Technology</option>
-              </select>
-            </div>
-            <br />
-            <div>
-              <label for="projecttitle">Project Title : </label>
-              <input name="projecttitle" type="text" />
-            </div>
-            <div>
-              <label for="picSrc">Upload a Picture: </label>
-              <input id="picSrc" name="test" type="file" accept="image/*" required />
-            </div>
-            <br />
-            <div>
-              <label> Description : </label>
-              <textarea name="description" cols="20" rows="5"></textarea>
-            </div>
-            <div>
-              <label for="start date">Start Date : </label>
-              <input type="date" name="startdate" id="start date">
     <div class="wrapper">
         <div class="container">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                         <a class="navbar-brand">E<span>Spoir</span></a>
@@ -115,6 +37,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
+                            <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
                             <li><a href="discoverlogin.php">Discover </a></li>
                             <li><a href="profile.php">Profile</a></li>
                             <li class="active"><a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
@@ -139,7 +62,6 @@
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-            <p>&nbsp;</p>
             <div class="inner-page about-us">
                 <div class="container">
                     <div class="col-md-6 no-padding-left">
@@ -218,8 +140,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6"> <img src="img/what_we_do.jpg"> </div>
-        <div class="clearfix"></div>
       </div>
   </div>
 <p>&nbsp;</p>

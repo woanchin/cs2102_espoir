@@ -85,30 +85,24 @@ $result = mysqli_query($mysqli, $sql);
 	}
 
 ?>
-<<<<<<< HEAD
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
   	<div class="wrapper">
   		<div class="container">
   			<nav class="navbar navbar-default">
   				<div class="container-fluid"> 
-  					<!-- Brand and toggle get grouped for better mobile display -->
   					<div class="navbar-header">
   						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
   						<a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
-
-  						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>               <li><a href="discoverlogin.php">Discover </a></li>
-            <li><a href="profile.php">Profile</a></li>
-            <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
-            <li> <a href="transactions.php"> Donate History </a></li>
-            <li><a href="logout.php" id="logout">Logout</a></li>
-          </ul>
-  						</div>
-  						<!-- /.navbar-collapse --> 
+                  <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>               <li><a href="discoverlogin.php">Discover </a></li>
+                  <li><a href="profile.php">Profile</a></li>
+                  <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
+                  <li> <a href="transactions.php"> Donate History </a></li>
+                  <li><a href="logout.php" id="logout">Logout</a></li>
+                </ul>
+  						</div> 
   					</div>
-  					<!-- /.container-fluid --> 
   				</nav>
   			</div>
   		</div>
@@ -130,144 +124,27 @@ $result = mysqli_query($mysqli, $sql);
   <div class="col-md-6">
     <table>
 		<tr><td valign="top" width="100px" height="50px">Name: </td><td valign="top"><?php echo $row["title"] ?></td><tr>
-       
-        <tr><td valign="top" width="100px" height="50px">Description: </td><td valign="top"><?php echo $row["description"] ?></td><tr>
-          
-        <tr><td valign="top" width="100px" height="50px">Start Date: </td><td valign="top"><?php echo $row["startDate"] ?></td><tr>
-        
-        <tr><td valign="top" width="100px" height="50px">Duration of Project: </td><td valign="top"><?php echo $row["duration"] ?></td><tr>
-      
-        <tr><td valign="top" width="100px" height="50px">Categories: </td><td valign="top"><?php echo $row["categories"] ?></td><tr>
- 
-        <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
-      
-		<tr><td><form action="comment.php" method="post">
-                        <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                        <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
-                        <input type="submit" name="submitBtn" id="submitBtn" value="Click here to leave a comment to this project here!">
-                    </form></td></tr>
-		
-   </table>
-   
-   <?php
-=======
-<body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
-    <div class="wrapper">
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a class="navbar-brand">E<span>Spoir</span></a>
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="discoverlogin.php">Discover <span class="sr-only">(current)</span></a></li>
-                            <li><a href="profile.php">Profile </a></li>
-                            <li><a href="createProject.php">Create Project </a></li>
-                            <li><a href="transactions.php">Donate History </a></li>
-                            <li><a href="logout.php" id="logout">Logout</a></li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-            </nav>
-        </div>
-    </div>
-    <div class="inner-head">
-        <div class="container">
-            <div class="col-lg-12">
-                <h4 class="pull-left"><?php echo $row["title"] ?></h4>
-            </div>
-        </div>
-    </div>
-    <!-- inner-head end -->
-    <div class="inner-page services">
-        <div class="container">
-            <div class="">
-                <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row["picName"]; ?>">
-                    <!--<img src="image/">-->
-                </div>
-                <div class="col-md-6">
-                    <table>
-                        <tr>
-                            <td valign="top" width="100px" height="50px">Project Name: </td>
-                            <td valign="top"><?php echo $row["title"] ?></td>
-                            </tr>
-
-                        <tr>
-                            <td valign="top" width="100px" height="50px">Description: </td>
-                            <td valign="top"><?php echo $row["description"] ?></td>
-                            </tr>
-
-                        <tr>
-                            <td valign="top" width="100px" height="50px">Start Date: </td>
-                            <td valign="top"><?php echo $row["startDate"] ?></td>
-                            </tr>
-
-                        <tr>
-                            <td valign="top" width="100px" height="50px">Duration of Project: </td>
-                            <td valign="top"><?php echo $row["duration"] ?></td>
-                            </tr>
-
-                        <tr>
-                            <td valign="top" width="100px" height="50px">Categories: </td>
-                            <td valign="top"><?php echo $row["categories"] ?></td>
-                            </tr>
-
-                        <tr>
-                            <?php 
-                                $donateResult = mysqli_query($mysqli, $donated);
-                                $donateRow = mysqli_fetch_array($donateResult,MYSQLI_ASSOC);
-                            ?>
-                            <td valign="top" width="100px" height="50px">Funds Collected: </td>
-                            <td valign="top"><?php echo "\$".$donateRow["amount"] ?></td>
-                            </tr>
-
-                        <tr>
-                            <?php 
-                                $email = $row['userEmail'];
-                                $user = mysqli_query($mysqli,"SELECT * FROM user WHERE userEmail = '$email'");
-                                $userDetail = mysqli_fetch_array($user,MYSQLI_ASSOC);
-                            ?>
-                            <td valign="top" width="100px" height="50px">Project Creator: </td>
-                            <?php
-                                 if($rowUser["userEmail"] == $row["userEmail"]) {	
-                                     echo "<td valign='top'>".$userDetail["lastName"]." ".$userDetail["firstName"]. "</td>";
-                                 } else {
-                                                    
-                                     echo "<td valign='top'><a href='viewProfile.php?userEmail=".$userDetail["userEmail"]."'>".$userDetail["lastName"]." ".$userDetail["firstName"]."</a></td>";
-                                 } ?>
-                            </tr>
-
-                        <tr>
-                            <td>
-                                <form action="comment.php" method="post">
-                                    <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
-                                    <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
-                                    <input type="submit" name="submitBtn" id="submitBtn" value="Click here to leave a comment to this project here!">
-                                </form>
-                            </td>
-                        </tr>
-
-                    </table>
-
-                    <?php
->>>>>>> cc91c111b78ab8bb38e45395e364bb255af54b69
-	if($rowUser["userEmail"] == $row["userEmail"]) 
-	{	
-		echo "<br>";
-		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
-	} else {
-		echo "<br>";
-		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
-	}
-   ?>
+    <tr><td valign="top" width="100px" height="50px">Description: </td><td valign="top"><?php echo $row["description"] ?></td><tr>
+    <tr><td valign="top" width="100px" height="50px">Start Date: </td><td valign="top"><?php echo $row["startDate"] ?></td><tr>
+    <tr><td valign="top" width="100px" height="50px">Duration of Project: </td><td valign="top"><?php echo $row["duration"] ?></td><tr>
+    <tr><td valign="top" width="100px" height="50px">Categories: </td><td valign="top"><?php echo $row["categories"] ?></td><tr>
+    <tr><td valign="top" width="100px" height="50px">Funds Collected: </td><td valign="top"><?php echo "\$".$row["fundsCollected"] ?></td><tr>
+    <tr><td colspa="2" height="50px"><form action="comment.php" method="post">
+          <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
+          <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
+          <input type="submit" name="submitBtn" id="submitBtn" value="Click here to leave a comment to this project here!">
+    </form></td></tr>		
+   </table>   
+  <?php
+  	if($rowUser["userEmail"] == $row["userEmail"]) 
+  	{	
+  		echo "<br>";
+  		echo "<a href="."editProject.php?id=".$row["projectID"].">Edit</a>";
+  	} else {
+  		echo "<br>";
+  		echo "<a href="."donate.php?id=".$row["projectID"].">Donate</a>";
+  	}
+  ?>
                 </div>
                 <div class="clearfix"></div>
             </div>

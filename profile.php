@@ -80,76 +80,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	 $result3 = mysqli_fetch_assoc($count3); 
 	 $total3 = $result3['COUNT(userEmail)'];
 ?>
-
-<<<<<<< HEAD
-  <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
-  	<div class="wrapper">
-  		<div class="container">
-  			<nav class="navbar navbar-default">
-  				<div class="container-fluid"> 
-  					<!-- Brand and toggle get grouped for better mobile display -->
-  					<div class="navbar-header">
-  						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-  						<a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
-
-  						<!-- Collect the nav links, forms, and other content for toggling -->
-  						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-  							<ul class="nav navbar-nav">
-	<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                            <li><a href="discoverlogin.php">Discover</a></li>
-                    <li class="active"><a href="profile.php">Profile
- <span class="sr-only">(current)</span></a></li>
-                    <li> <a href="createProject.php">Create Project </a></li>
-                    <li> <a href="transactions.php"> Donate History </a></li>
-                    <li><a href="logout.php" id="logout">Logout</a></li>
-					        </ul>
-  						</div>
-  						<!-- /.navbar-collapse --> 
-  					</div>
-  					<!-- /.container-fluid --> 
-  				</nav>
-  			</div>
-  		</div>
-  		<div class="inner-head">
-  			<div class="container"><div class="col-lg-12">
-  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<p class="pull-right pagination"> Profile</p>
-  				</div>
-  			</div>
-  		</div>
-  		<!-- inner-head end -->
-        <div class="inner-page services">
- <div class="container">
-  <div class="">
-   <div class="col-md-6 no-padding-left">
-	<img src="image/<?php echo $row["picName"]; ?>">
-    <!--<img src="image/">-->
-  </div>
-  <div class="col-md-6">
-    <h2>My Profile</h2>
-    <p>
-     			Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                <br /><br/>
-                Email: <?php echo $row["userEmail"] ?>
-                <br /><br/>
-                Nationality: <?php echo $row["nationality"] ?>
-                <br /><br />
-                Birthday: <?php echo $row["birthday"] ?>
-                <br /> <br />
-                Gender: <?php echo $row["gender"] ?>
-                <br /><br />
-                Bio: <?php echo $row["bio"] ?>
-                <br />  <br />
-                Followers: <a href="followers.php"><?php echo $total?></a>
-                <br/><br/>
-                Following: <a href="following.php"><?php echo $total3?></a>
-                <br/><br/>
-                <a href="editProfile.php">Edit</a>
-   </p>
- </div>
- <div class="clearfix"></div>
-</div>
-=======
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
         <div class="container">
@@ -164,6 +94,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
+                            <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
                             <li><a href="discoverlogin.php">Discover</a></li>
                             <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
                             <li><a href="createProject.php">Create Project </a></li>
@@ -182,9 +113,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
             <div class="col-lg-12">
                 <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
                 <form method="post" action="search.php">
-                    <p class="pull-right pagination">
-                        <input type="Search" name="keyword"><input type="submit" value="Search">
-                        &nbsp;&nbsp;&nbsp;&nbsp;  Profile</p>
+                    <p class="pull-right pagination"> Profile</p>
                 </form>
             </div>
         </div>
@@ -195,6 +124,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
             <div class="">
                 <div class="col-md-6 no-padding-left">
                     <img src="image/<?php echo $row["picName"]; ?>">
+                    <br /><br />
                     <!--<img src="image/">-->
                 </div>
                 <div class="col-md-6">
@@ -231,14 +161,9 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     </p>
                 </div>
                 <div class="clearfix"></div>
-            </div>
->>>>>>> cc91c111b78ab8bb38e45395e364bb255af54b69
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="testimonial main">
-    </div>
-
     <div class="copyright">
         <div class="container">
             <p>All Rights Reserved 2015 &copy; Espoir.com</p>
