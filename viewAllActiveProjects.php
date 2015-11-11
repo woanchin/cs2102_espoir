@@ -101,7 +101,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">view all active projects </h4>
+                <h4 class="pull-left">view all ongoing and completed projects </h4>
             </div>
         </div>
     </div>

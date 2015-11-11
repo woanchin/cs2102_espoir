@@ -8,13 +8,16 @@ include("db.php");
 <!DOCTYPE html>
 <?php
 	//Store Data input into variables
+	$type = $_POST['submitBtn'];
 	$emailtxt = $_POST["emailtxt"];
 	$projectID = $_POST["projectID"];
     $content = $_POST["content"];
     $commentID = $_POST["commentID"];
 	
     // Query String for edit comment
-    if($commentID != -1 ){
+    if ($type == 'Delete!'){
+		$query = "DELETE FROM comment WHERE commentID = '$commentID'";
+	}else if($commentID != -1 ){
         $query = "UPDATE comment SET content = '$content' WHERE commentID = '$commentID'";
 
     } else{ // Query String for new comment
@@ -32,6 +35,6 @@ include("db.php");
 	</form>
 		
 	<script language='javascript'>;
-        alert('Comment added/updated');
+        alert('Comment added/updated/deleted!');
         document.getElementById("BackToCommentForm").submit();
 	</script>

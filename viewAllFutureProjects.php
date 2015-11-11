@@ -40,11 +40,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     }
 
     //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
+	if($rowcount==1){	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
 	}
 	
 	else 
@@ -104,7 +101,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">Administrator Functions </h4>
+                <h4 class="pull-left">view all future projects </h4>
             </div>
         </div>
     </div>
@@ -113,13 +110,18 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         <div class="container">
             <div class="col-md-6">
                 <table>
-                    <tr><td><a href="viewAllUsers.php">1. View All Users</a></td></tr>
-                    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-                    <tr><td><a href="viewAllActiveProjects.php">2. View All Ongoing and Completed Projects</a></td></tr>
-                    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-                    <tr><td><a href="viewAllFutureProjects.php">3. View All Future Projects</a></td></tr>
-                    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-                    <tr><td><a href="">4. Create New Admin Account </a></td></tr>
+                    <?php 
+
+                        $sql2 = "SELECT * FROM project WHERE startDate <= DATE(NOW())";
+                        $result2=mysqli_query($mysqli,$sql2);
+                        $count = 1;                        
+                        foreach ($result2 as $a ){
+                    ?>
+                            <tr><td><a href="viewProject.php?id=<?php echo $a["projectID"] ?>"><?php echo $count++ ?> <?php echo $a["title"] ?></a></td></tr>
+                    <?php
+                        } 
+                    ?>
+
                 </table>
                 <br />
             </div>
