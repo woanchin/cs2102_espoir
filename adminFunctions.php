@@ -104,57 +104,23 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-                <form method="post" action="search.php">
-                    <p class="pull-right pagination"> Profile</p>
-                </form>
+                <h4 class="pull-left">Administrator Functions </h4>
             </div>
         </div>
     </div>
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-            <div class="">
-                <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row["picName"]; ?>">
-                    <br /><br />
-                    <!--<img src="image/">-->
-                </div>
-                <div class="col-md-6">
-                    <h2>My Profile</h2>
-                    <p>
-                        Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                        <br />
-                        <br />
-                        Email: <?php echo $row["userEmail"] ?>
-                        <br />
-                        <br />
-                        Nationality: <?php echo $row["nationality"] ?>
-                        <br />
-                        <br />
-                        Birthday: <?php echo $row["birthday"] ?>
-                        <br />
-                        <br />
-                        Gender: <?php echo $row["gender"] ?>
-                        <br />
-                        <br />
-                        Bio: <?php echo $row["bio"] ?>
-                        <br />
-                        <br />
-                        Followers: <a href="followers.php"><?php echo $total?></a>
-                        <br />
-                        <br />
-                        Following: <a href="following.php"><?php echo $total3?></a>
-                        <br />
-                        <br />
-                        <a href="viewMessage.php">View Messages</a>
-                        <br />
-                        <br />
-                        <a href="editProfile.php">Edit</a>
-                    </p>
-                </div>
-                <div class="clearfix"></div>
-            <div class="clearfix"></div>
+            <div class="col-md-6">
+                <table>
+                    <tr><td><a href="viewAllUsers.php">1. View All Users</a></td></tr>
+                    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+                    <tr><td><a href="viewAllActiveProjects.php">2. View All Ongoing and Completed Projects</a></td></tr>
+                    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+                    <tr><td><a href="">3. View All Future Projects</a></td></tr>
+                </table>
+                <br />
+            </div>
         </div>
     </div>
     <div class="copyright">

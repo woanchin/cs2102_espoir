@@ -40,11 +40,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     }
 
     //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
+	if($rowcount==1){	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
 	}
 	
 	else 
@@ -104,57 +101,30 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-                <form method="post" action="search.php">
-                    <p class="pull-right pagination"> Profile</p>
-                </form>
+                <h4 class="pull-left">view all active projects </h4>
             </div>
         </div>
     </div>
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-            <div class="">
-                <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row["picName"]; ?>">
-                    <br /><br />
-                    <!--<img src="image/">-->
-                </div>
-                <div class="col-md-6">
-                    <h2>My Profile</h2>
-                    <p>
-                        Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                        <br />
-                        <br />
-                        Email: <?php echo $row["userEmail"] ?>
-                        <br />
-                        <br />
-                        Nationality: <?php echo $row["nationality"] ?>
-                        <br />
-                        <br />
-                        Birthday: <?php echo $row["birthday"] ?>
-                        <br />
-                        <br />
-                        Gender: <?php echo $row["gender"] ?>
-                        <br />
-                        <br />
-                        Bio: <?php echo $row["bio"] ?>
-                        <br />
-                        <br />
-                        Followers: <a href="followers.php"><?php echo $total?></a>
-                        <br />
-                        <br />
-                        Following: <a href="following.php"><?php echo $total3?></a>
-                        <br />
-                        <br />
-                        <a href="viewMessage.php">View Messages</a>
-                        <br />
-                        <br />
-                        <a href="editProfile.php">Edit</a>
-                    </p>
-                </div>
-                <div class="clearfix"></div>
-            <div class="clearfix"></div>
+            <div class="col-md-6">
+                <table>
+                    <?php 
+
+                        $sql2 = "SELECT * FROM project WHERE startDate <= DATE(NOW())";
+                        $result2=mysqli_query($mysqli,$sql2);
+                        $count = 1;                        
+                        foreach ($result2 as $a ){
+                    ?>
+                            <tr><td><a href="viewProject.php?id=<?php echo $a["projectID"] ?>"><?php echo $count++ ?> <?php echo $a["title"] ?></a></td></tr>
+                    <?php
+                        } 
+                    ?>
+
+                </table>
+                <br />
+            </div>
         </div>
     </div>
     <div class="copyright">
