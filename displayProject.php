@@ -10,10 +10,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
 	$emailtxt = $_SESSION["emailtxt"];
 	$sqlUser = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-	if ($resultUser=mysqli_query($mysqli,$sqlUser))    {
+	if ($resultUser=mysqli_query($mysqli,$sqlUser)) {
         // Return the number of rows in result set
         $rowcountUser=mysqli_num_rows($resultUser);
   }
+
 	if($rowcountUser==1)	{	
         $rowUser = mysqli_fetch_array($resultUser,MYSQLI_ASSOC);
 	}
@@ -56,54 +57,39 @@ $donated = "SELECT SUM(`amount`) AS 'amount' FROM `donate` WHERE projectID = '$i
 $result = mysqli_query($mysqli, $sql);
 $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail = p.userEmail and p.projectID ='$id'";
 //check if the sql has been execute
-	if ($result=mysqli_query($mysqli,$sql))
-    {
-        // Return the number of rows in result set
+	if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
-    }
+  }
 
     //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
+	if($rowcount==1) {	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
 	} else {
 		echo "Fail to retrieve";
 	}
+
 	$enddate = new DateTime($row["endDate"]);
 	$remain = $enddate->diff(new DateTime());
 	
-		if ($resultn=mysqli_query($mysqli,$name))
-    {
-        $rowcountn=mysqli_num_rows($resultn);
-    }
+	if ($resultn=mysqli_query($mysqli,$name)) {
+      $rowcountn=mysqli_num_rows($resultn);
+  }
 
-	if($rowcountn==1)
-	{	
-
-        $rown = mysqli_fetch_array($resultn,MYSQLI_ASSOC);
-
+	if($rowcountn==1) {	
+      $rown = mysqli_fetch_array($resultn,MYSQLI_ASSOC);
 	} else {
 		echo "Fail to retrieve";
 	}
-
 	
-	if ($result2=mysqli_query($mysqli,$donated))
-    {
-        // Return the number of rows in result set
-        $rowcount2=mysqli_num_rows($result2);
-    }
-		if($rowcount2==1)
-	{	
+	if ($result2=mysqli_query($mysqli,$donated)) {
+      $rowcount2=mysqli_num_rows($result2);
+  }
 
-        $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-
+	if($rowcount2==1) {	
+      $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 	} else {
 		echo "Fail to retrieve";
 	}
-			
-
 ?>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
 <div class="wrapper">

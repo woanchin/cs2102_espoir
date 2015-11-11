@@ -55,7 +55,7 @@
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">Create Project</h4>
+                <h4 class="pull-left">Create an Awesome Project Now!</h4>
                 <p class="pull-right pagination">Create Project</p>
             </div>
         </div>
@@ -90,7 +90,7 @@
                             <br />
                             <div>
                                 <label for="projecttitle">Project Title : </label>
-                                <input name="projecttitle" type="text" />
+                                <input name="projecttitle" type="text" style="width:200px!important;height:25px"/>
                             </div>
                             <div>
                                 <label for="picSrc">Upload a Picture: </label>
@@ -103,16 +103,17 @@
                             </div>
                             <div>
                                 <label for="start date">Start Date : </label>
-                                <input type="date" name="startdate" id="start date">
+                                <input type="date" name="startdate" id="start date" style="width:140px!important;height:25px">
                             </div>
                             <br />
                             <div>
                                 <label for="end date">End Date : </label>
-                                <input type="date" name="enddate" id="end date">
+                                <input type="date" name="enddate" id="end date" style="width:140px!important;height:25px">
                             </div>
+                            <br />
                             <div>
                                 <label for="currency">Select a Currency : </label>
-                                <select name="currency">
+                                <select name="currency" style="width:150px!important;height:25px">
                                     <option value="">Currency...</option>
                                     <option value="AUD">AUD</option>
                                     <option value="CAD">CAD</option>

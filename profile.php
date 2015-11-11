@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
-}
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,52 +26,32 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 <?php 
     include("db.php");  
 
-    //Store Data input into variables
 	$emailtxt = $_SESSION["emailtxt"];
-	
-    //select results matching to what the user has typed	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-
-    //check if the sql has been execute
-	if ($result=mysqli_query($mysqli,$sql))
-    {
-        // Return the number of rows in result set
+	if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
     }
 
-    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
+    if($rowcount==1) {	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-	}
-	
-	else 
-	{
+	} else {
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
 		echo 'alert("Wrong username/password");';
 		echo 'window.location.href="../CS2102/loginreg.php";';
-		echo '</script>';
-		
+		echo '</script>';		
 	}
-
-  ?>
-<?php
   
   	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
 	 $count=mysqli_query($mysqli,$sql2) or die('Error: ' . mysqli_error($mysqli));
 	 $result = mysqli_fetch_assoc($count); 
 	 $total = $result['COUNT(following)'];
-  ?>
-
-<?php
   
   	$sql3 = "SELECT COUNT(userEmail) FROM subscription WHERE userEmail ='$emailtxt'";
 	 $count3=mysqli_query($mysqli,$sql3) or die('Error: ' . mysqli_error($mysqli));
 	 $result3 = mysqli_fetch_assoc($count3); 
 	 $total3 = $result3['COUNT(userEmail)'];
+
 ?>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
@@ -123,36 +103,35 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                 </div>
                 <div class="col-md-6">
                     <h2>My Profile</h2>
-                    <p>
-                        Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                        <br />
-                        <br />
-                        Email: <?php echo $row["userEmail"] ?>
-                        <br />
-                        <br />
-                        Nationality: <?php echo $row["nationality"] ?>
-                        <br />
-                        <br />
-                        Birthday: <?php echo $row["birthday"] ?>
-                        <br />
-                        <br />
-                        Gender: <?php echo $row["gender"] ?>
-                        <br />
-                        <br />
-                        Bio: <?php echo $row["bio"] ?>
-                        <br />
-                        <br />
-                        Followers: <a href="followers.php"><?php echo $total?></a>
-                        <br />
-                        <br />
-                        Following: <a href="following.php"><?php echo $total3?></a>
-                        <br />
-                        <br />
-                        <a href="viewMessage.php">View Messages</a>
-                        <br />
-                        <br />
-                        <a href="editProfile.php">Edit</a>
-                    </p>
+                    <br />
+                    Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
+                    <br />
+                    <br />
+                    Email: <?php echo $row["userEmail"] ?>
+                    <br />
+                    <br />
+                    Nationality: <?php echo $row["nationality"] ?>
+                    <br />
+                    <br />
+                    Birthday: <?php echo $row["birthday"] ?>
+                    <br />
+                    <br />
+                    Gender: <?php echo $row["gender"] ?>
+                    <br />
+                    <br />
+                    Bio: <?php echo $row["bio"] ?>
+                    <br />
+                    <br />
+                    Followers: <a href="followers.php"><?php echo $total?></a>
+                    <br />
+                    <br />
+                    Following: <a href="following.php"><?php echo $total3?></a>
+                    <br />
+                    <br />
+                    <a href="viewMessage.php">View Messages</a>
+                    <br />
+                    <br />
+                    <a href="editProfile.php">Edit</a>
                 </div>
                 <div class="clearfix"></div>
             <div class="clearfix"></div>
