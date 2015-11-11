@@ -54,7 +54,7 @@ if (isset($_GET["id"])){
 $sql = "SELECT * FROM project WHERE projectID = '$id'";
 $donated = "SELECT SUM(`amount`) AS 'amount' FROM `donate` WHERE projectID = '$id'";
 $result = mysqli_query($mysqli, $sql);
-
+$name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail = p.userEmail and p.projectID ='$id'";
 //check if the sql has been execute
 	if ($result=mysqli_query($mysqli,$sql))
     {
@@ -71,6 +71,23 @@ $result = mysqli_query($mysqli, $sql);
 	} else {
 		echo "Fail to retrieve";
 	}
+	$enddate = new DateTime($row["endDate"]);
+	$remain = $enddate->diff(new DateTime());
+	
+		if ($resultn=mysqli_query($mysqli,$name))
+    {
+        $rowcountn=mysqli_num_rows($resultn);
+    }
+
+	if($rowcountn==1)
+	{	
+
+        $rown = mysqli_fetch_array($resultn,MYSQLI_ASSOC);
+
+	} else {
+		echo "Fail to retrieve";
+	}
+
 	
 	if ($result2=mysqli_query($mysqli,$donated))
     {
@@ -85,8 +102,7 @@ $result = mysqli_query($mysqli, $sql);
 	} else {
 		echo "Fail to retrieve";
 	}
-
-	
+			
 
 ?>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -138,6 +154,10 @@ $result = mysqli_query($mysqli, $sql);
             <td valign="top"><?php echo $row["title"] ?></td>
           <tr>
           <tr>
+            <td valign="top" width="100px" height="50px">By: </td>
+            <td valign="top"><?php echo $rown["firstName"] ?> <?php echo $rown["lastName"] ?></td>
+          <tr>
+          <tr>
             <td valign="top" width="100px" height="50px">Description: </td>
             <td valign="top"><?php echo $row["description"] ?></td>
           <tr>
@@ -146,8 +166,12 @@ $result = mysqli_query($mysqli, $sql);
             <td valign="top"><?php echo $row["startDate"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="100px" height="50px">Duration of Project: </td>
-            <td valign="top"><?php echo $row["duration"] ?></td>
+            <td valign="top" width="100px" height="50px">End Date: </td>
+            <td valign="top"><?php echo $row["endDate"] ?></td>
+          <tr>
+          <tr>
+          <td valign="top" width="100px" height="50px">CountDown: </td>
+           <td valign="top"><?php echo $remain->d . ' days and ' . $remain->h . ' hours';?></td>
           <tr>
           <tr>
             <td valign="top" width="100px" height="50px">Categories: </td>

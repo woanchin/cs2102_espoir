@@ -107,8 +107,8 @@
                             </div>
                             <br />
                             <div>
-                                <label for="duration">Duration : </label>
-                                <input type="text" name="days" id="days" placeholder="Days" style="width: 100px!important; height: 25px" />
+                                <label for="end date">End Date : </label>
+                                <input type="date" name="enddate" id="end date">
                             </div>
                             <div>
                                 <label for="currency">Select a Currency : </label>
