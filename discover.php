@@ -90,10 +90,10 @@ $result = mysqli_query($mysqli, $sql);
 
 if (mysqli_num_rows($result)>0) {
 	$i = 1;
-	while($row = mysqli_fetch_assoc($result) && $i<=8) {
+	while($row = mysqli_fetch_assoc($result)) {
 		echo "<div class="."col-sm-4".">
         <div class="."portfolio-img-wrap".">
-          <img src="."img/portfolio$i.jpg".">
+          <img src="."img/portfolio($i%8).jpg".">
           <div class="."caption-container".">
            <div class="."portfolio-caption".">
                <h5><a href="."displayProject.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
