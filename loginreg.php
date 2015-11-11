@@ -50,7 +50,7 @@
         <div class="container">
             <div class="col-lg-12">
                 <h4 class="pull-left">Register / Login</h4>
-                <p class="pull-right pagination"><a href="index.php">home</a><span>></span><a href="">Register/Login</a></p>
+                <p class="pull-right pagination">Register/Login</p>
             </div>
         </div>
     </div>
@@ -59,7 +59,18 @@
         <div class="container">
             <div class="">
                 <div class="col-md-6 no-padding-left">
-                    <img src="img/about_us.jpg">
+                    <h2>Login</h2>
+                    <form action="AdminManager.php" method="post">
+                    <label for="emailtxt">Email:</label>
+                    <input name="emailtxt" type="text" id="emailtxt" style="width:200px!important;height:25px" required>
+                    <br />
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" name="loginPassword" id="loginPassword" style="width:200px!important;height:25px" required>
+                    <br /><br />
+                    <input type="submit" name="login" id="login" value="Login">
+                    </form>
+                    <br />
+                    <img src="img/what_we_do.jpg">
                 </div>
                 <div class="col-md-6">
                     <h2>Register</h2>
@@ -360,29 +371,7 @@
                             <input type="submit" name="signUpBtn" id="signUpBtn" value="Sign Up Now!">
                         </div>
                     </form>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="what-we-do">
-                <div class="col-md-6 no-padding-left">
-                    <h2>Login</h2>
-                    <form action="AdminManager.php" method="post">
-                        <p>
-                            <label for="emailtxt">Email:</label>
-                            <input name="emailtxt" type="text" id="emailtxt" style="width:200px!important;height:25px" required>
-                        </p>
-                        <br />
-                        <p>
-                            <label for="loginPassword">Password:</label>
-                            <input type="password" name="loginPassword" id="loginPassword" style="width:200px!important;height:25px" required>
-                        </p>
-                        <p>
-                            <input type="submit" name="login" id="login" value="Login">
-                        </p>
-                    </form>
-                </div>
-                <div class="col-md-6 no-padding-right">
-                    <img src="img/what_we_do.jpg">
+                    <br />
                 </div>
                 <div class="clearfix"></div>
             </div>

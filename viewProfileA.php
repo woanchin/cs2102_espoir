@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
-} 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,20 +21,26 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <link href="css/style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-</head>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 
+</head>
 <?php 
     include("db.php");  
-
-	$emailtxt = $_SESSION["emailtxt"];
+	$emailtxt = $_SESSION["emailtxt"];	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+    $searchUser = $_GET["id"];
+
 	if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
     }
 
-    if($rowcount==1) {	
+	if($rowcount==1) {	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $userType = $row["type"];
 	} else {
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
@@ -43,19 +49,20 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		echo '</script>';		
 	}
 
-    
-  
-  	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
-	 $count=mysqli_query($mysqli,$sql2) or die('Error: ' . mysqli_error($mysqli));
-	 $result = mysqli_fetch_assoc($count); 
-	 $total = $result['COUNT(following)'];
-  
-  	$sql3 = "SELECT COUNT(userEmail) FROM subscription WHERE userEmail ='$emailtxt'";
-	 $count3=mysqli_query($mysqli,$sql3) or die('Error: ' . mysqli_error($mysqli));
-	 $result3 = mysqli_fetch_assoc($count3); 
-	 $total3 = $result3['COUNT(userEmail)'];
+	$sql2 = "SELECT * FROM user WHERE userEmail = '$searchUser'";
+	$result2=mysqli_query($mysqli,$sql2);
+	$rowcount2=mysqli_num_rows($result2);
+	$row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-?>
+  ?>
+<?php
+  
+  	$sql5 = "SELECT COUNT(following) FROM subscription WHERE following ='$searchUser'";
+	 $count5=mysqli_query($mysqli,$sql5) or die(mysqli_error());
+	 $result5 = mysqli_fetch_assoc($count5); 
+	 $total5 = $result5['COUNT(following)'];
+  ?>
+
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
         <div class="container">
@@ -70,32 +77,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                        <?php
-                            if($userType=="Normal") {
-                        ?>
-                        
-                        <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                        <li><a href="discoverlogin.php">Discover</a></li>
-                        <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
-                        <li><a href="createProject.php">Create Project </a></li>
-                        <li><a href="projfollist.php">Projects Followed</a></li>
-                        <li><a href="transactions.php">Donate History </a></li>
-                        <li><a href="logout.php" id="logout">Logout</a></li>
-
-                        <?php
-                            } else {
-                        ?>
-
-                        <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                        <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
-                        <li><a href="viewAllUsers.php">View All Users</a></li>
-                        <li><a href="viewAllProjects.php">View All Projects</a></li>
-                        <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
-                        <li><a href="logout.php" id="logout">Logout</a></li>                        
-
-                        <?php 
-                            }
-                        ?>
+                          <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
+                          <li><a href="profile.php">Profile</a></li>
+                          <li class="active"><a href="viewAllUsers.php">View All Users</a><span class="sr-only">(current)</span></li>
+                          <li><a href="viewAllProjects.php">View All Projects</a></li>
+                          <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
+                          <li><a href="logout.php" id="logout">Logout</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -107,10 +94,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-                <form method="post" action="search.php">
-                    <p class="pull-right pagination"> Profile</p>
-                </form>
+                <h4 class="pull-left">edit <?php echo $row2["firstName"] ?>'s profile</h4>
             </div>
         </div>
     </div>
@@ -119,45 +103,38 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         <div class="container">
             <div class="">
                 <div class="col-md-6 no-padding-left">
-                    <img src="image/<?php echo $row["picName"]; ?>">
-                    <br /><br />
+                    <img src="image/<?php echo $row2["picName"]; ?>"><br /><br />
                     <!--<img src="image/">-->
                 </div>
                 <div class="col-md-6">
-                    <h2>My Profile</h2>
+                    <h2><?php echo $row2["firstName"] ?>'s Profile</h2>
                     <br />
-                    Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
-                    <br />
-                    <br />
-                    Email: <?php echo $row["userEmail"] ?>
+                    Name: <?php echo $row2["lastName"]." ".$row2["firstName"] ?>
                     <br />
                     <br />
-                    Nationality: <?php echo $row["nationality"] ?>
+                    Email: <?php echo $row2["userEmail"] ?>
                     <br />
                     <br />
-                    Birthday: <?php echo $row["birthday"] ?>
+                    Nationality: <?php echo $row2["nationality"] ?>
                     <br />
                     <br />
-                    Gender: <?php echo $row["gender"] ?>
+                    Birthday: <?php echo $row2["birthday"] ?>
                     <br />
                     <br />
-                    Bio: <?php echo $row["bio"] ?>
+                    Gender: <?php echo $row2["gender"] ?>
                     <br />
                     <br />
-                    Followers: <a href="followers.php"><?php echo $total?></a>
+                    Bio: <?php echo $row2["bio"] ?>
                     <br />
                     <br />
-                    Following: <a href="following.php"><?php echo $total3?></a>
+                    Followers: <?php echo $total5?>
                     <br />
                     <br />
-                    <a href="viewMessage.php">View Messages</a>
-                    <br />
-                    <br />
-                    <a href="editProfile.php">Edit</a>
-                    <br />
-                    <br />
+                    <a href="addMessage.php?emailtxt=<?php echo $row2["userEmail"] ?>">Sent Message to <?php echo $row2["lastName"]." ".$row2["firstName"] ?></a>
+                    <br /><br /><br /><br />
                 </div>
                 <div class="clearfix"></div>
+            </div>
             <div class="clearfix"></div>
         </div>
     </div>

@@ -39,12 +39,12 @@ if(isset($_SESSION["emailtxt"])){
 	$emailtxt = $_SESSION["emailtxt"];
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 	if ($result=mysqli_query($mysqli,$sql)){
-	         	$rowcount=mysqli_num_rows($result);
-    	}
+     	$rowcount=mysqli_num_rows($result);
+	}
 
 	if($rowcount==1){	
-	        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	        $searcher = $row["firstName"];
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $searcher = $row["firstName"];
 	}
 	else {
 		//ERROR Message and Redirect Link
@@ -63,12 +63,11 @@ if(isset($_POST["keyword"])){
 	$rowcount2 = mysqli_num_rows($result2);
 	$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-	$sql3 = "SELECT * FROM user WHERE firstName LIKE '%$keyword%' OR lastName LIKE '%$keyword%'";
-	$result3=mysqli_query($mysqli,$sql3);
-	$rowcount3 = mysqli_num_rows($result3);
-	$row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-}
-  ?>
+  $sql3 = "SELECT * FROM user WHERE (firstName LIKE '%$keyword%' OR lastName
+LIKE '%$keyword%') AND type != 'Admin'";
+$result3=mysqli_query($mysqli,$sql3);   $rowcount3 =
+mysqli_num_rows($result3);   $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+}   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
   	<div class="wrapper">

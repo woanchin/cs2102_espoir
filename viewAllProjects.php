@@ -26,21 +26,21 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 <?php 
     include("db.php");  
 
-	$emailtxt = $_SESSION["emailtxt"];
-	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+    $emailtxt = $_SESSION["emailtxt"];
+    $sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 
-	if ($result=mysqli_query($mysqli,$sql)) {
+    if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
     }
 
-	if($rowcount==1) {	
+    if($rowcount==1) {  
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	} else {
-		echo '<script language="javascript">';
-		echo 'alert("Wrong username/password");';
-		echo 'window.location.href="../CS2102/loginreg.php";';
-		echo '</script>';		
-	}
+    } else {
+        echo '<script language="javascript">';
+        echo 'alert("Wrong username/password");';
+        echo 'window.location.href="../CS2102/loginreg.php";';
+        echo '</script>';       
+    }
 
 ?>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -59,11 +59,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                         <ul class="nav navbar-nav">
                           <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
                           <li><a href="profile.php">Profile</a></li>
-                          <li class="active"><a href="viewAllUsers.php">View All Users</a><span class="sr-only">(current)</span></li>
-                          <li><a href="viewAllProjects.php">View All Projects</a></li>
+                          <li><a href="viewAllUsers.php">View All Users</a></li>
+                          <li class="active"><a href="viewAllProjects.php">View All Projects</a><span class="sr-only">(current)</span></li>
                           <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
                           <li><a href="logout.php" id="logout">Logout</a></li>
-                      </ul>
+                        </ul>
                     </div>
                     <!-- /.navbar-collapse -->
                 </div>
@@ -74,7 +74,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">view all users </h4>
+                <h4 class="pull-left">view all projects </h4>
             </div>
         </div>
     </div>
@@ -84,22 +84,22 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
             <div class="col-md-6">
                 <table>
                     <?php 
-                        $sql2 = "SELECT * FROM user WHERE userEmail != '$emailtxt'";
+                        $sql2 = "SELECT * FROM project WHERE startDate <= Date(NOW()) ";
                         $result2=mysqli_query($mysqli,$sql2);
                         $rowcount2=mysqli_num_rows($result2);
                         $count = 1;
                         foreach ($result2 as $a ){
                     ?>
                             <tr>
-                                <td width="350px"><a href="viewProfileA.php?id=<?php echo $a["userEmail"] ?>"><?php echo $count++ ?> <?php echo $a["userEmail"] ?></a></td>
-                                <td width="100px"><a href="editProfileA.php?id=<?php echo $a["userEmail"] ?>">Edit</a></td>
-                                <td width="100px"><a href="deleteProfile.php?id=<?php echo $a["userEmail"] ?>">Delete</a></td>
+                                <td width="350px"><a href="displayProject.php?id=<?php echo $a["projectID"] ?>"><?php echo $count++ ?> <?php echo $a["title"] ?></a></td>
+                                <td width="100px"><a href="editProjectA.php?id=<?php echo $a["projectID"] ?>">Edit</a></td>
+                                <td width="100px"><a href="deleteProject.php?id=<?php echo $a["projectID"] ?>">Delete</a></td>
                             </tr>
                     <?php
                         } 
 
                         if($rowcount2==0)
-                            echo "No users currently.";
+                            echo "No projects currently.";
                     ?>
 
                 </table>

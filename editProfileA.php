@@ -34,8 +34,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   
   include("db.php");  
 	$emailtxt = $_SESSION["emailtxt"];
-	
-	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+	$id = $_GET["id"];
+	$sql = "SELECT * FROM user WHERE userEmail = '$id'";
 
 	if ($result=mysqli_query($mysqli,$sql)) {
     $rowcount=mysqli_num_rows($result);
@@ -66,13 +66,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-                  <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                  <li><a href="discoverlogin.php">Discover</a></li>
-                  <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
-                  <li> <a href="createProject.php">Create Project </a></li>
-                  <li><a href="projfollist.php">Projects Followed</a></li>
-                  <li> <a href="transactions.php"> Donate History </a></li>
-                  <li><a href="logout.php" id="logout">Logout</a></li>        
+                    <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
+                    <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
+                    <li><a href="viewAllUsers.php">View All Users</a></li>
+                    <li><a href="viewAllProjects.php">View All Projects</a></li>
+                    <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
+                    <li><a href="logout.php" id="logout">Logout</a></li>                
 				        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
@@ -84,8 +83,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
-  					<p class="pull-right pagination"><a href="index.html">profile</a></p>
+  					<h4 class="pull-left">edit <?php echo $row["firstName"] ?>'s profile</h4>
   				</div>
   			</div>
   		</div>
@@ -99,13 +97,13 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   </div>
   <div class="col-md-6">
     <h2>Edit Profile</h2><br />
-	<form action="editProfileMan.php" method="post">
-	Last Name: <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px"  value="<?php echo $row["lastName"] ?>" /><br />
-                    First Name: <input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>" /><br />
-	Email: <input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly /><br /><br />
-                    About Me : <br /><textarea name="bio"><?php echo $row["bio"] ?></textarea><br />
-	<input type="submit" name="edit" id="edit" value="Edit" />
-                    </form>
+	  <form action="editProfileManA.php" method="post">
+    Last Name: <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px"  value="<?php echo $row["lastName"] ?>" /><br />
+    First Name: <input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>" /><br />
+    Email: <input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly /><br /><br />
+    About Me : <br /><textarea name="bio"><?php echo $row["bio"] ?></textarea><br />
+    <input type="submit" name="edit" id="edit" value="Edit" />
+    </form>
  </div>
  <div class="clearfix"></div>
 </div>

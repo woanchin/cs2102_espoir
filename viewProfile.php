@@ -30,49 +30,32 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
 </head>
 <?php 
-    include("db.php");  
-
-    //Store Data input into variables
-	$emailtxt = $_SESSION["emailtxt"];
-	
-    //select results matching to what the user has typed	
+    include("db.php");
+	$emailtxt = $_SESSION["emailtxt"];	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 
     //check if the sql has been execute
-	if ($result=mysqli_query($mysqli,$sql))
-    {
-        // Return the number of rows in result set
+	if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
     }
 
-    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
+	if($rowcount==1) {	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-	}
-	
-	else 
-	{
+	}	else 	{
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
 		echo 'alert("Wrong username/password");';
 		echo 'window.location.href="../CS2102/loginreg.php";';
-		echo '</script>';
-		
+		echo '</script>';		
 	}
 
-if(isset($_GET["userEmail"])){
-	$searchUser = $_GET["userEmail"];
-	$sql2 = "SELECT * FROM user WHERE userEmail = '$searchUser'";
-	$result2=mysqli_query($mysqli,$sql2);
-	$rowcount2=mysqli_num_rows($result2);
-	$row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-}
-
-  ?>
-<?php
+    if(isset($_GET["userEmail"])){
+    	$searchUser = $_GET["userEmail"];
+    	$sql2 = "SELECT * FROM user WHERE userEmail = '$searchUser'";
+    	$result2=mysqli_query($mysqli,$sql2);
+    	$rowcount2=mysqli_num_rows($result2);
+    	$row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+    }
   
   	$sql5 = "SELECT COUNT(following) FROM subscription WHERE following ='$searchUser'";
 	 $count5=mysqli_query($mysqli,$sql5) or die(mysqli_error());
