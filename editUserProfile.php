@@ -50,6 +50,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		echo 'window.location.href="../CS2102/loginreg.php";';
 		echo '</script>';
 	}
+
+  $id = $_GET["id"];
+  $sql2 = "SELECT * FROM user WHERE userEmail = '$id'";
+  $result2=mysqli_query($mysqli,$sql2);
+  $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
 ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -79,7 +85,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   		<div class="inner-head">
   			<div class="container">
   				<div class="col-lg-12">
-  					<h4 class="pull-left">edit <?php echo $row["firstName"] ?>'s profile</h4>
+  					<h4 class="pull-left">edit <?php echo $row2["firstName"] ?>'s profile</h4>
   				</div>
   			</div>
   		</div>
@@ -88,16 +94,16 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
  <div class="container">
   <div class="">
    <div class="col-md-6 no-padding-left">
-	<img src="image/<?php echo $row["picName"]; ?>">
+	<img src="image/<?php echo $row2["picName"]; ?>">
     <!--<img src="image/">-->
   </div>
   <div class="col-md-6">
     <h2>Edit Profile</h2><br />
-	  <form action="editProfileManA.php" method="post">
-    Last Name: <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px"  value="<?php echo $row["lastName"] ?>" /><br />
-    First Name: <input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row["firstName"] ?>" /><br />
-    Email: <input name="userEmail" type="email" id="userEmail" value="<?php echo $row["userEmail"] ?>" readonly /><br /><br />
-    About Me : <br /><textarea name="bio"><?php echo $row["bio"] ?></textarea><br />
+	  <form action="editUserProfileMan.php" method="post">
+    Last Name: <input name="Lname" type="text" id="Lname" style="width:200px!important;height:25px"  value="<?php echo $row2["lastName"] ?>" /><br />
+    First Name: <input name="Fname" type="text" id="Fname" style="width:200px!important;height:25px" value="<?php echo $row2["firstName"] ?>" /><br />
+    Email: <input name="userEmail" type="email" id="userEmail" value="<?php echo $row2["userEmail"] ?>" readonly /><br /><br />
+    About Me : <br /><textarea name="bio"><?php echo $row2["bio"] ?></textarea><br />
     <input type="submit" name="edit" id="edit" value="Edit" />
     </form>
  </div>

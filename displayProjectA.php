@@ -100,16 +100,15 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
           <a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
-        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-            <li><a href="profile.php">Profile</a></li>
-            <li><a href="viewAllUsers.php">View All Users</a></li>
-            <li class="active"><a href="viewAllProjects.php">View All Projects</a><span class="sr-only">(current)</span></li>
-            <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
-            <li><a href="logout.php" id="logout">Logout</a></li>
-          </ul>
-        </div>
+          <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">              
+              <li><a href="profile.php">Profile</a></li>
+              <li><a href="viewAllUsers.php">View All Users</a></li>
+              <li class="active"><a href="viewAllProjects.php">View All Projects</a><span class="sr-only">(current)</span></li>
+              <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
+              <li><a href="logout.php" id="logout">Logout</a></li>
+            </ul>
+          </div>
       </div>
     </nav>
   </div>

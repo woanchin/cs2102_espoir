@@ -43,6 +43,8 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		echo '</script>';		
 	}
 
+    if($userType=="Admin")
+        header("location:../CS2102/profileA.php");
     
   
   	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
@@ -70,9 +72,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                        <?php
-                            if($userType=="Normal") {
-                        ?>
                         
                         <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
                         <li><a href="discoverlogin.php">Discover</a></li>
@@ -82,20 +81,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                         <li><a href="transactions.php">Donate History </a></li>
                         <li><a href="logout.php" id="logout">Logout</a></li>
 
-                        <?php
-                            } else {
-                        ?>
-
-                        <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                        <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
-                        <li><a href="viewAllUsers.php">View All Users</a></li>
-                        <li><a href="viewAllProjects.php">View All Projects</a></li>
-                        <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
-                        <li><a href="logout.php" id="logout">Logout</a></li>                        
-
-                        <?php 
-                            }
-                        ?>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

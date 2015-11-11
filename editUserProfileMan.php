@@ -16,7 +16,7 @@ include("db.php");
 					if($sucess == 1){
 						echo '<script language="javascript">';
 						echo 'alert("Profile Updated");';
-						echo 'window.location.href="../CS2102/profileA.php";';
+						echo 'window.location.href="../CS2102/viewAllUsers.php";';
 						echo '</script>';
 					}
 

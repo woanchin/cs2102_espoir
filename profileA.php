@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	header("location:loginreg.php");
-}
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,21 +26,34 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 <?php 
     include("db.php");  
 
-    $emailtxt = $_SESSION["emailtxt"];
-    $sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
-
-    if ($result=mysqli_query($mysqli,$sql)) {
+	$emailtxt = $_SESSION["emailtxt"];
+	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+	if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
     }
 
-    if($rowcount==1) {  
+    if($rowcount==1) {	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    } else {
-        echo '<script language="javascript">';
-        echo 'alert("Wrong username/password");';
-        echo 'window.location.href="../CS2102/loginreg.php";';
-        echo '</script>';       
-    }
+        $userType = $row["type"];
+	} else {
+		//ERROR Message and Redirect Link
+		echo '<script language="javascript">';
+		echo 'alert("Wrong username/password");';
+		echo 'window.location.href="../CS2102/loginreg.php";';
+		echo '</script>';		
+	}
+
+    
+  
+  	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
+	 $count=mysqli_query($mysqli,$sql2) or die('Error: ' . mysqli_error($mysqli));
+	 $result = mysqli_fetch_assoc($count); 
+	 $total = $result['COUNT(following)'];
+  
+  	$sql3 = "SELECT COUNT(userEmail) FROM subscription WHERE userEmail ='$emailtxt'";
+	 $count3=mysqli_query($mysqli,$sql3) or die('Error: ' . mysqli_error($mysqli));
+	 $result3 = mysqli_fetch_assoc($count3); 
+	 $total3 = $result3['COUNT(userEmail)'];
 
 ?>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -56,12 +69,14 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                          <li><a href="profile.php">Profile</a></li>
-                          <li><a href="viewAllUsers.php">View All Users</a></li>
-                          <li class="active"><a href="viewAllProjects.php">View All Projects</a><span class="sr-only">(current)</span></li>
-                          <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
-                          <li><a href="logout.php" id="logout">Logout</a></li>
+                        <ul class="nav navbar-nav">                        
+
+                        <li class="active"><a href="profile.php">Profile<span class="sr-only">(current)</span></a></li>
+                        <li><a href="viewAllUsers.php">View All Users</a></li>
+                        <li><a href="viewAllProjects.php">View All Projects</a></li>
+                        <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
+                        <li><a href="logout.php" id="logout">Logout</a></li>                        
+
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -73,37 +88,49 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <div class="inner-head">
         <div class="container">
             <div class="col-lg-12">
-                <h4 class="pull-left">view all projects </h4>
+                <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
+                <form method="post" action="search.php">
+                    <p class="pull-right pagination"> Profile</p>
+                </form>
             </div>
         </div>
     </div>
     <!-- inner-head end -->
     <div class="inner-page services">
         <div class="container">
-            <div class="col-md-6">
-                <table>
-                    <?php 
-                        $sql2 = "SELECT * FROM project WHERE startDate <= Date(NOW()) ";
-                        $result2=mysqli_query($mysqli,$sql2);
-                        $rowcount2=mysqli_num_rows($result2);
-                        $count = 1;
-                        foreach ($result2 as $a ){
-                    ?>
-                            <tr>
-                                <td width="350px"><a href="displayProjectA.php?id=<?php echo $a["projectID"] ?>"><?php echo $count++ ?> <?php echo $a["title"] ?></a></td>
-                                <td width="100px"><a href="editProjectA.php?id=<?php echo $a["projectID"] ?>">Edit</a></td>
-                                <td width="100px"><a href="deleteProject.php?id=<?php echo $a["projectID"] ?>">Delete</a></td>
-                            </tr>
-                    <?php
-                        } 
-
-                        if($rowcount2==0)
-                            echo "No projects currently.";
-                    ?>
-
-                </table>
-                <br />
-            </div>
+            <div class="">
+                <div class="col-md-6 no-padding-left">
+                    <img src="image/<?php echo $row["picName"]; ?>">
+                    <br /><br />
+                    <!--<img src="image/">-->
+                </div>
+                <div class="col-md-6">
+                    <h2>My Profile</h2>
+                    <br />
+                    Name: <?php echo $row["lastName"]." ".$row["firstName"] ?>
+                    <br />
+                    <br />
+                    Email: <?php echo $row["userEmail"] ?>
+                    <br />
+                    <br />
+                    Nationality: <?php echo $row["nationality"] ?>
+                    <br />
+                    <br />
+                    Birthday: <?php echo $row["birthday"] ?>
+                    <br />
+                    <br />
+                    Gender: <?php echo $row["gender"] ?>
+                    <br />
+                    <br />
+                    Bio: <?php echo $row["bio"] ?>
+                    <br />
+                    <br />
+                    <a href="editProfileA.php">Edit</a>
+                    <br />
+                    <br />
+                </div>
+                <div class="clearfix"></div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div class="copyright">

@@ -32,21 +32,20 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 
   <?php 
     include("db.php");  
-	 $emailtxt = $_SESSION["emailtxt"];
-	 $id = $_GET["id"];
-	 $sql = "SELECT * FROM project WHERE projectID = '$id'";
+    $emailtxt = $_SESSION["emailtxt"];
+    $id = $_GET["id"];
+    $sql = "SELECT * FROM project WHERE projectID = '$id'";
 
-  if ($result=mysqli_query($mysqli,$sql)) {
-    $rowcount=mysqli_num_rows($result);
-  }
-  	
-  if($rowcount==1) {	
-    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    if ($result=mysqli_query($mysqli,$sql)) {
+      $rowcount=mysqli_num_rows($result);
+    }
+    	
+    if($rowcount==1) {	
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
- 	} else {
- 		echo "Failure to retrieve";
- 	}
-	
+   	} else {
+   		echo "Failure to retrieve";
+   	}	
   ?>
 
   <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -62,14 +61,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   							<ul class="nav navbar-nav">
-<li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                            <li><a href="discoverlogin.php">Discover</a></li>
-                    <li ><a href="profile.php">Profile</a></li>
-                    <li class="active"> <a href="createProject.php">Create Project <span class="sr-only">(current)</span></a></li>
-                    <li><a href="projfollist.php">Projects Followed</a></li>
-                    <li> <a href="transactions.php"> Donate History </a></li>
+                    <li><a href="profile.php">Profile</a></li>
+                    <li ><a href="viewAllUsers.php">View All Users</a></li>
+                    <li class="active"><a href="viewAllProjects.php">View All Projects</a><span class="sr-only">(current)</span></li>
+                    <li><a href="createNewAdmin.php">Create New Admin Account </a></li>
                     <li><a href="logout.php" id="logout">Logout</a></li>
-					        </ul>
+				        </ul>
   						</div>
   						<!-- /.navbar-collapse --> 
   					</div>
@@ -93,13 +90,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   </div>
   <div class="col-md-6">
     <h2>Edit Project</h2>
-	<form action="editProjectMan.php" method="post">
-                              Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
-                              Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
-                              Duration: <input name="duration" type="text" id="duration" style="width:200px!important;height:25px" value="<?php echo $row["duration"] ?>"> <br />
-                              <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
-	         <input type="submit" name="edit" id="edit" value="Edit">
-                          </form>
+    <form action="editProjectManA.php" method="post">
+    Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
+    Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
+    <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+    <input type="submit" name="edit" id="edit" value="Edit">
+    </form><br />
  </div>
  <div class="clearfix"></div>
 </div>

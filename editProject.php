@@ -102,13 +102,12 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   </div>
   <div class="col-md-6">
     <h2>Edit Project</h2>
-	<form action="editProjectMan.php" method="post">
-                              Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
-                              Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
-                              Duration: <input name="duration" type="text" id="duration" style="width:200px!important;height:25px" value="<?php echo $row["duration"] ?>"> <br />
-                              <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
-	         <input type="submit" name="edit" id="edit" value="Edit">
-                          </form>
+    <form action="editProjectMan.php" method="post">
+    Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
+    Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
+    <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+    <input type="submit" name="edit" id="edit" value="Edit">
+    </form>
  </div>
  <div class="clearfix"></div>
 </div>

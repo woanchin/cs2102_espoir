@@ -15,7 +15,7 @@ include("db.php");
 					if($success == 1){
 						echo '<script language="javascript">';
 						echo 'alert("Project Updated");';
-						echo 'window.location.href="../CS2102/displayProject.php?id='.$id.'";';
+						echo 'window.location.href="../CS2102/viewAllProjects.php";';
 						echo '</script>';
 					}
 

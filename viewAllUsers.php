@@ -57,7 +57,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                          <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
                           <li><a href="profile.php">Profile</a></li>
                           <li class="active"><a href="viewAllUsers.php">View All Users</a><span class="sr-only">(current)</span></li>
                           <li><a href="viewAllProjects.php">View All Projects</a></li>
@@ -92,7 +91,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     ?>
                             <tr>
                                 <td width="350px"><a href="viewProfileA.php?id=<?php echo $a["userEmail"] ?>"><?php echo $count++ ?> <?php echo $a["userEmail"] ?></a></td>
-                                <td width="100px"><a href="editProfileA.php?id=<?php echo $a["userEmail"] ?>">Edit</a></td>
+                                <td width="100px"><a href="editUserProfile.php?id=<?php echo $a["userEmail"] ?>">Edit</a></td>
                                 <td width="100px"><a href="deleteProfile.php?id=<?php echo $a["userEmail"] ?>">Delete</a></td>
                             </tr>
                     <?php
