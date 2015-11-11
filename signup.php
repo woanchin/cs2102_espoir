@@ -11,7 +11,7 @@ include("db.php");
 	$gender = $_POST["gender"];
 
  // prepare the image for insertion
-$imgData =addslashes (file_get_contents($_FILES['test']['tmp_name']));
+$imgData =addslashes(file_get_contents($_FILES['test']['tmp_name']));
 $bio = $_POST["bio"];
 
 	$filename = "img_post" . rand(1, 9) . date("YmdHis") . rand(25, 125) . rand(256, 850);
