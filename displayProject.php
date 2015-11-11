@@ -137,39 +137,39 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
       <div class="col-md-6">
         <table>
           <tr>
-            <td valign="top" width="50px" height="50px">Name: </td>
+            <td valign="top" width="150px" height="50px">Name: </td>
             <td valign="top"><?php echo $row["title"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">By: </td>
+            <td valign="top" height="50px">By: </td>
             <td valign="top"><?php echo $rown["firstName"] ?> <?php echo $rown["lastName"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">Description: </td>
+            <td valign="top" height="50px">Description: </td>
             <td valign="top"><?php echo $row["description"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">Start Date: </td>
+            <td valign="top" height="50px">Start Date: </td>
             <td valign="top"><?php echo $row["startDate"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">End Date: </td>
+            <td valign="top" height="50px">End Date: </td>
             <td valign="top"><?php echo $row["endDate"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">CountDown: </td>
+            <td valign="top" height="50px">CountDown: </td>
            <td valign="top"><?php echo $remain->d . ' days and ' . $remain->h . ' hours';?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">Categories: </td>
+            <td valign="top" height="50px">Categories: </td>
             <td valign="top"><?php echo $row["categories"] ?></td>
           <tr>
           <tr>
-            <td valign="top" width="50px" height="50px">Funds Collected: </td>
+            <td valign="top" height="50px">Funds Collected: </td>
             <td valign="top"><?php echo "\$".$row2["amount"] ?></td>
           <tr>
           <tr>
-            <td colspa="2" height="50px"><form action="comment.php" method="post">
+            <td colspan="2" height="50px"><form action="comment.php" method="post">
                 <input name="emailtxt" type="hidden" value="<?php echo $_SESSION["emailtxt"]?>"/>
                 <input name="projectID" type="hidden" value="<?php echo $id ?>"/>
                 <input type="submit" name="submitBtn" id="submitBtn" value="Click here to leave a comment to this project here!">

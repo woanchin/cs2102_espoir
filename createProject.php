@@ -144,77 +144,54 @@
         </div>
       </div>
   </div>
+</div>
 <p>&nbsp;</p>
 <div class="copyright">
-  <div class="container">
-    <p>All Rights Reserved 2015 &copy; Espoir.com</p>
-  </div>
+    <div class="container">
+        <p>All Rights Reserved 2015 &copy; Espoir.com</p>
+    </div>
 </div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="js/jquery.min.js"></script> 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="js/bootstrap.js"></script> 
-<script src="js/responsiveslides.min.js"></script> 
-<script src="js/response.min.js"></script> 
-<script src="js/jquery.flexslider-min.js"></script> 
-<script src="js/jquery.mixitup.js"></script> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
+<script src="js/responsiveslides.min.js"></script>
+<script src="js/response.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script src="js/jquery.mixitup.js"></script>
 <script>
-  $('.collapse').on('shown.bs.collapse', function(){
-   $(this).parent().find(".down-icon").removeClass("down-icon").addClass("up-icon");
- }).on('hidden.bs.collapse', function(){
-   $(this).parent().find(".up-icon").removeClass("up-icon").addClass("down-icon");
- });
-</script> 
-<script>
+    $('.collapse').on('shown.bs.collapse', function () {
+        $(this).parent().find(".down-icon").removeClass("down-icon").addClass("up-icon");
+    }).on('hidden.bs.collapse', function () {
+        $(this).parent().find(".up-icon").removeClass("up-icon").addClass("down-icon");
+    });
 </script>
-    </div>
-    <p>&nbsp;</p>
-    <div class="copyright">
-        <div class="container">
-            <p>All Rights Reserved 2015 &copy; Espoir.com</p>
-        </div>
-    </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.js"></script>
-    <script src="js/responsiveslides.min.js"></script>
-    <script src="js/response.min.js"></script>
-    <script src="js/jquery.flexslider-min.js"></script>
-    <script src="js/jquery.mixitup.js"></script>
-    <script>
-        $('.collapse').on('shown.bs.collapse', function () {
-            $(this).parent().find(".down-icon").removeClass("down-icon").addClass("up-icon");
-        }).on('hidden.bs.collapse', function () {
-            $(this).parent().find(".up-icon").removeClass("up-icon").addClass("down-icon");
-        });
-    </script>
-    <script>
-        $('.cd-testimonials-wrapper').flexslider({
-            //declare the slider items
-            selector: ".cd-testimonials > li",
-            animation: "slide",
-            //do not add navigation for paging control of each slide
-            controlNav: false,
-            slideshow: false,
-            //Allow height of the slider to animate smoothly in horizontal mode
-            smoothHeight: true,
-            start: function () {
-                $('.cd-testimonials').children('li').css({
-                    'opacity': 1,
-                    'position': 'relative'
-                });
-            }
-        });
-    </script>
-    <script>
-        $(function () {
+<script>
+    $('.cd-testimonials-wrapper').flexslider({
+        //declare the slider items
+        selector: ".cd-testimonials > li",
+        animation: "slide",
+        //do not add navigation for paging control of each slide
+        controlNav: false,
+        slideshow: false,
+        //Allow height of the slider to animate smoothly in horizontal mode
+        smoothHeight: true,
+        start: function () {
+            $('.cd-testimonials').children('li').css({
+                'opacity': 1,
+                'position': 'relative'
+            });
+        }
+    });
+</script>
+<script>
+    $(function () {
 
-            // Instantiate MixItUp:
+        // Instantiate MixItUp:
 
-            $('#Container').mixItUp();
+        $('#Container').mixItUp();
 
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
