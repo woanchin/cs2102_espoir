@@ -14,12 +14,12 @@ include("db.php");
     $commentID = $_POST["commentID"];
 	
     // Query String for edit comment
-    if($commentID != null ){
-        $query = "UPDATE `comment` SET `content` = $content WHERE `commentID` = $commentID";
+    if($commentID != -1 ){
+        $query = "UPDATE comment SET content = '$content' WHERE commentID = '$commentID'";
 
     } else{ // Query String for new comment
  
-        $query = "INSERT INTO `comment` (`projectID`,`userEmail`, `content`) VALUES ($projectID,'$emailtxt','$content')";	
+        $query = "INSERT INTO comment (projectID,userEmail,content) VALUES ('$projectID','$emailtxt','$content')";	
     }
     
     
