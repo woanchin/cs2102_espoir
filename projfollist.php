@@ -64,21 +64,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 	}
 
   ?>
-<?php
-  
-  	$sql2 = "SELECT COUNT(following) FROM subscription WHERE following ='$emailtxt'";
-	 $count=mysqli_query($mysqli,$sql2) or die(mysqli_error());
-	 $result = mysqli_fetch_assoc($count); 
-	 $total = $result['COUNT(following)'];
-  ?>
 
-<?php
-  
-  	$sql3 = "SELECT COUNT(userEmail) FROM subscription WHERE userEmail ='$emailtxt'";
-	 $count3=mysqli_query($mysqli,$sql3) or die(mysqli_error());
-	 $result3 = mysqli_fetch_assoc($count3); 
-	 $total3 = $result3['COUNT(userEmail)'];
-  ?>
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
@@ -98,7 +84,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                             <li><a href="discoverlogin.php">Discover </a></li>
                             <li><a href="profile.php">Profile</a></li>
                             <li><a href="createProject.php">Create Project</a></li>
-                            <li><a href="projfollist.php">Projects Followed</a></li>
+                             <li class="active"><a href="projfollist.php">Projects Followed <span class="sr-only">(current)</span></a></li>
                             <li><a href="transactions.php">Donate History </a></li>
                             <li><a href="logout.php" id="logout">Logout</a></li>
                         </ul>
@@ -114,7 +100,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
             <div class="col-lg-12">
                 <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
                     <p class="pull-right pagination">
-                          Following
+                        Project Followed
                     </p>
             </div>
         </div>
@@ -125,7 +111,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
             <div class="">
                 <?php
 	  //Query String
-	  $query = "Select u.firstName,u.lastName, s.following FROM subscription s,user u WHERE s.userEmail = '$emailtxt' AND s.following=u.userEmail";
+	  $query = "Select p.title,f.projectID FROM projfollow f,project p WHERE f.userEmail = '$emailtxt' AND f.projectID=p.projectID";
 	  //Execute Query
 	  $reply = mysqli_query($mysqli, $query);
       $rowcount=mysqli_num_rows($reply);
@@ -138,7 +124,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                         ?>
                         <table cellspacing="5" cellpadding="5" width="200%" id="formspace">
                             <tr>
-                                <td><strong>Following </strong></td>
+                                <td><strong>Project Followed</strong></td>
                             </tr>
                             <?php
                             //Generate Table from Database                          
@@ -146,13 +132,13 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                             {
                                 // set up a row for each record
                                 echo '<tr>';
-                                echo '<td><a href="viewProfile.php?userEmail='.$row->following.'">'. $row->lastName . ' ' . $row->firstName . ' </a> </td>';
+                                echo '<td><a href="displayProject.php?id='.$row->projectID.'">'. $row->title. ' </a> </td>';
                                 echo '</tr>';
                             }
                         }
                         if($rowcount == 0){
                             ?>
-                            <h3>You did not follow anyone yet! Check out some awesome project </h3>
+                            <h3>You did not follow any project yet! Check out some awesome project </h3>
                             <?php }
         ?>
                             <tr>

@@ -8,7 +8,7 @@ $userEmail = $emailtxt;
 $title = $_POST["projecttitle"];
 $description = $_POST["description"];
 $startDate = $_POST["startdate"];
-$duration = $_POST["days"];
+$endDate = $_POST["enddate"];
 $categories = $_POST["category"];
 $currency = $_POST["currency"];
 $fundsCollected = 0;
@@ -33,7 +33,7 @@ if ($result[0] == 0) {
     $date  = (String) date("Y-M-d-H:i:s");
 
     // Query String
-    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, `duration`, `categories`, `currency`, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', '$duration', '$categories', '$currency',  '$filename.jpg')";
+    $query = "INSERT INTO `project` (`userEmail`, `title`, `description`, `fileSrc`, `startDate`, `endDate`, `categories`, `currency`, `picName`) VALUES ('$userEmail', '$title', '$description', '{$imgData}', '$startDate', '$endDate', '$categories', '$currency',  '$filename.jpg')";
     
     $success= mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
     $id =mysqli_insert_id($mysqli);

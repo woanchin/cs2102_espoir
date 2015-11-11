@@ -82,6 +82,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
             <li><a href="discoverlogin.php">Discover</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li> <a href="createProject.php">Create Project </a></li>
+            <li><a href="projfollist.php">Projects Followed</a></li>
             <li class="active"> <a href="transactions.php"> Donate History <span class="sr-only">(current)</span></a></li>
             <li><a href="logout.php" id="logout">Logout</a></li>
           </ul>
