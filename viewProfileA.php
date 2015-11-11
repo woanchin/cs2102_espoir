@@ -128,9 +128,6 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <br />
                     <br />
                     Followers: <?php echo $total5?>
-                    <br />
-                    <br />
-                    <a href="addMessage.php?emailtxt=<?php echo $row2["userEmail"] ?>">Sent Message to <?php echo $row2["lastName"]." ".$row2["firstName"] ?></a>
                     <br /><br /><br /><br />
                 </div>
                 <div class="clearfix"></div>

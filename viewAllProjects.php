@@ -91,7 +91,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                         foreach ($result2 as $a ){
                     ?>
                             <tr>
-                                <td width="350px"><a href="displayProject.php?id=<?php echo $a["projectID"] ?>"><?php echo $count++ ?> <?php echo $a["title"] ?></a></td>
+                                <td width="350px"><a href="displayProjectA.php?id=<?php echo $a["projectID"] ?>"><?php echo $count++ ?> <?php echo $a["title"] ?></a></td>
                                 <td width="100px"><a href="editProjectA.php?id=<?php echo $a["projectID"] ?>">Edit</a></td>
                                 <td width="100px"><a href="deleteProject.php?id=<?php echo $a["projectID"] ?>">Delete</a></td>
                             </tr>
