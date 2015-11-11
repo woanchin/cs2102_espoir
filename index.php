@@ -38,7 +38,6 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
                             <li><a href="loginreg.php">Register/Login</a></li>
-                            <li><a href="discover.php">Discover</a>
                             <li>
                         </ul>
                     </div>
