@@ -166,7 +166,9 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                                     <input name="projectID" type="hidden" value="<?php echo $projectID ?>"/>
                                     <textarea name="content" cols="30" rows="1" placeholder="Your message here"></textarea><br />
                                     <input type="submit" name="submitBtn" id="submitBtn" value="Edit!">
+									<input type="submit" name="submitBtn" id="submitBtn" value="Delete!">
                                 </form>
+								
                                 <?php	}
 											?>
                             </td>
