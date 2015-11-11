@@ -78,7 +78,7 @@ if(isset($_POST["keyword"])){
   					<!-- Brand and toggle get grouped for better mobile display -->
   					<div class="navbar-header">
   						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-  						<a class="navbar-brand" href="index.html">E<span>Spoir</span></a> </div>
+  						<a class="navbar-brand" href="index.php">E<span>Spoir</span></a> </div>
 
   						<!-- Collect the nav links, forms, and other content for toggling -->
   						<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
@@ -177,49 +177,6 @@ if(isset($_POST["keyword"])){
          </div>
        </div>
 
-  		<div class="footer">
-  			<div class="container">
-  				<div class="col-sm-2">
-  					<h5>Site Map</h5>
-  					<ul>
-  						<li><a href="">Home</a></li>
-  						<li><a href="">About Us</a></li>
-  						<li><a href="">Services</a></li>
-  						<li><a href="">Pricing</a></li>
-  						<li><a href="">Contact Us</a></li>
-  					</ul>
-  				</div>
-  				<div class="col-sm-4 col-md-3 twitter">
-  					<h5>Twitter Feed</h5>
-  					<ul>
-  						<li><i class="fa  fa-twitter"></i>Hello. Welcome to our Crowdfunding website. <span>http://uibrush.com</span></li>
-  						<li><i class="fa  fa-twitter"></i>Hello. Welcome to our Crowdfunding website. <span>http://uibrush.com</span></li>
-  					</ul>
-  				</div>
-  				<div class="col-md-4 testimonial">
-  					<h5>Testimonial</h5>
-  					<ul>
-  						<li><i class="fa  fa-quote-left"></i>Lorem ipsum dolor sit amet,  adipiscing elit, sed 
-  							diam  nibh euismod tincidunt ut laoreet dolore magna erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  </li>
-
-  						</ul>
-  						<div class="t-image">
-  							<img src="img/testimonial.png">
-  							<h6>- Joyce He </h6><br>
-  							<p>Team Lead</p>
-  						</div>
-  					</div>
-  					<div class="col-md-3 contact-footer">
-  						<div class="footer-form">
-  							<h5>Contact Us</h5>
-  							<input type="text" placeholder="Name">
-  							<input type="text" placeholder="E-Mail">
-  							<textarea placeholder="Message" rows="3"></textarea>
-  							<button class="submit-bt">Send</button>
-  						</div>
-  					</div>
-  				</div>
-  			</div>
   			<div class="copyright">
   				<div class="container">
   					<p>All Rights Reserved 2015 &copy; Espoir.com</p>
