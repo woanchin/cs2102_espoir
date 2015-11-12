@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
+	header("location:loginreg.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +29,41 @@
       <![endif]-->
 
 </head>
+<?php 
+    include("db.php");  
+
+    //Store Data input into variables
+	$emailtxt = $_SESSION["emailtxt"];
+	
+    //select results matching to what the user has typed	
+	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
+
+    //check if the sql has been execute
+	if ($result=mysqli_query($mysqli,$sql))
+    {
+        // Return the number of rows in result set
+        $rowcount=mysqli_num_rows($result);
+    }
+
+    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
+	if($rowcount==1)
+	{	
+
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+	}
+	
+	else 
+	{
+		//ERROR Message and Redirect Link
+		echo '<script language="javascript">';
+		echo 'alert("Wrong username/password");';
+		echo 'window.location.href="../CS2102/loginreg.php";';
+		echo '</script>';
+		
+	}
+
+    ?>
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
     <div class="wrapper">
         <div class="container">
@@ -36,10 +78,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                            <li class="active"><a href="discoverlogin.php">Discover <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="discoverlogin.php">Discover</a></li>
                             <li><a href="profile.php">Profile</a></li>
                             <li><a href="createProject.php">Create Project </a></li>
+                            <li><a href="viewOwnProject.php">My Project </a></li>
                             <li><a href="projfollist.php">Projects Followed</a></li>
                             <li><a href="transactions.php">Donate History </a></li>
                             <li><a href="logout.php" id="logout">Logout</a></li>
@@ -49,6 +91,19 @@
                 </div>
                 <!-- /.container-fluid -->
             </nav>
+        </div>
+    </div>
+    <div class="inner-head">
+        <div class="container">
+            <div class="col-lg-12">
+                <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
+                <form method="post" action="search.php">
+                    <h4 class="pull-right pagination">&nbsp Discover</h4>
+                    <p class="pull-right pagination">
+                        <input type="Search" name="keyword"><input type="submit" value="Search"></p>
+
+                </form>
+            </div>
         </div>
     </div>
     <div class="slider">
@@ -94,11 +149,10 @@ $result = mysqli_query($mysqli, $sql);
 
 if (mysqli_num_rows($result)>0) {
 	$i = 1;
-	$n = $i%8;
 	while($row = mysqli_fetch_assoc($result)) {
 		echo "<div class="."col-sm-4".">
         <div class="."portfolio-img-wrap".">
-          <img src="."img/portfolio$n.jpg".">
+          <img src="."img/portfolio$i.jpg".">
           <div class="."caption-container".">
            <div class="."portfolio-caption".">
                <h5><a href="."displayProject.php?id=".$row["projectID"].">".$row["title"]."</a></h5>
@@ -108,6 +162,7 @@ if (mysqli_num_rows($result)>0) {
        </div>
 		</div>";
 		$i++;
+        if($i == 8){break;}
 	}
 } else {
 	

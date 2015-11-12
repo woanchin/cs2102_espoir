@@ -16,7 +16,7 @@ include("db.php");
     // Execute Query					
     if($sucess == 1){
         echo "<script language='javascript'>;
-         alert('Comment added');
+         alert('Message added');
          window.location.href='../CS2102/addMessage.php?emailtxt=$receiverEmail';
          </script>";
     }

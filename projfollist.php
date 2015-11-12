@@ -63,7 +63,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 		
 	}
 
-  ?>
+?>
 
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -80,11 +80,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                        <li><a><form method="post" action="search.php"><input type="Search" name="keyword"><input type="submit" value="Search"></form></a></li>
-                            <li><a href="discoverlogin.php">Discover </a></li>
+                            <li><a href="discoverlogin.php">Discover</a></li>
                             <li><a href="profile.php">Profile</a></li>
-                            <li><a href="createProject.php">Create Project</a></li>
-                             <li class="active"><a href="projfollist.php">Projects Followed <span class="sr-only">(current)</span></a></li>
+                            <li><a href="createProject.php">Create Project </a></li>
+                            <li><a href="viewOwnProject.php">My Project </a></li>
+                            <li class="active"><a href="projfollist.php">Projects Followed</a></li>
                             <li><a href="transactions.php">Donate History </a></li>
                             <li><a href="logout.php" id="logout">Logout</a></li>
                         </ul>
@@ -99,9 +99,11 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
         <div class="container">
             <div class="col-lg-12">
                 <h4 class="pull-left">welcome <?php echo $row["firstName"] ?></h4>
+                <form method="post" action="search.php">
+                    <h4 class="pull-right pagination">&nbsp Project Followed</h4>
                     <p class="pull-right pagination">
-                        Project Followed
-                    </p>
+                        <input type="Search" name="keyword"><input type="submit" value="Search"></p>
+                </form>
             </div>
         </div>
     </div>
@@ -117,7 +119,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
       $rowcount=mysqli_num_rows($reply);
 	?>
                 <div class="col-md-6">
-                    <h2>Followers</h2>
+                    <h2>Project Followered</h2>
                     <p>
                         <?php
                         if($reply && $rowcount != 0){
