@@ -93,6 +93,25 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <form action="editProjectManA.php" method="post">
     Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
     Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
+
+    Old Start Date: <?php echo $row["startDate"] ?> <br />
+    <?php 
+      if($row["startDate"] > NOW()) {
+    ?>
+      New Start Date: <input type="date" name="startdate" id="start date" style="width:140px!important;height:25px" /> 
+    <?php
+      } else if($row["endDate"] <= NOW() ) {
+    ?>
+      Unable to change Start Date as project is ongoing!
+    <?php
+      } else {
+        echo "Project has ended!";
+      }
+    ?>
+    <br /><br />
+
+    Old End Date: <?php echo$row["endDate"] ?> <br />
+    New End Date: <input type="date" name="enddate" id="start date" style="width:140px!important;height:25px" /> 
     <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
     <input type="submit" name="edit" id="edit" value="Edit">
     </form><br />
