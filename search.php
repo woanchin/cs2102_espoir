@@ -63,7 +63,7 @@ if(isset($_POST["keyword"])){
 	$rowcount2 = mysqli_num_rows($result2);
 	$row2= mysqli_fetch_array($result2,MYSQLI_ASSOC);
 
-	$sql3 = "SELECT * FROM user WHERE firstName LIKE '%$keyword%' OR lastName LIKE '%$keyword%'";
+	$sql3 = "SELECT * FROM user WHERE (firstName LIKE '%$keyword%' OR lastName LIKE '%$keyword%') AND userEmail != '$emailtxt'";
 	$result3=mysqli_query($mysqli,$sql3);
 	$rowcount3 = mysqli_num_rows($result3);
 	$row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
@@ -81,7 +81,7 @@ if(isset($_POST["keyword"])){
                         <a class="navbar-brand">E<span>Spoir</span></a>
                     </div>
 
-                    <<!-- Collect the nav links, forms, and other content for toggling -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="discoverlogin.php">Discover</a></li>

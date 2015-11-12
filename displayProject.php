@@ -187,10 +187,19 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
                         <tr>
                             <td valign="top" height="50px">By: </td>
                             <td valign="top">
+                                <?php
+                                    if($emailtxt==$row['userEmail']){
+                                        echo "Myself";
+                                    } else {
+                                ?>
                                 <a href="viewProfile.php?userEmail=<?php echo $row['userEmail'] ?>">
                                     <?php echo $rown["firstName"] ?>
                                     <?php echo $rown["lastName"] ?>
                                 </a>
+
+                                <?php
+                                    }
+                                ?>
                             </td>
                             <tr>
                         <tr>
