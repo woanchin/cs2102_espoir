@@ -46,50 +46,92 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 </head>
 <?php
 
-if (isset($_GET["id"])){
-	$id = $_GET["id"];
-} else {
-	$id = mysqli_insert_id();
-}
+    if (isset($_GET["id"])){
+      $id = $_GET["id"];
+    } else {
+      $id = mysqli_insert_id();
+    }
 
-$sql = "SELECT * FROM project WHERE projectID = '$id'";
-$donated = "SELECT SUM(`amount`) AS 'amount' FROM `donate` WHERE projectID = '$id'";
-$result = mysqli_query($mysqli, $sql);
-$name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail = p.userEmail and p.projectID ='$id'";
-//check if the sql has been execute
-	if ($result=mysqli_query($mysqli,$sql)) {
-        $rowcount=mysqli_num_rows($result);
-  }
+    $sql = "SELECT * FROM project WHERE projectID = '$id'";
+    $donated = "SELECT SUM(`amount`) AS 'amount' FROM `donate` WHERE projectID = '$id'";
+    $result = mysqli_query($mysqli, $sql);
+    $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail = p.userEmail and p.projectID ='$id'";
+    //check if the sql has been execute
+      if ($result=mysqli_query($mysqli,$sql)) {
+            $rowcount=mysqli_num_rows($result);
+      }
 
     //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1) {	
+  if($rowcount==1) {  
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	} else {
-		echo "Fail to retrieve";
-	}
+  } else {
+    echo "Fail to retrieve";
+  }
 
-	$enddate = new DateTime($row["endDate"]);
-	$remain = $enddate->diff(new DateTime());
-	
-	if ($resultn=mysqli_query($mysqli,$name)) {
+  $enddate = new DateTime($row["endDate"]);
+  $remain = $enddate->diff(new DateTime());
+    $currency = $row["currency"];
+
+    $conversion = "1";
+
+    if($currency=="AUD")
+    $conversion="1.40";
+
+    if($currency=="CAN")
+    $conversion="1.32";
+
+    if($currency=="CHF")
+    $conversion="1.00";
+
+    if($currency=="EUR")
+    $conversion="0.93";
+
+    if($currency=="GBP")
+    $conversion="0.66";
+
+    if($currency=="INR")
+    $conversion="66.11";
+
+    if($currency=="JPY")
+    $conversion="122.92";
+
+    if($currency=="KRW")
+    $conversion="1153.47";
+
+    if($currency=="NZD")
+    $conversion="1.52";
+
+    if($currency=="RMB")
+    $conversion="6.37";
+
+    if($currency=="SGD")
+    $conversion="1.42";
+
+    if($currency=="USD")
+    $conversion="1";
+  
+  if ($resultn=mysqli_query($mysqli,$name)) {
       $rowcountn=mysqli_num_rows($resultn);
-  }
+    }
 
-	if($rowcountn==1) {	
+  if($rowcountn==1) { 
       $rown = mysqli_fetch_array($resultn,MYSQLI_ASSOC);
-	} else {
-		echo "Fail to retrieve";
-	}
-	
-	if ($result2=mysqli_query($mysqli,$donated)) {
+  } else {
+    echo "Fail to retrieve";
+  }
+  
+  if ($result2=mysqli_query($mysqli,$donated)) {
       $rowcount2=mysqli_num_rows($result2);
+    }
+
+  if($rowcount2==1) { 
+      $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+  } else {
+    echo "Fail to retrieve";
   }
 
-	if($rowcount2==1) {	
-      $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-	} else {
-		echo "Fail to retrieve";
-	}
+    $amount = $row2["amount"]*$conversion;
+
 ?>
 
 <body data-responsejs='{ "create": [ { "prop": "width", "breakpoints": [0, 320, 481, 641, 961, 1025, 1281, 1400] }]}'>
@@ -164,7 +206,7 @@ $name = "SELECT u.firstName, u.lastName FROM user u, project p WHERE u.userEmail
           <tr>
           <tr>
             <td valign="top" height="50px">Funds Collected: </td>
-            <td valign="top"><?php echo "\$".$row2["amount"] ?></td>
+            <td valign="top"><?php echo $row["currency"]." \$".$amount ?></td>
           </tr>
         </table>        
       </div>

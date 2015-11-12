@@ -94,24 +94,35 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
     Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
 
-    Old Start Date: <?php echo $row["startDate"] ?> <br />
+    Old Start Date: <?php echo $row["startDate"] ?> 
     <?php 
-      if($row["startDate"] > NOW()) {
+      $startdate = new DateTime($row["startDate"]);
+      $diff2 = $startdate->diff(new DateTime());
+      $interval2 = $diff2->format("%r%a");
+      $diffdays2 = (int)$interval2;
+      if($diffdays2<0){
     ?>
-      New Start Date: <input type="date" name="startdate" id="start date" style="width:140px!important;height:25px" /> 
-    <?php
-      } else if($row["endDate"] <= NOW() ) {
-    ?>
-      Unable to change Start Date as project is ongoing!
+      <br />New Start Date: <input type="date" name="startdate" id="start date" style="width:140px!important;height:25px" /> <br /><br />
     <?php
       } else {
-        echo "Project has ended!";
+        echo "<br /> Unable to change the start date as the project is ongoing!<br /><br />";
       }
     ?>
+      Old End Date: <?php echo$row["endDate"] ?> 
+    <?php
+      $enddate = new DateTime($row["endDate"]);
+      $diff = $enddate->diff(new DateTime());
+      $interval = $diff->format("%r%a");
+      $diffdays = (int)$interval;
+      if($diffdays<0){
+    ?>
+      <br />New End Date: <input type="date" name="enddate" id="start date" style="width:140px!important;height:25px" /> 
+    <?php
+      } else {
+        echo "<br /> Unable to change the end date as the project is over!<br /><br />";
+      } 
+    ?>
     <br /><br />
-
-    Old End Date: <?php echo$row["endDate"] ?> <br />
-    New End Date: <input type="date" name="enddate" id="start date" style="width:140px!important;height:25px" /> 
     <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
     <input type="submit" name="edit" id="edit" value="Edit">
     </form><br />

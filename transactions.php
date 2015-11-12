@@ -31,36 +31,21 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
 </head>
 <?php 
     include("db.php");  
-
-    //Store Data input into variables
 	$emailtxt = $_SESSION["emailtxt"];
-	
-    //select results matching to what the user has typed	
 	$sql = "SELECT * FROM user WHERE userEmail = '$emailtxt'";
 
-    //check if the sql has been execute
-	if ($result=mysqli_query($mysqli,$sql))
-    {
-        // Return the number of rows in result set
+	if ($result=mysqli_query($mysqli,$sql)) {
         $rowcount=mysqli_num_rows($result);
     }
 
-    //if the username and password matched the database, it will show the next page if not it will prompt the user to reenter his or her credentials
-	if($rowcount==1)
-	{	
-
+	if($rowcount==1) {	
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-	}
-	
-	else 
-	{
+	} else {
 		//ERROR Message and Redirect Link
 		echo '<script language="javascript">';
 		echo 'alert("Wrong username/password");';
 		echo 'window.location.href="../CS2102/loginreg.php";';
 		echo '</script>';
-		
 	}
 
 ?>

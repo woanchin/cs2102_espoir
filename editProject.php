@@ -90,7 +90,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
   			<div class="container">
   				<div class="col-lg-12">
   					<h4 class="pull-left"><?php echo $row["title"] ?></h4>
-                      <form method="post" action="search.php">
+                <form method="post" action="search.php">
                     <h4 class="pull-right pagination">&nbsp project</h4>
                     <p class="pull-right pagination">
                         <input type="Search" name="keyword"><input type="submit" value="Search"></p>
@@ -110,6 +110,36 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
     <form action="editProjectMan.php" method="post">
     Project Name: <input name="name" type="text" id="name" style="width:200px!important;height:25px" value="<?php echo $row["title"] ?>"> <br />
     Description: <br /><textarea name="description" cols="20" rows="2"><?php echo $row["description"] ?></textarea> <br />
+
+    Old Start Date: <?php echo $row["startDate"] ?> 
+    <?php 
+      $startdate = new DateTime($row["startDate"]);
+      $diff2 = $startdate->diff(new DateTime());
+      $interval2 = $diff2->format("%r%a");
+      $diffdays2 = (int)$interval2;
+      if($diffdays2<0){
+    ?>
+      <br />New Start Date: <input type="date" name="startdate" id="start date" style="width:140px!important;height:25px" /> <br /><br />
+    <?php
+      } else {
+        echo "<br /> Unable to change the start date as the project is ongoing!<br /><br />";
+      }
+    ?>
+      Old End Date: <?php echo$row["endDate"] ?> 
+    <?php
+      $enddate = new DateTime($row["endDate"]);
+      $diff = $enddate->diff(new DateTime());
+      $interval = $diff->format("%r%a");
+      $diffdays = (int)$interval;
+      if($diffdays<0){
+    ?>
+      <br />New End Date: <input type="date" name="enddate" id="start date" style="width:140px!important;height:25px" /> 
+    <?php
+      } else {
+        echo "<br /> Unable to change the end date as the project is over!<br /><br />";
+      }
+    ?>
+    <br /><br />
     <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
     <input type="submit" name="edit" id="edit" value="Edit">
     </form>

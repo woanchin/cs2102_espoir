@@ -119,7 +119,7 @@ if (!isset($_SESSION["emailtxt"]) && !isset($_SESSION["loginPassword"])){
       $rowcount=mysqli_num_rows($reply);
 	?>
                 <div class="col-md-6">
-                    <h2>Project Followered</h2>
+                    <h2>Project Followed</h2>
                     <p>
                         <?php
                         if($reply && $rowcount != 0){
